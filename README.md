@@ -45,27 +45,29 @@ User can:
 
 ### 2. Screen Archetypes
 
-*    Login screen
-*    Register screen
-*    Search screen
-*    Compose question screen
-*    Post's content screen (showing question, answers, and comment box)
-*    User's Profile screen
+*    Login screen: user can login their account
+*    Register screen: user can register for an account
+*    Search screen: user can search for Q&A posts based on their searching question,phrase,terms
+*    Compose question screen: user can compose a question post. (optional) User can upload imgage from photo library along with the question
+*    Post's content screen (showing questions, answers, and comment box): user can view the question, list of answers, and a comment box to add their answer to question
+*    User's Profile screen: user can view their basic profile, user's question posts and (option) user's favorite posts.  
 
 ### 3. Navigation
 
 **Tab Navigation** (Tab to Screen)
 
-* User tab
-   
+* User tab  
 * Search tab
+* (optional) User's favorite posts tab
    
 **Flow Navigation** (Screen to Screen)
 
 * User tab
     * If not yet logged in -> login/register screen
     * If logged-in:
-        * User's post
+        * User's posts.
+            *  (optional) user can delete their post.
+            *  (optional) mark 'completed' if their issue is ressolved
         * 
 * Search tab
     * Search by full-sentence question
@@ -74,8 +76,12 @@ User can:
     * Get a list of posts
         * (When click on particular post) -> Post's content screen
             * Get list of answers for that particular post
-            * User can add answer to Comment box
-            * 
+            * User can add text answer to Comment box. 
+                * (optional) user can add image along with the text as their answer to the Comment box
+
+* (optional) User's favorite posts tab
+    *  Keep track of posts user are interested in
+        *  Update user if someone add answers to 'favorite' posts
 ## Wireframes
 [Add picture of your hand sketched wireframes in this section]
 <img src="YOUR_WIREFRAME_IMAGE_URL" width=600>
