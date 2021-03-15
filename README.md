@@ -37,11 +37,11 @@ User can:
 * User can answer question
 
 **Optional Nice-to-have Stories**
-
+* User can add their favorite posts 
 * User delete/ Mark 'completed' post 
 * When user post a question, check if question is already in the database and suggest to direct user to the current post instead
 * Camera/Photo Libary feature - add photo along with question
-* Administrator Account - monitor posts (delete/add), 
+* Administrator Account - monitor posts (delete/add), update some common questions& answers students used to have
 
 ### 2. Screen Archetypes
 
@@ -65,8 +65,8 @@ User can:
 * User tab
     * If not yet logged in -> login/register screen
     * If logged-in:
-        * User's post
-        * 
+        * User's posts
+        * User's favorite posts
 * Search tab
     * Search by full-sentence question
     * Search by phrase/terms
