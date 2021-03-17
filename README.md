@@ -19,12 +19,12 @@ User can:
 
 ### App Evaluation
 [Evaluation of your app across the following attributes]
-- **Category:**
-- **Mobile:**
-- **Story:**
-- **Market:**
-- **Habit:**
-- **Scope:**
+- **Category:** University Mobible Application
+- **Mobile:**   This app primarily develope for mobile and pc.Functionality wouldn't be limited to mobile devices, however mobile version could potentially have more features.
+- **Story:**    User can search for questions, save & keep track of their posted questions and other questions from other users. 
+- **Market:**   The app can be used under any education system/organization plattform
+- **Habit:**    Students tend to seek advisors for questions and waiting for the replies. This app will help student & school staff make less effort to searching for answers
+- **Scope:**    User are students from the university
 
 ## Product Spec
 
@@ -84,7 +84,7 @@ User can:
         *  Update user if someone add answers to 'favorite' posts
 ## Wireframes
 [Add picture of your hand sketched wireframes in this section]
-<img src="YOUR_WIREFRAME_IMAGE_URL" width=600>
+<img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/wireframe_image.png" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
 
