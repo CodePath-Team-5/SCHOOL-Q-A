@@ -95,5 +95,4 @@ The app is mainly for students at the CSUEB. It serve as a small community for s
 ## Schema 
 [This section will be completed in Unit 9]
 ### Models & Networking
-<img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/schoolQA.jpg
-" width=600>
+<img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/schoolQA.png" width=600>
