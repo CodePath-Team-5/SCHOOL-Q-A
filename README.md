@@ -16,7 +16,7 @@ The app is mainly for students at the CSUEB. It serve as a small community for s
 
 ### App Evaluation
 [Evaluation of your app across the following attributes]
-- **Category:** University Mobible Application
+- **Category:** University Mobile Application
 - **Mobile:**   This is an Android app
 - **Story:**    User can search for questions, save & keep track of their posted questions and other questions from other users. 
 - **Market:**   The app is for students at the CSUEB
@@ -37,21 +37,21 @@ The app is mainly for students at the CSUEB. It serve as a small community for s
 
 **Optional Nice-to-have Stories**
 * User can view how many answers did a user answered - Checking creditability of other users...
-* User  register account with their school email - Identify users
+* User register account with their school email - Identify users
 * User can modify their profile
 * User can visit other user's profile
 * User can upvote a post
 * User delete/ Mark 'completed' post 
 * When user post a question, check if question is already in the database and suggest to direct user to the current post instead
-* Camera/Photo Libary feature - add photo along with question
+* Camera/Photo Library feature - add photo along with question
 * Administrator Account - monitor posts (delete/add), 
 
 ### 2. Screen Archetypes
 
 *    Login screen: user can login their account
 *    Register screen: user can register for an account
-*    Search screen: user can search for Q&A posts based on their searching question,phrase,terms
-*    Compose question screen: user can compose a question post. (optional) User can upload imgage from photo library along with the question
+*    Search screen: user can search for Q&A posts based on their searching question, phrase, terms
+*    Compose question screen: user can compose a question post. (optional) User can upload image from photo library along with the question
 *    Post's content screen (showing questions, answers, and comment box): user can view the question, list of answers, and a comment box to add their answer to question
 *    User's Profile screen: user can view their basic profile, user's question posts and (option) user's favorite posts.  
 
@@ -70,8 +70,7 @@ The app is mainly for students at the CSUEB. It serve as a small community for s
     * If logged-in:
         * User's posts.
             *  (optional) user can delete their post.
-            *  (optional) mark 'completed' if their issue is ressolved
-        * 
+            *  (optional) mark 'completed' if their issue is resolved
 * Search tab
     * Search by full-sentence question
     * Search by phrase/terms
