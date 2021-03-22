@@ -94,9 +94,6 @@ The app is mainly for students at the CSUEB. It serve as a small community for s
 
 ## Schema 
 [This section will be completed in Unit 9]
-### Models
-[Add table of models]
-### Networking
-- [Add list of network requests by screen ]
-- [Create basic snippets for each Parse network request]
-- [OPTIONAL: List endpoints if using existing API such as Yelp]
+### Models & Networking
+<img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/schoolQA.jpg
+" width=600>
