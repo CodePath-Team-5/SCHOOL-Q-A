@@ -12,18 +12,15 @@ Original App Design Project - README Template
 ## Overview
 
 ### Description
-User can:
-    - post question
-    - search questions & answer
-    - answer question
+The app is mainly for students at the CSUEB. It serve as a small community for students to easily access to different resources to resolve their problems.
 
 ### App Evaluation
 [Evaluation of your app across the following attributes]
 - **Category:** University Mobible Application
-- **Mobile:**   This app primarily develope for mobile and pc.Functionality wouldn't be limited to mobile devices, however mobile version could potentially have more features.
+- **Mobile:**   This is an Android app
 - **Story:**    User can search for questions, save & keep track of their posted questions and other questions from other users. 
-- **Market:**   The app can be used under any education system/organization plattform
-- **Habit:**    Students tend to seek advisors for questions and waiting for the replies. This app will help student & school staff make less effort to searching for answers
+- **Market:**   The app is for students at the CSUEB
+- **Habit:**    This app will give student an easy access to find the answers from other users from CSUEB.
 - **Scope:**    User are students from the university
 
 ## Product Spec
@@ -31,13 +28,19 @@ User can:
 ### 1. User Stories (Required and Optional)
 
 **Required Must-have Stories**
-* User can login/ register account
+* User can login
+* User can register account 
 * User can search question
-* User can add new question
+* User can post new question
 * User can answer question
+* User can have their own profile: User can see their own posts
 
 **Optional Nice-to-have Stories**
-
+* User can view how many answers did a user answered - Checking creditability of other users...
+* User  register account with their school email - Identify users
+* User can modify their profile
+* User can visit other user's profile
+* User can upvote a post
 * User delete/ Mark 'completed' post 
 * When user post a question, check if question is already in the database and suggest to direct user to the current post instead
 * Camera/Photo Libary feature - add photo along with question
