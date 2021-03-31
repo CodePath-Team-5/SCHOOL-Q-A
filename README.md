@@ -107,7 +107,12 @@ The app is mainly for students at the CSUEB. It serve as a small community for s
 - Layout for activities had been designed. 
 - Project can run with simple buttons to move from 1 activity to another
 
-
+<p float="left">
+   Project simple run: 
+   <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/sprint1_update(1).gif" width=200px >
+   Project Activity Layouts: 
+   <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/sprint1_update(2).gif" width=200px>
+</p>
 
 ## Sprint 2
 ## Sprint 3
