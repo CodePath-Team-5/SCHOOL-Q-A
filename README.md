@@ -8,6 +8,7 @@ Original App Design Project - README Template
 1. [Product Spec](#Product-Spec)
 1. [Wireframes](#Wireframes)
 2. [Schema](#Schema)
+3. [Sprint 1](#Sprint1)
 
 ## Overview
 
@@ -28,12 +29,12 @@ The app is mainly for students at the CSUEB. It serve as a small community for s
 ### 1. User Stories (Required and Optional)
 
 **Required Must-have Stories**
-* User can login
-* User can register account 
-* User can search question
-* User can post new question
-* User can answer question
-* User can have their own profile: User can see their own posts
+* [ ] User can login
+* [ ] User can register account 
+* [ ] User can search question
+* [ ] User can post new question
+* [ ] User can answer question
+* [ ] User can have their own profile: User can see their own posts
 
 **Optional Nice-to-have Stories**
 * User can view how many answers did a user answered - Checking creditability of other users...
@@ -96,3 +97,18 @@ The app is mainly for students at the CSUEB. It serve as a small community for s
 [This section will be completed in Unit 9]
 ### Models & Networking
 <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/schoolQA.png" width=600>
+
+## Sprint 1
+- Design layouts for activities  - Hao Lam
+- Set up Back4App                - Margaret Hu
+
+###  Update project:
+- Back4app had been set up  to save user & post data
+- Layout for activities had been designed. 
+- Project can run with simple buttons to move from 1 activity to another
+
+
+
+## Sprint 2
+## Sprint 3
+## Sprint 4
