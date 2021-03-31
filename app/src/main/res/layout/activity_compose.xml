@@ -4,42 +4,96 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
     tools:context=".ComposeActivity">
 
-    <EditText
-        android:id="@+id/textView3"
+    <TextView
+        android:id="@+id/textView_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Title"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:drawableEnd="@drawable/ic_quill"
+        android:drawablePadding="10dp"
+        android:text="COMPOSE"
+        android:textColor="#000000"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/et_compose_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView_header"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="false"
+        android:layout_centerHorizontal="false"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:hint="Question title/topic..."
+        android:textColor="#000000"
+        android:textStyle="bold"
         tools:layout_editor_absoluteX="141dp"
         tools:layout_editor_absoluteY="57dp" />
 
     <EditText
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
+        android:id="@+id/et_compost_questionContent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textView3"
+        android:layout_below="@id/et_compose_title"
+        android:hint="Question's content"
         android:inputType="textLongMessage|textMultiLine"
-        android:text="What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?" />
+        tools:text="What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/bttn_compose_addPhoto_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/imageView2"
+        android:layout_below="@id/et_compost_questionContent"
+        android:layout_margin="10dp"
+        android:drawableEnd="@drawable/ic_baseline_add_photo_alternate_24"
         android:text="Add Photo" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/bttn_compose_submit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/button4"
-        android:text="Submit" />
+        android:layout_below="@id/bttn_compose_addPhoto_button"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:background="@drawable/round_edge_button"
+        android:backgroundTint="#F44336"
+        android:text="Submit"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/iv_compose_image"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_below="@id/et_compost_questionContent"
+        android:layout_toEndOf="@id/bttn_compose_addPhoto_button"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/bttn_compose_cancel_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textView4"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_below="@id/bttn_compose_submit_button"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/round_edge_button"
+        android:backgroundTint="#000000"
+        android:text="CANCEL"
+        android:textColor="#FFFFFF"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 </RelativeLayout>
