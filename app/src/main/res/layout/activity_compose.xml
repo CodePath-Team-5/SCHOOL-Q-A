@@ -12,13 +12,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
-        android:drawableEnd="@drawable/ic_quill"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:drawablePadding="10dp"
-        android:text="COMPOSE"
+        android:text="@string/compose_logo"
         android:textColor="#000000"
         android:textSize="36sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        app:drawableEndCompat="@drawable/ic_quill" />
 
     <EditText
         android:id="@+id/et_compose_title"
@@ -27,11 +30,12 @@
         android:layout_below="@id/textView_header"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="false"
         android:layout_centerHorizontal="false"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:hint="Question title/topic..."
+        android:autofillHints=""
+        android:hint="@string/question_title_topic"
+        android:inputType="text"
         android:textColor="#000000"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="141dp"
@@ -42,9 +46,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/et_compose_title"
-        android:hint="Question's content"
+        android:hint="@string/question_s_content"
         android:inputType="textLongMessage|textMultiLine"
-        tools:text="What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?" />
+        tools:text="What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/bttn_compose_addPhoto_button"
@@ -53,7 +58,7 @@
         android:layout_below="@id/et_compost_questionContent"
         android:layout_margin="10dp"
         android:drawableEnd="@drawable/ic_baseline_add_photo_alternate_24"
-        android:text="Add Photo" />
+        android:text="@string/add_photo" />
 
     <Button
         android:id="@+id/bttn_compose_submit_button"
@@ -67,7 +72,7 @@
         android:layout_marginEnd="10dp"
         android:background="@drawable/round_edge_button"
         android:backgroundTint="#F44336"
-        android:text="Submit"
+        android:text="@string/submit"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
         android:textStyle="bold" />
@@ -78,6 +83,7 @@
         android:layout_height="70dp"
         android:layout_below="@id/et_compost_questionContent"
         android:layout_toEndOf="@id/bttn_compose_addPhoto_button"
+        android:contentDescription="@string/image"
         tools:srcCompat="@tools:sample/avatars" />
 
     <Button
@@ -92,7 +98,7 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/round_edge_button"
         android:backgroundTint="#000000"
-        android:text="CANCEL"
+        android:text="@string/cancel"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
         android:textStyle="bold" />

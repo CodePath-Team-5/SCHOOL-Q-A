@@ -13,9 +13,10 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:background="#FFFFFF"
+        android:contentDescription="@string/profile_back"
+        android:onClick="handle_back_button"
         android:tint="#000000"
-        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24"
-        android:onClick="handle_back_button"/>
+        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
 
     <ImageView
         android:id="@+id/iv_profile_image"
@@ -24,6 +25,7 @@
         android:layout_below="@id/bttn_profile_back_button"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"
+        android:contentDescription="@string/profile_image"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -32,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/bttn_profile_back_button"
         android:layout_marginBottom="10dp"
-        android:layout_toRightOf="@id/iv_profile_image"
+        android:layout_toEndOf="@id/iv_profile_image"
         android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -44,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_profile_username"
         android:layout_marginBottom="10dp"
-        android:layout_toRightOf="@id/iv_profile_image"
+        android:layout_toEndOf="@id/iv_profile_image"
         android:textColor="#000000"
         tools:text="Major/Profession" />
 
@@ -54,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_profile_major"
         android:layout_marginBottom="10dp"
-        android:layout_toRightOf="@id/iv_profile_image"
+        android:layout_toEndOf="@id/iv_profile_image"
         android:textColor="#000000"
         tools:text="Year of Experience/ Graduation" />
 
@@ -63,8 +65,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_profile_year"
-        android:layout_toRightOf="@id/iv_profile_image"
-        android:text="Post count:"
+        android:layout_toEndOf="@id/iv_profile_image"
+        android:text="@string/post_count"
         android:textColor="#000000" />
 
     <TextView
@@ -82,17 +84,17 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_profile_year"
         android:layout_marginStart="10dp"
-        android:layout_toRightOf="@id/textView9"
+        android:layout_toEndOf="@id/textView9"
         android:textColor="#000000"
         tools:text="0" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/tv_my_posts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_profile_description"
         android:layout_marginBottom="10dp"
-        android:text="My Posts:"
+        android:text="@string/my_posts"
         android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold" />
@@ -101,6 +103,6 @@
         android:id="@+id/rv_profile_UserPosts"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/textView12" />
+        android:layout_below="@id/tv_my_posts" />
 
 </RelativeLayout>

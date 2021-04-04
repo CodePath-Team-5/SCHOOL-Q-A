@@ -10,10 +10,11 @@
 
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/csueb_logo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_csueb_logo" />
+        android:layout_height="150dp"
+        android:contentDescription="@string/logo"
+        app:srcCompat="@drawable/csueb_logo" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/username_text_input_layout"
@@ -117,11 +118,11 @@
         android:layout_height="wrap_content"
         android:background="@drawable/round_edge_button"
         android:backgroundTint="#F44336"
+        android:onClick="handle_signUp"
         android:padding="10dp"
-        android:text="Sign Up!"
+        android:text="@string/confirm"
         android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:onClick="handle_signUp"/>
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/bttn_signup_cancel_button"
@@ -130,7 +131,7 @@
         android:background="@drawable/round_edge_button"
         android:backgroundTint="#000000"
         android:padding="10dp"
-        android:text="CANCEL"
+        android:text="@string/cancel"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:onClick="handle_cancel"/>
