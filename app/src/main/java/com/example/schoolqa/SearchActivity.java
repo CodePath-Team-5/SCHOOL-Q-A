@@ -1,6 +1,7 @@
 package com.example.schoolqa;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -10,12 +11,22 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class SearchActivity extends AppCompatActivity {
     public static String tag = "SearchActivity";
     EditText et_user_input;
     ImageButton bttn_user_profile;
     ImageButton bttn_logout;
     RecyclerView recyclerView_postResults;
+    PostAdaptor adaptor;
+    List<Post> allpost;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +52,40 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
+        allpost = new ArrayList<>();
+        adaptor = new PostAdaptor(this, allpost);
+
+        recyclerView_postResults.setAdapter(adaptor);
+        recyclerView_postResults.setLayoutManager(new LinearLayoutManager(this));
+
+        queryPost();
+
     }
 
+
+    private void queryPost() {
+        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+        query.include(Post.KEY_USER);
+        query.setLimit(20);
+        query.addDescendingOrder(Post.KEY_CREATED);
+        query.findInBackground(new FindCallback<Post>() {
+            @Override
+            public void done(List<Post> posts, ParseException e) {
+                if(e!= null){
+                    Log.e(tag, "Issue with getting post", e);
+                    return;
+                }
+                for (Post post:posts){
+                    Log.i(tag, "Post: "+post.getContent()+" user: "+ post.getUser().getUsername());
+                }
+                adaptor.clear();
+                adaptor.addAll(posts);
+                //allPost.addAll(posts);
+                //adaptor.notifyDataSetChanged();
+                //swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+    }
 
     public void handle_search_button(View view) {
         //Search button clicked
