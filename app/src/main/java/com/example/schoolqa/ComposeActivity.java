@@ -36,5 +36,6 @@ public class ComposeActivity extends AppCompatActivity {
     public void handle_cancel_button(View view) {
         // Cancel button clicked
         Log.d(tag,"Cancel button clicked");
+        finish();
     }
 }
