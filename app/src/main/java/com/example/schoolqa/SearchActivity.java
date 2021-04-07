@@ -15,6 +15,7 @@ public class SearchActivity extends AppCompatActivity {
     EditText et_user_input;
     ImageButton bttn_user_profile;
     ImageButton bttn_logout;
+    ImageButton bttn_addPost;
     RecyclerView recyclerView_postResults;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,7 @@ public class SearchActivity extends AppCompatActivity {
         et_user_input= findViewById(R.id.et_search_input_text);
         bttn_logout = findViewById(R.id.bttn_logout_button);
         bttn_user_profile = findViewById(R.id.bttn_profile_button);
+        bttn_addPost = findViewById(R.id.bttn_add_post_button);
         recyclerView_postResults= findViewById(R.id.rv_search_results);
 
         //Logout button clicked
@@ -40,8 +42,16 @@ public class SearchActivity extends AppCompatActivity {
                 handle_profile_button();
             }
         });
+        //Add New Post button clicked
+        bttn_addPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handle_add_NewPost_button();
+            }
+        });
 
     }
+
 
 
     public void handle_search_button(View view) {
@@ -53,6 +63,12 @@ public class SearchActivity extends AppCompatActivity {
         Log.d(tag,"Profile button clicked");
         //go to Profile activity
         Intent intent = new Intent(this, ProfileActivity.class);
+        startActivity(intent);
+    }
+    private void handle_add_NewPost_button() {
+        Log.d(tag,"Add Post button clicked");
+        //go to Profile activity
+        Intent intent = new Intent(this, ComposeActivity.class);
         startActivity(intent);
     }
 
