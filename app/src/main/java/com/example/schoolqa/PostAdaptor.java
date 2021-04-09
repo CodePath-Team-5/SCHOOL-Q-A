@@ -1,6 +1,7 @@
 package com.example.schoolqa;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,11 +71,14 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHholder>{
         public void bind(Post post) {
             tvUsername.setText(post.getUser().getUsername());
             tvQuestion.setText(post.getQuestion());
-            ParseFile image = post.getImage();
-            if(image!= null){
-                Glide.with(context).load(post.getImage().getUrl()).into(ivImage);
-            }
 
+            ParseFile image = post.getImage();
+            if (image != null) {
+                // Glide.with(context).load(post.getImage().getUrl()).into(ivImage);
+                Glide.with(context).load(post.getUser().getParseFile("user_image").getUrl()).into(ivImage);
+            } else {
+                Glide.with(context).load(context.getResources().getDrawable(R.drawable.ic_user)).into(ivImage);
+            }
         }
     }
 }

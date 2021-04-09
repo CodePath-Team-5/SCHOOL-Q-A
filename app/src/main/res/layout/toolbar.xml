@@ -43,5 +43,21 @@
         android:contentDescription="@string/profile"
         android:tint="#000000"
         app:srcCompat="@drawable/ic_baseline_account_30" />
+    <ImageButton
+        android:id="@+id/bttn_compose_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="false"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:layout_toEndOf="@id/bttn_profile_button"
+        android:background="#F44336"
+        android:contentDescription="@string/profile"
+        android:tint="#000000"
+        app:srcCompat="@drawable/ic_add_post_30" />
+
 
 </RelativeLayout>

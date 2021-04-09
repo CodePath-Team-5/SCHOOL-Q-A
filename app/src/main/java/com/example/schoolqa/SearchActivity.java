@@ -23,6 +23,7 @@ public class SearchActivity extends AppCompatActivity {
     EditText et_user_input;
     ImageButton bttn_user_profile;
     ImageButton bttn_logout;
+    ImageButton bttn_compose;
     RecyclerView recyclerView_postResults;
     PostAdaptor adaptor;
     List<Post> allpost;
@@ -35,6 +36,7 @@ public class SearchActivity extends AppCompatActivity {
         et_user_input= findViewById(R.id.et_search_input_text);
         bttn_logout = findViewById(R.id.bttn_logout_button);
         bttn_user_profile = findViewById(R.id.bttn_profile_button);
+        bttn_compose = findViewById(R.id.bttn_compose_button);
         recyclerView_postResults= findViewById(R.id.rv_search_results);
 
         //Logout button clicked
@@ -49,6 +51,13 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 handle_profile_button();
+            }
+        });
+        //Compose button clicked
+        bttn_compose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handle_compose_button();
             }
         });
 
@@ -98,7 +107,12 @@ public class SearchActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
     }
-
+    private void handle_compose_button() {
+        Log.d(tag,"Compose button clicked");
+        //go to Profile activity
+        Intent intent = new Intent(this, ComposeActivity.class);
+        startActivity(intent);
+    }
     private void handle_logout_button() {
         Log.d(tag,"Logout button clicked");
         //logout account
@@ -106,4 +120,5 @@ public class SearchActivity extends AppCompatActivity {
         //exit app
         finish();
     }
+
 }
