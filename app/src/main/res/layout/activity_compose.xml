@@ -58,7 +58,8 @@
         android:layout_below="@id/et_compost_questionContent"
         android:layout_margin="10dp"
         android:drawableEnd="@drawable/ic_baseline_add_photo_alternate_24"
-        android:text="@string/add_photo" />
+        android:text="@string/add_photo"
+        android:onClick="handle_add_image_button"/>
 
     <Button
         android:id="@+id/bttn_compose_submit_button"
@@ -75,7 +76,8 @@
         android:text="@string/submit"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:onClick="handle_submit_button"/>
 
     <ImageView
         android:id="@+id/iv_compose_image"
@@ -101,5 +103,6 @@
         android:text="@string/cancel"
         android:textColor="#FFFFFF"
         android:textSize="14sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:onClick="handle_cancel_button"/>
 </RelativeLayout>

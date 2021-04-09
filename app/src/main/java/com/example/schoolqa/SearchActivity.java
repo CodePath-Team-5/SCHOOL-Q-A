@@ -1,5 +1,6 @@
 package com.example.schoolqa;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -23,6 +25,7 @@ public class SearchActivity extends AppCompatActivity {
     EditText et_user_input;
     ImageButton bttn_user_profile;
     ImageButton bttn_logout;
+    ImageButton bttn_compose;
     RecyclerView recyclerView_postResults;
     PostAdaptor adaptor;
     List<Post> allpost;
@@ -32,10 +35,11 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         //link layout components
-        et_user_input= findViewById(R.id.et_search_input_text);
+        et_user_input = findViewById(R.id.et_search_input_text);
         bttn_logout = findViewById(R.id.bttn_logout_button);
         bttn_user_profile = findViewById(R.id.bttn_profile_button);
-        recyclerView_postResults= findViewById(R.id.rv_search_results);
+        bttn_compose = findViewById(R.id.bttn_compose_button);
+        recyclerView_postResults = findViewById(R.id.rv_search_results);
 
         //Logout button clicked
         bttn_logout.setOnClickListener(new View.OnClickListener() {
@@ -49,6 +53,13 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 handle_profile_button();
+            }
+        });
+        //Compose button clicked
+        bttn_compose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handle_compose_button();
             }
         });
 
@@ -98,7 +109,12 @@ public class SearchActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ProfileActivity.class);
         startActivity(intent);
     }
-
+    private void handle_compose_button() {
+        Log.d(tag,"Compose button clicked");
+        //go to Profile activity
+        Intent intent = new Intent(this, ComposeActivity.class);
+        startActivity(intent);
+    }
     private void handle_logout_button() {
         Log.d(tag,"Logout button clicked");
         //logout account
@@ -106,4 +122,5 @@ public class SearchActivity extends AppCompatActivity {
         //exit app
         finish();
     }
+
 }
