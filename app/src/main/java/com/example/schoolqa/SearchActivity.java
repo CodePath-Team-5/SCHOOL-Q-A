@@ -1,5 +1,6 @@
 package com.example.schoolqa;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -33,11 +35,11 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         //link layout components
-        et_user_input= findViewById(R.id.et_search_input_text);
+        et_user_input = findViewById(R.id.et_search_input_text);
         bttn_logout = findViewById(R.id.bttn_logout_button);
         bttn_user_profile = findViewById(R.id.bttn_profile_button);
         bttn_compose = findViewById(R.id.bttn_compose_button);
-        recyclerView_postResults= findViewById(R.id.rv_search_results);
+        recyclerView_postResults = findViewById(R.id.rv_search_results);
 
         //Logout button clicked
         bttn_logout.setOnClickListener(new View.OnClickListener() {

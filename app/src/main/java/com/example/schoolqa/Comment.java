@@ -6,7 +6,8 @@ import com.parse.ParseUser;
 
 public class Comment extends ParseObject {
     public static final String KEY_CONTENT ="comment_content";
-    public static final String KEY_USER="postID";
+    public static final String KEY_POST="postID";
+    public static final String KEY_USER="userID";
     public static final String KEY_IMAGE="image";
     public static final String KEY_CREATED="createdAt";
 
@@ -34,4 +35,12 @@ public class Comment extends ParseObject {
     public void setUser(ParseUser user){
         put(KEY_USER, user);
     }
+
+    public ParseUser getPost(){
+        return getParseUser(KEY_POST);
+    }
+    public void setPost(ParseUser user){
+        put(KEY_POST, user);
+    }
+
 }

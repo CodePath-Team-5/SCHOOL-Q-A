@@ -5,8 +5,18 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @ParseClassName("Post")
 public class Post extends ParseObject {
+
+    private List<Comment> commentList;
+
+    public Post() {
+        this.commentList = new ArrayList<>();;
+    }
+
     public static final String KEY_CONTENT ="content";
     public static final String KEY_USER="user";
     public static final String KEY_IMAGE="image";
@@ -39,5 +49,11 @@ public class Post extends ParseObject {
     }
     public void setUser(ParseUser user){
         put(KEY_USER, user);
+    }
+
+    private List<Comment> getCommentList() { return commentList; }
+    private  void setCommentList(List<Comment> list)
+    {
+        commentList.addAll(list);
     }
 }
