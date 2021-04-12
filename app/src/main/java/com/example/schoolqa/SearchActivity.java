@@ -30,6 +30,9 @@ public class SearchActivity extends AppCompatActivity {
     PostAdaptor adaptor;
     List<Post> allpost;
 
+    ImageButton bttn_bttn_search_button;
+    String search_key;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,7 @@ public class SearchActivity extends AppCompatActivity {
         bttn_user_profile = findViewById(R.id.bttn_profile_button);
         bttn_compose = findViewById(R.id.bttn_compose_button);
         recyclerView_postResults = findViewById(R.id.rv_search_results);
+        bttn_bttn_search_button = findViewById(R.id.bttn_search_button);
 
         //Logout button clicked
         bttn_logout.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +72,15 @@ public class SearchActivity extends AppCompatActivity {
 
         recyclerView_postResults.setAdapter(adaptor);
         recyclerView_postResults.setLayoutManager(new LinearLayoutManager(this));
+
+        bttn_bttn_search_button = findViewById(R.id.bttn_search_button);
+        bttn_bttn_search_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                search_key = et_user_input.getText().toString();
+                handle_search_button(v,search_key);
+            }
+        });
 
         queryPost();
 
@@ -98,10 +111,30 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-    public void handle_search_button(View view) {
+    public void handle_search_button(View view,final String search_key) {
         //Search button clicked
         Log.d(tag,"Search button clicked");
-
+        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+        query.include(Post.KEY_USER);
+        query.setLimit(20);
+        query.addDescendingOrder(Post.KEY_CREATED);
+        query.findInBackground(new FindCallback<Post>() {
+            @Override
+            public void done(List<Post> posts, ParseException e) {
+                if(e!= null){
+                    Log.e(tag, "Issue with getting post", e);
+                    return;
+                }
+                for (Post post:posts){
+                    Log.i(tag, "Post: "+post.getContent()+" user: "+ post.getUser().getUsername());
+                }
+                adaptor.clear();
+                adaptor.addSearch(posts,search_key);
+                //allPost.addAll(posts);
+                //adaptor.notifyDataSetChanged();
+                //swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
     private void handle_profile_button() {
         Log.d(tag,"Profile button clicked");

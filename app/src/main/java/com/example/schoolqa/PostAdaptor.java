@@ -56,6 +56,16 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHholder>{
         notifyDataSetChanged();
     }
 
+    public void addSearch(List<Post> list, String key){
+        for(int i =0; i<list.size();i++){
+            if(list.get(i).getQuestion().toLowerCase().contains(key.toLowerCase())||list.get(i).getContent().toLowerCase().contains(key.toLowerCase())){
+                posts.add(list.get(i));
+            }
+        }
+        notifyDataSetChanged();
+    }
+
+
     class ViewHholder extends RecyclerView.ViewHolder{
 
         private TextView tvUsername;
