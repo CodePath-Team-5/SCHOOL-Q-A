@@ -14,6 +14,7 @@ import android.widget.ImageButton;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,8 +103,10 @@ public class SearchActivity extends AppCompatActivity {
     private void handle_logout_button() {
         Log.d(tag,"Logout button clicked");
         //logout account
+        ParseUser.logOut();
+        ParseUser currentUser = ParseUser.getCurrentUser(); // this will now be null
 
-        //exit app
-        finish();
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 }

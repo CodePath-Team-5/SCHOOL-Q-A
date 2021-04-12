@@ -57,8 +57,7 @@
         android:padding="10dp"
         android:text="@string/login"
         android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:onClick="handle_login"/>
+        android:textStyle="bold"/>
 
     <Button
         android:id="@+id/bttn_signUp_button"
