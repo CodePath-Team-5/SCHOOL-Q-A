@@ -2,10 +2,16 @@ package com.example.schoolqa;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -34,14 +40,39 @@ public class RegisterActivity extends AppCompatActivity {
     public void handle_signUp(View view) {
         //Sign up button clicked
         Log.d(tag,"Signup button clicked");
-        //Register account
+        String email_id = et_email.getText().toString();
+        if(!email_id.contains("@horizon.csueastbay.edu"))
+        {
+            Toast.makeText(RegisterActivity.this, "Sign up Failed. Only csueb email is valid", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        ParseUser user = new ParseUser();
+        user.setUsername(et_username.getText().toString());
+        user.setPassword(et_password.getText().toString());
+        user.setEmail(et_email.getText().toString());
+        user.put("major_profession", et_major.getText().toString());
+        user.put("year_experience", et_year.getText().toString());
+        user.put("description", et_intro.getText().toString());
+        user.signUpInBackground(new SignUpCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    Intent intent = new Intent(RegisterActivity.this, SearchActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(RegisterActivity.this, "Sign up Failed. Enter correct credentials", Toast.LENGTH_SHORT).show();
+                    Log.e(tag, "Issue with Sign up", e);
+                    return;
+                }
 
-        //Log-in user
+            }
+
+        });
 
     }
 
     public void handle_cancel(View view) {
-        //Cancel button clicked
         Log.d(tag,"Cancel button clicked");
         finish();
     }
