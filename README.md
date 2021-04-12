@@ -9,6 +9,7 @@ Original App Design Project - README Template
 1. [Wireframes](#Wireframes)
 2. [Schema](#Schema)
 3. [Sprint 1](#Sprint1)
+4. [Sprint 2](#Sprint1)
 
 ## Overview
 
@@ -115,5 +116,11 @@ The app is mainly for students at the CSUEB. It serve as a small community for s
 </p>
 
 ## Sprint 2
+- Add Compose Button & Redesign Search Resutl Item Layout      - Hao Lam
+- Setup Adapter for Comment List, Structure Compose Data Model - Hao Lam
+- Setup Adapter for Search List, Structure User Data Model     - Yi-Nong Wei
+- Setup Network - ParseApplication                             - Yi-Nong Wei
+- Output: 
+   <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/sprint2.gif" width=200px >
 ## Sprint 3
 ## Sprint 4
