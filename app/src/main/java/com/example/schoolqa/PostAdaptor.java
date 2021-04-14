@@ -20,17 +20,19 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHholder>{
 
     private Context context;
     private List<Post> posts;
+    private  OnQuestionItemListener mOnQuestionItemListener;
 
-    public PostAdaptor(Context context, List<Post> posts) {
+    public PostAdaptor(Context context, List<Post> posts, OnQuestionItemListener onQuestionItemListener) {
         this.context = context;
         this.posts = posts;
+        this.mOnQuestionItemListener = onQuestionItemListener;
     }
 
     @NonNull
     @Override
     public ViewHholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.post_item, parent, false);
-        return new ViewHholder(view);
+        return new ViewHholder(view, mOnQuestionItemListener);
     }
 
     @Override
@@ -66,16 +68,20 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHholder>{
     }
 
 
-    class ViewHholder extends RecyclerView.ViewHolder{
+    class ViewHholder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private TextView tvUsername;
         private ImageView ivImage;
         private TextView tvQuestion;
-        public ViewHholder(@NonNull View itemView) {
+        OnQuestionItemListener onQuestionItemListener;
+        public ViewHholder(@NonNull View itemView, OnQuestionItemListener onQuestionItemListener) {
             super(itemView);
             tvUsername = itemView.findViewById(R.id.tvUsername);
             ivImage = itemView.findViewById(R.id.ivImage);
             tvQuestion = itemView.findViewById(R.id.tvQuestion);
+
+            this.onQuestionItemListener = onQuestionItemListener;
+            itemView.setOnClickListener(this);
         }
 
         public void bind(Post post) {
@@ -91,5 +97,14 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHholder>{
                 Glide.with(context).load(context.getResources().getDrawable(R.drawable.ic_user)).into(ivImage);
             }
         }
+
+        @Override
+        public void onClick(View v) {
+            onQuestionItemListener.onItemClick(getAdapterPosition());
+        }
+    }
+    public interface OnQuestionItemListener
+    {
+        void onItemClick (int position);
     }
 }

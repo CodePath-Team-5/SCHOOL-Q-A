@@ -5,17 +5,22 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import org.parceler.Parcel;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Parcel(analyze = Post.class)
 @ParseClassName("Post")
 public class Post extends ParseObject {
 
     private List<Comment> commentList;
 
-    public Post() {
-        this.commentList = new ArrayList<>();;
+    public Post()
+    {
+
     }
+
 
     public static final String KEY_CONTENT ="content";
     public static final String KEY_USER="user";
@@ -51,9 +56,4 @@ public class Post extends ParseObject {
         put(KEY_USER, user);
     }
 
-    private List<Comment> getCommentList() { return commentList; }
-    private  void setCommentList(List<Comment> list)
-    {
-        commentList.addAll(list);
-    }
 }

@@ -21,7 +21,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     private List<Comment> commentList;
 
 
-    public CommentAdapter(@NonNull Context context, List<Comment> comments) {
+    public CommentAdapter(Context context, List<Comment> comments) {
         this.commentList = comments;
         this.context = context;
     }
@@ -43,6 +43,18 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         return commentList.size();
     }
 
+    // Clean all elements of the recycler
+    public void clear() {
+        commentList.clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of items -- change to type used
+    public void addAll(List<Comment> list) {
+        commentList.addAll(list);
+        notifyDataSetChanged();
+    }
+
     class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvUsername;
         private ImageView ivImage;
@@ -57,18 +69,18 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         }
 
         public void bind(Comment comment) {
-            tvUsername.setText(comment.getUser().getUsername());
+          //  tvUsername.setText(comment.getUser().getUsername());
             tvComment.setText(comment.getContent());
 
-            ParseFile user_image = comment.getUser().getParseFile("user_image");
+           // ParseFile user_image = comment.getUser().getParseFile("user_image");
             ParseFile cmt_image = comment.getImage();
             //add user image
-            if (user_image != null) {
-                // Glide.with(context).load(post.getImage().getUrl()).into(ivImage);
-                Glide.with(context).load(user_image.getUrl()).into(ivImage);
-            } else {
-                Glide.with(context).load(context.getResources().getDrawable(R.drawable.ic_user)).into(ivImage);
-            }
+//            if (user_image != null) {
+//                // Glide.with(context).load(post.getImage().getUrl()).into(ivImage);
+//                Glide.with(context).load(user_image.getUrl()).into(ivImage);
+//            } else {
+//                Glide.with(context).load(context.getResources().getDrawable(R.drawable.ic_user)).into(ivImage);
+//            }
             //add comment image
             if (cmt_image != null) {
                 // Glide.with(context).load(post.getImage().getUrl()).into(ivImage);
