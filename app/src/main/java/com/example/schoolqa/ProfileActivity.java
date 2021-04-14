@@ -1,14 +1,29 @@
 package com.example.schoolqa;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity {
     public static String tag = "ProfileActivity";
@@ -18,7 +33,12 @@ public class ProfileActivity extends AppCompatActivity {
     TextView tv_intro;
     TextView tv_post_count;
     ImageView iv_user_image;
+    ImageButton bttn_back;
     RecyclerView recyclerView_User_postResults;
+    ParseUser user = ParseUser.getCurrentUser();
+    Context context;
+    PostAdaptor adapter;
+    List<Post> userposts;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +53,65 @@ public class ProfileActivity extends AppCompatActivity {
         iv_user_image = findViewById(R.id.iv_profile_image);
         recyclerView_User_postResults = findViewById(R.id.rv_profile_UserPosts);
 
+        userposts = new ArrayList<>();
+        adapter= new PostAdaptor(this, userposts);
+
+        recyclerView_User_postResults.setAdapter(adapter);
+        recyclerView_User_postResults.setLayoutManager(new LinearLayoutManager(this));
+
+        bttn_back = findViewById(R.id.bttn_profile_back_button);
+        bttn_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                handle_back_button(v);
+            }
+        });
+
+        bind();
+    }
+
+    private void bind() {
+        tv_username.setText(user.getUsername().toString());
+        tv_major.setText(user.get("major_profession").toString());
+        tv_year.setText(user.get("year_experience").toString());
+        tv_intro.setText(user.get("description").toString());
+
+        ParseFile image = user.getParseFile("user_image");
+
+        if (image != null) {
+            // Glide.with(context).load(post.getImage().getUrl()).into(ivImage);
+            Glide.with(this).load(image.getUrl()).into(iv_user_image);
+        } else {
+            Glide.with(this).load(context.getResources().getDrawable(R.drawable.ic_user)).into(iv_user_image);
+        }
+
+        queryPost();
+    }
+
+    private void queryPost() {
+        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+        query.include(Post.KEY_USER);
+        query.whereEqualTo(Post.KEY_USER, user);
+        query.setLimit(20);
+        query.addDescendingOrder(Post.KEY_CREATED);
+        query.findInBackground(new FindCallback<Post>() {
+            @Override
+            public void done(List<Post> posts, ParseException e) {
+                if(e!= null){
+                    Log.e(tag, "Issue with getting post", e);
+                    return;
+                }
+                for (Post post:posts){
+                    Log.i(tag, "Post: "+post.getContent()+" user: "+ post.getUser().getUsername());
+                }
+                adapter.clear();
+                adapter.addAll(posts);
+                //allPost.addAll(posts);
+                //adaptor.notifyDataSetChanged();
+                //swipeRefreshLayout.setRefreshing(false);
+                tv_post_count.setText(""+posts.size());
+            }
+        });
 
     }
 
