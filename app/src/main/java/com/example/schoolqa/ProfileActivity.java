@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -114,10 +115,18 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
     }
+    public void handle_edit_button(View view) {
+        //Edit button clicked
+        Log.d(tag,"Edit button clicked");
 
+        Intent intent = new Intent(this, EditProfileActivity.class);
+        startActivity(intent);
+    }
     public void handle_back_button(View view) {
         //Back button clicked
         Log.d(tag,"Back button clicked");
         finish(); //go back to previous screen - Search screen
     }
+
+
 }
