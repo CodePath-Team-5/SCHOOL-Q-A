@@ -69,7 +69,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         }
 
         public void bind(Comment comment) {
-          //  tvUsername.setText(comment.getUser().getUsername());
+           // tvUsername.setText(comment.getUser().getUsername());
             tvComment.setText(comment.getContent());
 
            // ParseFile user_image = comment.getUser().getParseFile("user_image");

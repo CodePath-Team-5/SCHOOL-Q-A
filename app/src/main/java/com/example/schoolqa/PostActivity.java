@@ -90,7 +90,7 @@ public class PostActivity extends AppCompatActivity {
                 }
                 // Access the array of results here
                 for (Comment comment:itemList) {
-                    Log.i(tag, "Comment: " + comment.getContent());
+                    Log.i(tag, "Comment: " + comment.getContent() + " username: "+ comment.getUser().getUsername());
                 }
                 commentAdapter.clear();
                 commentAdapter.addAll(itemList);
