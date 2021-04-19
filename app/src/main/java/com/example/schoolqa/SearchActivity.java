@@ -18,10 +18,12 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQuestionItemListener {
     public static String tag = "SearchActivity";
     EditText et_user_input;
     ImageButton bttn_user_profile;
@@ -33,6 +35,7 @@ public class SearchActivity extends AppCompatActivity {
 
     ImageButton bttn_bttn_search_button;
     String search_key;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +72,7 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         allpost = new ArrayList<>();
-        adaptor = new PostAdaptor(this, allpost);
+        adaptor = new PostAdaptor(this, allpost,  this);
 
         recyclerView_postResults.setAdapter(adaptor);
         recyclerView_postResults.setLayoutManager(new LinearLayoutManager(this));
@@ -131,7 +134,7 @@ public class SearchActivity extends AppCompatActivity {
                 }
                 adaptor.clear();
                 adaptor.addSearch(posts,search_key);
-                //allPost.addAll(posts);
+                //allpost.addAll(posts);
                 //adaptor.notifyDataSetChanged();
                 //swipeRefreshLayout.setRefreshing(false);
             }
@@ -159,4 +162,13 @@ public class SearchActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    @Override
+    public void onItemClick(int position) {
+        Post post = allpost.get(position);
+        Log.d(tag,"Item clicked: item "+position+ " - title: "+post.getQuestion() );
+        Intent intent = new Intent(this, PostActivity.class);
+        intent.putExtra("post", Parcels.wrap(post));
+        startActivity(intent);
+
+    }
 }
