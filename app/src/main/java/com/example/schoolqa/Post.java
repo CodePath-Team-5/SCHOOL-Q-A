@@ -21,7 +21,6 @@ public class Post extends ParseObject {
 
     }
 
-
     public static final String KEY_CONTENT ="content";
     public static final String KEY_USER="user";
     public static final String KEY_IMAGE="image";
@@ -41,7 +40,6 @@ public class Post extends ParseObject {
     }
     public void setQuestion(String question){
         put(KEY_QUESTION, question);
-    }
 
     public int getVote(){
         return getInt(KEY_VOTE);
