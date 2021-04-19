@@ -14,8 +14,6 @@ import java.util.List;
 @ParseClassName("Post")
 public class Post extends ParseObject {
 
-    private List<Comment> commentList;
-
     public Post()
     {
 
@@ -39,7 +37,7 @@ public class Post extends ParseObject {
         return getString(KEY_QUESTION);
     }
     public void setQuestion(String question){
-        put(KEY_QUESTION, question);
+        put(KEY_QUESTION, question);}
 
     public int getVote(){
         return getInt(KEY_VOTE);

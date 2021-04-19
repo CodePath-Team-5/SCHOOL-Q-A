@@ -23,10 +23,12 @@ import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements PostAdaptor.OnQuestionItemListener {
     public static String tag = "ProfileActivity";
     TextView tv_username;
     TextView tv_major;
@@ -55,7 +57,7 @@ public class ProfileActivity extends AppCompatActivity {
         recyclerView_User_postResults = findViewById(R.id.rv_profile_UserPosts);
 
         userposts = new ArrayList<>();
-        adapter= new PostAdaptor(this, userposts);
+        adapter= new PostAdaptor(this, userposts, this);
 
         recyclerView_User_postResults.setAdapter(adapter);
         recyclerView_User_postResults.setLayoutManager(new LinearLayoutManager(this));
@@ -129,4 +131,12 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onItemClick(int position) {
+        Post post = userposts.get(position);
+        Log.d(tag,"Item clicked: item "+position+ " - title: "+post.getQuestion() );
+        Intent intent = new Intent(this, PostActivity.class);
+        intent.putExtra("post", Parcels.wrap(post));
+        startActivity(intent);
+    }
 }
