@@ -59,10 +59,12 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         private TextView tvUsername;
         private ImageView ivImage;
         private TextView tvComment;
+        private TextView tvTimestamp;
         private ImageView ivUserImage;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvUsername = itemView.findViewById(R.id.commentItem_username);
+            tvTimestamp = itemView.findViewById(R.id.comentItem_timestamp);
             ivImage = itemView.findViewById(R.id.commentItem_image);
             tvComment = itemView.findViewById(R.id.commentItem_comment);
             ivUserImage = itemView.findViewById(R.id.commentItem_userImage);
@@ -70,6 +72,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
         public void bind(Comment comment) {
             tvUsername.setText(comment.getUser().getUsername());
+            String time = TimeFormatter.getTimeDifference(comment.getCreatedAt().toString());
+            tvTimestamp.setText(time);
             tvComment.setText(comment.getContent());
 
             ParseFile user_image = comment.getUser().getParseFile("user_image");

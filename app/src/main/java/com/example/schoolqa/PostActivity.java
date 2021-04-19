@@ -35,6 +35,7 @@ public class PostActivity extends AppCompatActivity {
     TextView tv_title;
     TextView tv_question_content;
     TextView tv_author_name; //name of user who created the post
+    TextView tv_post_timestamp;
     EditText et_user_comment;
     ImageView iv_question_image;
     TextView btnn_vote;
@@ -54,6 +55,7 @@ public class PostActivity extends AppCompatActivity {
         tv_title = findViewById(R.id.tv_post_title);
         tv_question_content = findViewById(R.id.tv_post_questionContent);
         tv_author_name = findViewById(R.id.tv_post_author_name);
+        tv_post_timestamp = findViewById(R.id.tv_post_timestamp);
         iv_question_image = findViewById(R.id.iv_post_image);
         et_user_comment = findViewById(R.id.et_post_userComment);
         btnn_vote = findViewById(R.id.bttn_post_upvote);
@@ -79,6 +81,9 @@ public class PostActivity extends AppCompatActivity {
         tv_title.setText(post.getQuestion());
         tv_question_content.setText(post.getContent());
         tv_author_name.setText(post.getUser().getUsername());
+        String createdAt = TimeFormatter.getTimeDifference(post.getCreatedAt().toString());
+        tv_post_timestamp.setText(" - "+ createdAt);
+        Log.d(tag,"Time create post: "+ createdAt);
 
         vote = post.getVote();
         btnn_vote.setText(String.valueOf(vote));
