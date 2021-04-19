@@ -9,7 +9,8 @@ Original App Design Project - README Template
 1. [Wireframes](#Wireframes)
 2. [Schema](#Schema)
 3. [Sprint 1](#Sprint1)
-4. [Sprint 2](#Sprint1)
+4. [Sprint 2](#Sprint2)
+5. [Sprint 3](#Sprint3)
 
 ## Overview
 
@@ -30,23 +31,24 @@ The app is mainly for students at the CSUEB. It serve as a small community for s
 ### 1. User Stories (Required and Optional)
 
 **Required Must-have Stories**
-* [ ] User can login
-* [ ] User can register account 
-* [ ] User can search question
+* [X] User can login
+* [X] User can register account 
+* [X] User can search question
 * [ ] User can post new question
 * [ ] User can answer question
-* [ ] User can have their own profile: User can see their own posts
+* [X] User can have their own profile: User can see their own posts
 
 **Optional Nice-to-have Stories**
-* User can view how many answers did a user answered - Checking creditability of other users...
-* User register account with their school email - Identify users
-* User can modify their profile
-* User can visit other user's profile
-* User can upvote a post
-* User delete/ Mark 'completed' post 
-* When user post a question, check if question is already in the database and suggest to direct user to the current post instead
-* Camera/Photo Library feature - add photo along with question
-* Administrator Account - monitor posts (delete/add), 
+* [X] User must register account with their school email (csueb email)
+* [ ] User can view how many answers did a user answered - Checking creditability of other users...
+* [ ] User register account with their school email - Identify users
+* [ ]User can modify their profile
+* [ ]User can visit other user's profile
+* [ ]User can upvote a post
+* [ ]User delete/ Mark 'completed' post 
+* [ ]When user post a question, check if question is already in the database and suggest to direct user to the current post instead
+* [ ]Camera/Photo Library feature - add photo along with question
+* [ ]Administrator Account - monitor posts (delete/add), 
 
 ### 2. Screen Archetypes
 
@@ -123,4 +125,22 @@ The app is mainly for students at the CSUEB. It serve as a small community for s
 - Output: 
    <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/sprint2.gif" width=200px >
 ## Sprint 3
+- Implement Login/Register feature               - Nischitha Chottanahalli Nagaraju
+- Implement Search function                      - Yi-Nong Wei
+- Implement Profile feature                      - Yi-Nong Wei
+- Test run:
+<p float="left">
+   Sign up feature - Fail version
+   <img src= "https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/sprint3_signup_feature(1).gif" width=200px>
+   Sign up feature - Sucess version                                                   
+   <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/sprint3_signup_feature(2).gif" width=200px>
+</p>
+<p2 float="left">   
+   Login, Profile, Compose feature: 
+   <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/sprint3_login_profile_feature.gif" width=200px>
+   Search feature:
+   <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/sprint3_search_feature.gif" width=200px>
+</p2>
+                                                                                                 
+
 ## Sprint 4
