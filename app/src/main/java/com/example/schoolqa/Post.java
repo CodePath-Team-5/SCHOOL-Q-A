@@ -27,6 +27,7 @@ public class Post extends ParseObject {
     public static final String KEY_IMAGE="image";
     public static final String KEY_CREATED="createdAt";
     public static final String KEY_QUESTION="question";
+    public static final String KEY_VOTE="vote";
 
     public String getContent(){
         return getString(KEY_CONTENT);
@@ -39,7 +40,14 @@ public class Post extends ParseObject {
         return getString(KEY_QUESTION);
     }
     public void setQuestion(String question){
-        put(KEY_CONTENT, question);
+        put(KEY_QUESTION, question);
+    }
+
+    public int getVote(){
+        return getInt(KEY_VOTE);
+    }
+    public void setVote(int vote){
+        put(KEY_VOTE, vote);
     }
 
     public ParseFile getImage(){

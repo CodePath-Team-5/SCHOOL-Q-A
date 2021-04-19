@@ -4,12 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.parse.FindCallback;
@@ -33,9 +37,12 @@ public class PostActivity extends AppCompatActivity {
     TextView tv_author_name; //name of user who created the post
     EditText et_user_comment;
     ImageView iv_question_image;
+    TextView btnn_vote;
+    ProgressBar progressBar;
     RecyclerView recyclerView_post_comments;
     CommentAdapter commentAdapter;
-
+    int vote;
+    Boolean is_upvote;
     Post post;
     List<Comment> commentList;
 
@@ -49,7 +56,11 @@ public class PostActivity extends AppCompatActivity {
         tv_author_name = findViewById(R.id.tv_post_author_name);
         iv_question_image = findViewById(R.id.iv_post_image);
         et_user_comment = findViewById(R.id.et_post_userComment);
+        btnn_vote = findViewById(R.id.bttn_post_upvote);
+        progressBar  = findViewById(R.id.post_progressBar);
         recyclerView_post_comments = findViewById(R.id.rv_post_comments);
+
+        is_upvote = false;
 
         post = (Post) Parcels.unwrap(getIntent().getParcelableExtra("post"));
 
@@ -59,28 +70,40 @@ public class PostActivity extends AppCompatActivity {
         recyclerView_post_comments.setLayoutManager(new LinearLayoutManager(this));
 
 
-
+        progressBar.setVisibility(View.VISIBLE);
         setupPost(post);
+        progressBar.setVisibility(View.INVISIBLE);
     }
 
     private void setupPost(Post post) {
         tv_title.setText(post.getQuestion());
         tv_question_content.setText(post.getContent());
         tv_author_name.setText(post.getUser().getUsername());
+
+        vote = post.getVote();
+        btnn_vote.setText(String.valueOf(vote));
+
         ParseFile image = post.getImage();
         if (image != null) {
             // Glide.with(context).load(post.getImage().getUrl()).into(ivImage);
             Glide.with(this).load(image.getUrl()).into(iv_question_image);
         }
+        else
+        {
+            Log.d(tag,"No image attached to the post");
+        }
+
 
         queryComments();
     }
 
     private void queryComments() {
+        progressBar.setVisibility(View.VISIBLE);
         // Specify which class to query
         ParseQuery<Comment> query = ParseQuery.getQuery(Comment.class);
         // Define our query conditions
         query.whereEqualTo("postId", post.getObjectId());
+        query.addDescendingOrder(Post.KEY_CREATED);
         // Execute the find asynchronously
         query.findInBackground(new FindCallback<Comment>() {
             public void done(List<Comment> itemList, ParseException e) {
@@ -90,12 +113,13 @@ public class PostActivity extends AppCompatActivity {
                 }
                 // Access the array of results here
                 for (Comment comment:itemList) {
-                    Log.i(tag, "Comment: " + comment.getContent() + " username: "+ comment.getUser().getUsername());
+                    Log.i(tag, "Comment: " + comment.getContent());
                 }
                 commentAdapter.clear();
                 commentAdapter.addAll(itemList);
             }
         });
+        progressBar.setVisibility(View.GONE);
     }
 
 
@@ -113,6 +137,33 @@ public class PostActivity extends AppCompatActivity {
 
         Log.d(tag,"Update comment list ");
         queryComments();
+        et_user_comment.setText("");
+        Toast.makeText(this,"Comment sent!", Toast.LENGTH_SHORT).show();
+
+
+    }
+    public void handle_vote_button(View view) {
+        //Vote button clicked
+        Log.d(tag,"Vote button clicked");
+
+        if (is_upvote==false)
+        {
+            is_upvote = true;
+            vote++;
+            post.setVote(vote);
+            btnn_vote.setTextColor(Color.parseColor("#F44336"));
+            Toast.makeText(this,"Upvote!", Toast.LENGTH_SHORT).show();
+        }
+        else
+        {
+            is_upvote = false;
+            vote--;
+            post.setVote(vote);
+            btnn_vote.setTextColor(Color.parseColor("#000000"));
+            Toast.makeText(this,"Downvote!", Toast.LENGTH_SHORT).show();
+        }
+        btnn_vote.setText(String.valueOf(vote));
+        post.saveInBackground();// Immediately save the data asynchronously
 
     }
     public void handle_back_button(View view) {
@@ -120,6 +171,7 @@ public class PostActivity extends AppCompatActivity {
         Log.d(tag,"Back button clicked");
         finish(); //go back to previous screen - Search screen/Profile screen
     }
+
 
 
 }
