@@ -34,7 +34,7 @@ public class Post extends ParseObject {
         return getString(KEY_QUESTION);
     }
     public void setQuestion(String question){
-        put(KEY_CONTENT, question);
+        put(KEY_QUESTION, question);
     }
 
     public ParseFile getImage(){
