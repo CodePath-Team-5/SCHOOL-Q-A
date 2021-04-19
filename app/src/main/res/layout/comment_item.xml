@@ -20,7 +20,7 @@
 
     <TextView
         android:id="@+id/commentItem_username"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/commentItem_userImage"
         android:layout_alignParentTop="true"
@@ -30,6 +30,16 @@
         android:layout_toEndOf="@id/commentItem_userImage"
         android:text="@string/username"
         android:textColor="#000000" />
+
+    <TextView
+        android:id="@+id/comentItem_timestamp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/commentItem_username"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:textColor="#000000"
+        tools:text="10d" />
 
     <TextView
         android:id="@+id/commentItem_comment"
@@ -45,13 +55,13 @@
 
     <ImageView
         android:id="@+id/commentItem_image"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/commentItem_comment"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="5dp"
-        tools:srcCompat="@tools:sample/avatars"
-        android:contentDescription="@string/todo" />
+        android:contentDescription="@string/todo"
+        tools:srcCompat="@tools:sample/avatars" />
 
     <FrameLayout
         android:id="@+id/division_line2"

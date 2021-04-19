@@ -5,16 +5,20 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import org.parceler.Parcel;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Parcel(analyze = Post.class)
 @ParseClassName("Post")
 public class Post extends ParseObject {
 
     private List<Comment> commentList;
 
-    public Post() {
-        this.commentList = new ArrayList<>();;
+    public Post()
+    {
+
     }
 
     public static final String KEY_CONTENT ="content";
@@ -22,6 +26,7 @@ public class Post extends ParseObject {
     public static final String KEY_IMAGE="image";
     public static final String KEY_CREATED="createdAt";
     public static final String KEY_QUESTION="question";
+    public static final String KEY_VOTE="vote";
 
     public String getContent(){
         return getString(KEY_CONTENT);
@@ -35,6 +40,12 @@ public class Post extends ParseObject {
     }
     public void setQuestion(String question){
         put(KEY_QUESTION, question);
+
+    public int getVote(){
+        return getInt(KEY_VOTE);
+    }
+    public void setVote(int vote){
+        put(KEY_VOTE, vote);
     }
 
     public ParseFile getImage(){
@@ -51,9 +62,4 @@ public class Post extends ParseObject {
         put(KEY_USER, user);
     }
 
-    private List<Comment> getCommentList() { return commentList; }
-    private  void setCommentList(List<Comment> list)
-    {
-        commentList.addAll(list);
-    }
 }
