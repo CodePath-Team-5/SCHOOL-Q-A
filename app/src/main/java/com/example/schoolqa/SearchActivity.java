@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
     ImageButton bttn_bttn_search_button;
     String search_key;
 
+    SwipeRefreshLayout refreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,8 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
         bttn_compose = findViewById(R.id.bttn_compose_button);
         recyclerView_postResults = findViewById(R.id.rv_search_results);
         bttn_bttn_search_button = findViewById(R.id.bttn_search_button);
+        refreshLayout = findViewById(R.id.swipeContainer);
+
 
         //Logout button clicked
         bttn_logout.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +77,15 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
 
         allpost = new ArrayList<>();
         adaptor = new PostAdaptor(this, allpost,  this);
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.i(tag, "refreshing");
+                queryPost();
+                refreshLayout.setRefreshing(false);
+            }
+        });
 
         recyclerView_postResults.setAdapter(adaptor);
         recyclerView_postResults.setLayoutManager(new LinearLayoutManager(this));
