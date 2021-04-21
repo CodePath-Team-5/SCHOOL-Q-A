@@ -117,4 +117,14 @@
         android:layout_height="match_parent"
         android:layout_below="@id/tv_my_posts" />
 
+    <Button
+        android:id="@+id/bttn_refresh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="51dp"
+        android:text="refresh" />
+
 </RelativeLayout>

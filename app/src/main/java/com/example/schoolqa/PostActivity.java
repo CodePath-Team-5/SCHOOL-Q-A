@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -61,6 +62,9 @@ public class PostActivity extends AppCompatActivity {
     Boolean comment_image_exist;
     Post post;
     List<Comment> commentList;
+    Button btn_refresh;
+    //SwipeRefreshLayout refreshLayout;
+
     private File photoFile;
     public String photoFileName = "photo.jpg";
 
@@ -91,7 +95,14 @@ public class PostActivity extends AppCompatActivity {
         commentAdapter = new CommentAdapter(this,commentList);
         recyclerView_post_comments.setAdapter(commentAdapter);
         recyclerView_post_comments.setLayoutManager(new LinearLayoutManager(this));
-
+        btn_refresh = findViewById(R.id.bttn_refresh);
+        btn_refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(tag, "refresh button clicked");
+                setupPost(post);
+            }
+        });
         //set visibility of progress bar
         progressBar.setVisibility(View.VISIBLE);
         setupPost(post);

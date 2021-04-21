@@ -175,7 +175,10 @@ public class EditProfileActivity extends AppCompatActivity {
         user.put("major_profession", et_major.getText().toString());
         user.put("year_experience", et_year.getText().toString());
         user.put("description", et_intro.getText().toString());
-        user.put("user_image",new ParseFile(photoFile));
+        if(photoFile!=null){
+            user.put("user_image",new ParseFile(photoFile));
+        }
+
 
         //update change on back4app
         user.saveInBackground(new SaveCallback() {

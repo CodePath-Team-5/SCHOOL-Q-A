@@ -3,6 +3,7 @@ package com.example.schoolqa;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -42,6 +43,7 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
     Context context;
     PostAdaptor adapter;
     List<Post> userposts;
+    Button btn_refresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,15 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
             @Override
             public void onClick(View v) {
                 handle_back_button(v);
+            }
+        });
+
+        btn_refresh = findViewById(R.id.bttn_refresh);
+        btn_refresh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(tag,"refresher clicked");
+                bind();
             }
         });
 

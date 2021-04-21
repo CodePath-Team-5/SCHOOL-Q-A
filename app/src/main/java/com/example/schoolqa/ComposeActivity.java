@@ -70,6 +70,7 @@ public class ComposeActivity extends AppCompatActivity {
                 }
                 et_question_title.setText("");
                 et_question_content.setText("");
+                finish();
             }
         });
     }
