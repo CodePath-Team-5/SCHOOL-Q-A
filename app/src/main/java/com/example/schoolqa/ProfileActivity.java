@@ -68,6 +68,8 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
     Comment deletedComment = null;
     Comment user_cmt;
 
+    SwipeRefreshLayout refreshLayout_comments;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +86,7 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
         recyclerView_User_postResults = findViewById(R.id.rv_profile_UserPosts);
         recyclerView_User_comments = findViewById(R.id.rv_user_comments);
         bttn_editProfile = findViewById(R.id.imageButton_profile_edit);
+        refreshLayout_comments = findViewById(R.id.Comment_swipeContainer);
 
         //get intent
         Bundle extras = getIntent().getExtras();
@@ -109,7 +112,15 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
             }
         });
 
-
+        //setup refresh
+        refreshLayout_comments.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.i(tag, "refreshing comment list");
+                queryComments();
+                refreshLayout_comments.setRefreshing(false);
+            }
+        });
 
         if (guest == true)
         {
@@ -187,8 +198,7 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
         Log.i(tag,"In QUERY2");
         for (int i =0; i< userposts.size();i++)
         {
-            ParseQuery<Comment> query = ParseQuery.getQuery(Comment.class);
-            query.include(Comment.KEY_POST_ID);
+            ParseQuery<Comment> query = new ParseQuery("Comment");
             query.whereEqualTo(Comment.KEY_POST_ID, userposts.get(i).getObjectId());
             query.addDescendingOrder(Comment.KEY_CREATED);
             query.findInBackground(new FindCallback<Comment>() {
@@ -196,9 +206,11 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
                 public void done(List<Comment> comments, ParseException e) {
                     if  (e!=null)
                     {
+                        //fail
                         Log.e(tag, "Issue with getting comment", e);
                         return;
                     }
+                    //sucess
                     for (Comment cmt:comments){
                         Log.i(tag, "Commment: "+cmt.getContent()+" -user: "+ cmt.getUser().getUsername());
                         user_comments.add(cmt);

@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -27,6 +28,7 @@ import java.util.List;
 public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQuestionItemListener {
     public static String tag = "SearchActivity";
     EditText et_user_input;
+    TextView tv_search;
     ImageButton bttn_user_profile;
     ImageButton bttn_logout;
     ImageButton bttn_compose;
@@ -50,6 +52,7 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
         bttn_compose = findViewById(R.id.bttn_compose_button);
         recyclerView_postResults = findViewById(R.id.rv_search_results);
         bttn_bttn_search_button = findViewById(R.id.bttn_search_button);
+        tv_search = findViewById(R.id.tv_searchtresult);
         refreshLayout = findViewById(R.id.swipeContainer);
 
 
@@ -75,6 +78,7 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
             }
         });
 
+        tv_search.setText("Recently Added Posts:");
         allpost = new ArrayList<>();
         adaptor = new PostAdaptor(this, allpost,  this);
 
@@ -130,11 +134,11 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
 
     public void handle_search_button(View view,final String search_key) {
         //Search button clicked
+        tv_search.setText("Search Results:");
         Log.d(tag,"Search button clicked");
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
-        query.setLimit(20);
-        query.addDescendingOrder(Post.KEY_CREATED);
+        query.addDescendingOrder(Post.KEY_VOTE);
         query.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> posts, ParseException e) {

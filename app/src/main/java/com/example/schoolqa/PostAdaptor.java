@@ -72,6 +72,7 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHholder>{
     class ViewHholder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private TextView tvUsername;
+        private TextView tvVote;
         private TextView tvPostId;
         private TextView tvTimestamp;
         private ImageView ivImage;
@@ -84,6 +85,7 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHholder>{
             tvTimestamp = itemView.findViewById(R.id.timeCreated);
             tvQuestion = itemView.findViewById(R.id.tvQuestion);
             tvPostId = itemView.findViewById(R.id.tvPostid);
+            tvVote = itemView.findViewById(R.id.tv_Postvote);
 
             this.onQuestionItemListener = onQuestionItemListener;
             itemView.setOnClickListener(this);
@@ -95,6 +97,7 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHholder>{
             tvPostId.setText("Post ID: "+post.getObjectId());
             String time = TimeFormatter.getTimeDifference(post.getCreatedAt().toString());
             tvTimestamp.setText(time);
+            tvVote.setText(""+post.getVote());
             //ParseFile image = post.getImage();
             ParseFile image = post.getUser().getParseFile("user_image");
             if (image != null) {
