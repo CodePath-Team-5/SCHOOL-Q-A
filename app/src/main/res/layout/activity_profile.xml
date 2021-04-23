@@ -161,19 +161,26 @@
         android:textColor="#000000"
         tools:text="0" />
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/Comment_swipeContainer"
-        android:layout_width="match_parent"
+
+    <ImageButton
+        android:id="@+id/bttn_refresh_cmts"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_cmtCount"
-        android:layout_marginBottom="9dp">
+        android:layout_below="@id/rv_profile_UserPosts"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:background="#FFFFFF"
+        app:srcCompat="@drawable/ic_baseline_refresh_30"
+        android:onClick="handle_refresh_comments"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_user_comments"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
+        android:layout_below="@id/tv_profile_comment_count"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp" />
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </RelativeLayout>
 </ScrollView>

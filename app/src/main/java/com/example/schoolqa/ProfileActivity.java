@@ -68,8 +68,6 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
     Comment deletedComment = null;
     Comment user_cmt;
 
-    SwipeRefreshLayout refreshLayout_comments;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,7 +84,6 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
         recyclerView_User_postResults = findViewById(R.id.rv_profile_UserPosts);
         recyclerView_User_comments = findViewById(R.id.rv_user_comments);
         bttn_editProfile = findViewById(R.id.imageButton_profile_edit);
-        refreshLayout_comments = findViewById(R.id.Comment_swipeContainer);
 
         //get intent
         Bundle extras = getIntent().getExtras();
@@ -112,15 +109,7 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
             }
         });
 
-        //setup refresh
-        refreshLayout_comments.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                Log.i(tag, "refreshing comment list");
-                queryComments();
-                refreshLayout_comments.setRefreshing(false);
-            }
-        });
+
 
         if (guest == true)
         {
@@ -503,5 +492,9 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
             intent.putExtra("comment", Parcels.wrap(user_comments.get(position)));
             startActivity(intent);
         }
+    }
+
+    public void handle_refresh_comments(View view) {
+        queryComments();
     }
 }
