@@ -24,7 +24,6 @@ public class Comment extends ParseObject implements Cloneable{
     public static final String KEY_POST_ID="postId";
     public static final String KEY_USER="author";
     public static final String KEY_IMAGE="image";
-    public static final String KEY_POST="fromPost";
     public static final String KEY_CREATED="createdAt";
 
 
