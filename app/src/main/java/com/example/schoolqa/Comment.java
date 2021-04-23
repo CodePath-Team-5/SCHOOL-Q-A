@@ -1,25 +1,39 @@
 package com.example.schoolqa;
 
+import android.util.Log;
+
+import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import org.parceler.Parcel;
 
 import java.io.Serializable;
+import java.util.List;
+
 @Parcel(analyze = Comment.class)
 @ParseClassName("Comment")
-public class Comment extends ParseObject{
+public class Comment extends ParseObject implements Cloneable{
+
     public static final String KEY_CONTENT ="comment_content";
-    public static final String KEY_POST="postId";
+    public static final String KEY_POST_ID="postId";
     public static final String KEY_USER="author";
     public static final String KEY_IMAGE="image";
+    public static final String KEY_POST="fromPost";
     public static final String KEY_CREATED="createdAt";
+
 
     //empty constructor needed by the Parceler library
     public Comment() {
+    }
+
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     public String getContent(){
@@ -51,10 +65,12 @@ public class Comment extends ParseObject{
     }
 
     public String getPostId(){
-        return getString(KEY_POST);
+        return getString(KEY_POST_ID);
     }
     public void setPostId(String post){
-        put(KEY_POST, post);
+        put(KEY_POST_ID, post);
     }
+
+
 
 }

@@ -72,6 +72,8 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHholder>{
     class ViewHholder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private TextView tvUsername;
+        private TextView tvPostId;
+        private TextView tvTimestamp;
         private ImageView ivImage;
         private TextView tvQuestion;
         OnQuestionItemListener onQuestionItemListener;
@@ -79,16 +81,20 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHholder>{
             super(itemView);
             tvUsername = itemView.findViewById(R.id.tvUsername);
             ivImage = itemView.findViewById(R.id.ivImage);
+            tvTimestamp = itemView.findViewById(R.id.timeCreated);
             tvQuestion = itemView.findViewById(R.id.tvQuestion);
+            tvPostId = itemView.findViewById(R.id.tvPostid);
 
             this.onQuestionItemListener = onQuestionItemListener;
             itemView.setOnClickListener(this);
         }
 
         public void bind(Post post) {
-            tvUsername.setText(post.getUser().getUsername());
+            tvUsername.setText("Author: "+post.getUser().getUsername());
             tvQuestion.setText(post.getQuestion());
-
+            tvPostId.setText("Post ID: "+post.getObjectId());
+            String time = TimeFormatter.getTimeDifference(post.getCreatedAt().toString());
+            tvTimestamp.setText(time);
             //ParseFile image = post.getImage();
             ParseFile image = post.getUser().getParseFile("user_image");
             if (image != null) {
@@ -101,11 +107,11 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHholder>{
 
         @Override
         public void onClick(View v) {
-            onQuestionItemListener.onItemClick(getAdapterPosition());
+                onQuestionItemListener.onItemClick(v,getAdapterPosition());
         }
     }
     public interface OnQuestionItemListener
     {
-        void onItemClick (int position);
+        void onItemClick (View v, int position);
     }
 }

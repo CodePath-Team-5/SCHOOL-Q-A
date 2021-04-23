@@ -157,6 +157,7 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
         Log.d(tag,"Profile button clicked");
         //go to Profile activity
         Intent intent = new Intent(this, ProfileActivity.class);
+        intent.putExtra("is_guest", false);
         startActivity(intent);
     }
     private void handle_compose_button() {
@@ -175,8 +176,10 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
         startActivity(intent);
     }
 
+
+
     @Override
-    public void onItemClick(int position) {
+    public void onItemClick(View v, int position) {
         Post post = allpost.get(position);
         Log.d(tag,"Item clicked: item "+position+ " - title: "+post.getQuestion() );
         Intent intent = new Intent(this, PostActivity.class);
@@ -184,4 +187,5 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
         startActivity(intent);
 
     }
+
 }

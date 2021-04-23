@@ -19,17 +19,18 @@ import java.util.List;
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
     private Context context;
     private List<Comment> commentList;
+    private OnCommentItemListener itemListener;
 
-
-    public CommentAdapter(Context context, List<Comment> comments) {
+    public CommentAdapter(Context context, List<Comment> comments, OnCommentItemListener listener ) {
         this.commentList = comments;
         this.context = context;
+        this.itemListener = listener;
     }
     @NonNull
     @Override
     public CommentAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.comment_item,parent,false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, itemListener);
     }
 
     @Override
@@ -55,19 +56,24 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         notifyDataSetChanged();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView tvUsername;
         private ImageView ivImage;
         private TextView tvComment;
         private TextView tvTimestamp;
         private ImageView ivUserImage;
-        public ViewHolder(@NonNull View itemView) {
+        OnCommentItemListener commentItemListener;
+
+        public ViewHolder(@NonNull View itemView, OnCommentItemListener listener) {
             super(itemView);
             tvUsername = itemView.findViewById(R.id.commentItem_username);
             tvTimestamp = itemView.findViewById(R.id.comentItem_timestamp);
             ivImage = itemView.findViewById(R.id.commentItem_image);
             tvComment = itemView.findViewById(R.id.commentItem_comment);
             ivUserImage = itemView.findViewById(R.id.commentItem_userImage);
+
+            this.commentItemListener = listener;
+            itemView.setOnClickListener(this);
         }
 
         public void bind(Comment comment) {
@@ -90,5 +96,14 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                 Glide.with(context).load(cmt_image.getUrl()).into(ivImage);
             }
         }
+        @Override
+        public void onClick(View v) {
+                commentItemListener.onItemClick(v,getAdapterPosition());
+            }
+        }
+    public interface OnCommentItemListener
+    {
+        void onItemClick(View v, int position);
     }
 }
+
