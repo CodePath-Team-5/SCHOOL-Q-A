@@ -185,12 +185,22 @@ public class EditProfileActivity extends AppCompatActivity {
             @Override
             public void done(ParseException e) {
                 if(e!=null){
+
                     Log.e(updatetag, "error while saving", e);
+                    Intent returnIntent = new Intent();
+                    setResult(RESULT_CANCELED,returnIntent);
+                    finish();
                 }
-                Log.i(updatetag, "save successful");
+                else
+                {
+                    Log.i(updatetag, "save successful");
+                    Intent returnIntent = new Intent();
+                    setResult(RESULT_OK,returnIntent);
+                    finish();
+                }
             }
         });
-        finish();
+
     }
 
     public void handle_back_button(View view) {

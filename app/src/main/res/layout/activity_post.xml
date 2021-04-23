@@ -106,16 +106,24 @@
                 app:drawableTint="#000000"
                 tools:text="23" />
 
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeContainer_inPost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_post_comment_image"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="9dp"
+            >
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_post_comments"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/iv_post_comment_image"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
+
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp" />
-
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
             <EditText
                 android:id="@+id/et_post_userComment"
                 android:layout_width="wrap_content"
@@ -190,23 +198,5 @@
                 android:tint="#FFFFFF"
                 app:srcCompat="@drawable/ic_cancel_24" />
 
-            <ProgressBar
-                android:id="@+id/post_progressBar"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:progressTint="#F44336" />
-
-            <Button
-                android:id="@+id/bttn_refresh"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="39dp"
-                android:text="refresh" />
-
-        </RelativeLayout>
+    </RelativeLayout>
 </ScrollView>
