@@ -1,8 +1,10 @@
 package com.example.schoolqa;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.parse.FindCallback;
@@ -30,11 +33,13 @@ import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity implements PostAdaptor.OnQuestionItemListener {
     public static String tag = "ProfileActivity";
+    public static final int REQUEST_CODE = 5;
     TextView tv_username;
     TextView tv_major;
     TextView tv_year;
     TextView tv_intro;
     TextView tv_post_count;
+    TextView tv_comment_count;
     ImageView iv_user_image;
     ImageButton bttn_back;
     RecyclerView recyclerView_User_postResults;
@@ -42,6 +47,7 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
     Context context;
     PostAdaptor adapter;
     List<Post> userposts;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +58,7 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
         tv_major = findViewById(R.id.tv_profile_major);
         tv_year = findViewById(R.id.tv_profile_year);
         tv_intro = findViewById(R.id.tv_profile_description);
+        tv_comment_count = findViewById(R.id.tv_profile_comment_count);
         tv_post_count = findViewById(R.id.tv_profile_post_count);
         iv_user_image = findViewById(R.id.iv_profile_image);
         recyclerView_User_postResults = findViewById(R.id.rv_profile_UserPosts);
@@ -74,9 +81,9 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
     }
 
     private void bind() {
-        tv_username.setText(user.getUsername().toString());
-        tv_major.setText(user.get("major_profession").toString());
-        tv_year.setText(user.get("year_experience").toString());
+        tv_username.setText(user.getUsername());
+        tv_major.setText("Major/Profession: "+user.get("major_profession").toString());
+        tv_year.setText("Year of Graduation/ Experience: "+user.get("year_experience").toString());
         tv_intro.setText(user.get("description").toString());
 
         ParseFile image = user.getParseFile("user_image");
@@ -89,6 +96,7 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
         }
 
         queryPost();
+        queryComments();
     }
 
     private void queryPost() {
@@ -117,12 +125,27 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
         });
 
     }
+    private void queryComments()
+    {
+        ParseQuery<Comment> query = ParseQuery.getQuery(Comment.class);
+        query.include(Comment.KEY_USER);
+        query.whereEqualTo(Comment.KEY_USER, user);
+        query.addDescendingOrder(Post.KEY_CREATED);
+        query.findInBackground(new FindCallback<Comment>() {
+            @Override
+            public void done(List<Comment> comments, ParseException e) {
+
+                tv_comment_count.setText(""+comments.size());
+                Log.i(tag, "Comments: "+ comments.size());
+            }
+        });
+    }
     public void handle_edit_button(View view) {
         //Edit button clicked
         Log.d(tag,"Edit button clicked");
 
         Intent intent = new Intent(this, EditProfileActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, REQUEST_CODE);
     }
     public void handle_back_button(View view) {
         //Back button clicked
@@ -138,5 +161,22 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
         Intent intent = new Intent(this, PostActivity.class);
         intent.putExtra("post", Parcels.wrap(post));
         startActivity(intent);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==REQUEST_CODE)
+        {
+            if (resultCode==RESULT_OK)
+            {
+                Toast.makeText(this,"Update profile sucessfully",Toast.LENGTH_SHORT).show();
+                bind();
+            }
+            else if (resultCode==RESULT_CANCELED)
+            {
+                Toast.makeText(this,"Fail to update your profile. Please try again later!",Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

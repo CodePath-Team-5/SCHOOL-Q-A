@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -32,6 +33,7 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import org.parceler.Parcels;
 
@@ -53,7 +55,6 @@ public class PostActivity extends AppCompatActivity {
     ImageView iv_question_image;
     TextView btnn_vote;
     ImageButton bttn_cancel_comment_image;
-    ProgressBar progressBar;
     RecyclerView recyclerView_post_comments;
     CommentAdapter commentAdapter;
     int vote;
@@ -61,6 +62,8 @@ public class PostActivity extends AppCompatActivity {
     Boolean comment_image_exist;
     Post post;
     List<Comment> commentList;
+    SwipeRefreshLayout refreshLayout;
+
     private File photoFile;
     public String photoFileName = "photo.jpg";
 
@@ -79,7 +82,7 @@ public class PostActivity extends AppCompatActivity {
         et_user_comment = findViewById(R.id.et_post_userComment);
         btnn_vote = findViewById(R.id.bttn_post_upvote);
         bttn_cancel_comment_image = findViewById(R.id.bttn_post_cancle_comment_image);
-        progressBar  = findViewById(R.id.post_progressBar);
+        refreshLayout = findViewById(R.id.swipeContainer_inPost);
         recyclerView_post_comments = findViewById(R.id.rv_post_comments);
 
         is_upvote = false;
@@ -92,10 +95,15 @@ public class PostActivity extends AppCompatActivity {
         recyclerView_post_comments.setAdapter(commentAdapter);
         recyclerView_post_comments.setLayoutManager(new LinearLayoutManager(this));
 
-        //set visibility of progress bar
-        progressBar.setVisibility(View.VISIBLE);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Log.i(tag, "refreshing");
+                queryComments();
+                refreshLayout.setRefreshing(false);
+            }
+        });
         setupPost(post);
-        progressBar.setVisibility(View.INVISIBLE);
     }
 
     private void setupPost(Post post) {
@@ -129,7 +137,7 @@ public class PostActivity extends AppCompatActivity {
     }
 
     private void queryComments() {
-        progressBar.setVisibility(View.VISIBLE);
+
         // Specify which class to query
         ParseQuery<Comment> query = ParseQuery.getQuery(Comment.class);
         // Define our query conditions
@@ -150,7 +158,7 @@ public class PostActivity extends AppCompatActivity {
                 commentAdapter.addAll(itemList);
             }
         });
-        progressBar.setVisibility(View.GONE);
+
     }
 
 
@@ -161,14 +169,30 @@ public class PostActivity extends AppCompatActivity {
         String input = et_user_comment.getText().toString();
         Comment comment = new Comment();
         comment.setContent(input);
+        Log.d(tag,"Send button clicked - comment: "+input);
         comment.setUser(ParseUser.getCurrentUser());
         comment.setPostId(post.getObjectId());
         if (comment_image_exist ==true) {
             comment.setImage(new ParseFile(photoFile));
             comment_image_exist = false; //reset
         }
-        comment.saveInBackground();// Immediately save the data asynchronously
-        Log.d(tag,"Send button clicked - comment: "+input);
+        comment.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e==null)
+                {
+                    //save success
+                    Toast.makeText(getApplicationContext(),"Sent!", Toast.LENGTH_SHORT).show();
+                    queryComments();
+                }
+                else
+                {
+                    //fail to save
+                    Toast.makeText(getApplicationContext(),"Fail to send comment. Please try again!!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });// Immediately save the data asynchronously
+
 
         Log.d(tag,"Update comment list ");
         //when sent...reset text box & image view
@@ -177,8 +201,7 @@ public class PostActivity extends AppCompatActivity {
         bttn_cancel_comment_image.setVisibility(View.INVISIBLE);
         et_user_comment.setText("");
 
-        queryComments();
-        Toast.makeText(this,"Comment sent!", Toast.LENGTH_SHORT).show();
+
 
 
     }
@@ -260,6 +283,7 @@ public class PostActivity extends AppCompatActivity {
                 comment_image_exist = true;
             } else { // Result was a failure
                 Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
+                comment_image_exist = false;
             }
         }
     }
