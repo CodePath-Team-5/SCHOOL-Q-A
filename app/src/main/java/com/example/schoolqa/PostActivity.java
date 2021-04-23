@@ -41,7 +41,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostActivity extends AppCompatActivity {
+public class PostActivity extends AppCompatActivity implements CommentAdapter.OnCommentItemListener{
 
     public static String tag = "PostActivity";
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 45;
@@ -91,7 +91,7 @@ public class PostActivity extends AppCompatActivity {
         post = (Post) Parcels.unwrap(getIntent().getParcelableExtra("post"));
 
         commentList = new ArrayList<>();
-        commentAdapter = new CommentAdapter(this,commentList);
+        commentAdapter = new CommentAdapter(this,commentList, this);
         recyclerView_post_comments.setAdapter(commentAdapter);
         recyclerView_post_comments.setLayoutManager(new LinearLayoutManager(this));
 
@@ -302,9 +302,20 @@ public class PostActivity extends AppCompatActivity {
     public void handle_back_button(View view) {
         //Back button clicked
         Log.d(tag,"Back button clicked");
+        Intent returnIntent= new Intent();
+        setResult(RESULT_OK,returnIntent);
         finish(); //go back to previous screen - Search screen/Profile screen
     }
 
 
+    @Override
+    public void onItemClick(View v, int position) {
+        Log.d(tag,"User click on other user image... guest_name: "+ commentList.get(position).getUser().getUsername());
 
+        Intent intent = new Intent(this, ProfileActivity.class);
+        intent.putExtra("is_guest", true);
+        intent.putExtra("comment", Parcels.wrap(commentList.get(position)));
+        startActivity(intent);
+
+    }
 }

@@ -64,12 +64,12 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <FrameLayout
-        android:id="@+id/division_line2"
+        android:id="@+id/division_line3"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@id/commentItem_image"
         android:layout_marginBottom="5dp"
-        android:background="#000000">
+        android:background="#807D7D">
 
     </FrameLayout>
 

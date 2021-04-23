@@ -12,11 +12,14 @@ import java.util.List;
 
 @Parcel(analyze = Post.class)
 @ParseClassName("Post")
-public class Post extends ParseObject {
+public class Post extends ParseObject implements Cloneable {
 
     public Post()
     {
 
+    }
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 
     public static final String KEY_CONTENT ="content";

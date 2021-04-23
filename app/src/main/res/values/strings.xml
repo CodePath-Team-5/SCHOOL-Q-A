@@ -31,4 +31,5 @@
     <string name="profile">Profile</string>
     <string name="todo">TODO</string>
     <string name="comment_count">Comment count:</string>
+    <string name="comments_from_my_posts">Comments From My Posts:</string>
 </resources>
