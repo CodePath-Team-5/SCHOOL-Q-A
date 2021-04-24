@@ -34,7 +34,8 @@ The app is mainly for students at the CSUEB. It serve as a small community for s
 **Required Must-have Stories**
 * [X] User can login
 * [X] User can register account 
-* [X] User can search question
+* [X] User can view most recent question posts in the Search Page
+* [X] User can type in keyword/sentence to search for related posts.
 * [X] User can post new question
 * [X] User can comment to a question
 * [X] User can have their own profile: User can see their own posts
