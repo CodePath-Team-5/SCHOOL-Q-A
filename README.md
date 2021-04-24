@@ -11,6 +11,7 @@ Original App Design Project - README Template
 3. [Sprint 1](#Sprint1)
 4. [Sprint 2](#Sprint2)
 5. [Sprint 3](#Sprint3)
+6. [Sprint 4](#Sprint4)
 
 ## Overview
 
@@ -34,21 +35,21 @@ The app is mainly for students at the CSUEB. It serve as a small community for s
 * [X] User can login
 * [X] User can register account 
 * [X] User can search question
-* [ ] User can post new question
-* [ ] User can answer question
+* [X] User can post new question
+* [X] User can comment to a question
 * [X] User can have their own profile: User can see their own posts
 
 **Optional Nice-to-have Stories**
-* [X] User must register account with their school email (csueb email)
-* [ ] User can view how many answers did a user answered - Checking creditability of other users...
-* [ ] User register account with their school email - Identify users
-* [ ]User can modify their profile
-* [ ]User can visit other user's profile
-* [ ]User can upvote a post
-* [ ]User delete/ Mark 'completed' post 
-* [ ]When user post a question, check if question is already in the database and suggest to direct user to the current post instead
-* [ ]Camera/Photo Library feature - add photo along with question
-* [ ]Administrator Account - monitor posts (delete/add), 
+* [X] Login: User must register account with their school email (csueb email)
+* [X] Profile: User can view their personal info on Profile
+* [X] Profile: User can modify their profile. User can change: user image, username, password, user's info
+* [X] Profile: User can view list of their posts and comments in Profile
+* [X] Profile: User can delete their posts. User can undo the task if they change their mind
+* [X] Profile: User can delete their comments. User can undo the task if they change their mind
+* [X] Post: User can view other user's profile by clicking on user's image under comment section
+* [X] Post: User can upvote a post
+* [X] Post: Capture Photo feature. User can send comment with attached image
+* [X] Compose: Capture Photo feature. User can upload a post question with attached image.
 
 ### 2. Screen Archetypes
 
@@ -128,6 +129,7 @@ The app is mainly for students at the CSUEB. It serve as a small community for s
 - Implement Login/Register feature               - Nischitha Chottanahalli Nagaraju
 - Implement Search function                      - Yi-Nong Wei
 - Implement Profile feature                      - Yi-Nong Wei
+- Implement Compose Activity                     - Margaret Hu
 - Test run:
 <p float="left">
    Sign up feature - Fail version
@@ -144,3 +146,25 @@ The app is mainly for students at the CSUEB. It serve as a small community for s
                                                                                                  
 
 ## Sprint 4
+- Implement Edit Profile                                                   -  Yi-Nong Wei
+- Add refresh feature to SearchResult list, Comment list, Post list        -  Yi-Nong Wei
+- Implement delete & undo delele feature on user posts and comments        -  Hao Lam
+- Improve overall layout & user experience in Profile & Post Activity      -  Hao Lam
+- Implement Capture Photo feature in Compose Activity                      -  Margaret Hu
+- Test run:
+<p float="left">
+   Search Function
+   <img src= "https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/sprint4_search.gif" width=200px>
+   Post Activity                                                   
+   <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/sprint4_post.gif" width=200px>
+</p>
+<p2 float="left">   
+   Profile Activity 
+   <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/sprint4_profile.gif" width=200px>
+   Edit Profile Activity                                                   
+   <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/sprint_edit_profile.gif" width=200px>
+</p2>
+<p3 float="left">   
+   Compose Activity 
+   <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/sprint4_compose.gif" width=200px>
+</p3>
