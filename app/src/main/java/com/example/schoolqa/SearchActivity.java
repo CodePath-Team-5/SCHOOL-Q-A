@@ -1,6 +1,7 @@
 package com.example.schoolqa;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -27,6 +29,7 @@ import java.util.List;
 
 public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQuestionItemListener {
     public static String tag = "SearchActivity";
+    public static final int COMPOSE_CODE = 29;
     EditText et_user_input;
     TextView tv_search;
     ImageButton bttn_user_profile;
@@ -168,7 +171,7 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
         Log.d(tag,"Compose button clicked");
         //go to Profile activity
         Intent intent = new Intent(this, ComposeActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, COMPOSE_CODE);
     }
     private void handle_logout_button() {
         Log.d(tag,"Logout button clicked");
@@ -180,7 +183,16 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
         startActivity(intent);
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==COMPOSE_CODE) {
+            if (resultCode == RESULT_OK) {
+                Toast.makeText(this, "Post Created!", Toast.LENGTH_SHORT).show();
+                queryPost();
+            }
+        }
+    }
 
     @Override
     public void onItemClick(View v, int position) {
