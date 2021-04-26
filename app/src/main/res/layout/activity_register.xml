@@ -30,7 +30,19 @@
             android:hint="Username"
             android:inputType="textPersonName" />
 
+
+
     </com.google.android.material.textfield.TextInputLayout>
+    <TextView
+        android:id="@+id/tvNameError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:gravity="center|start"
+        android:text="Please enter name"
+        android:textColor="@android:color/holo_red_dark"
+        android:visibility="gone" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/password_text_input_layout"
@@ -48,7 +60,100 @@
             android:hint="Password"
             android:inputType="textPassword" />
 
+
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/tvPasswordError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:gravity="center|start"
+        android:text="Please enter password"
+        android:textColor="@android:color/holo_red_dark"
+        android:visibility="gone" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Password should be"
+        android:textColor="@android:color/black" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center|start"
+            android:text="At least 8 characters"
+            android:textColor="@android:color/black" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center|start"
+            android:text="Minimum one uppercase"
+            android:textColor="@android:color/black" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center|start"
+            android:text="Minimum one number"
+            android:textColor="@android:color/black" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:gravity="center|start"
+            android:text="Minimum one symbol"
+            android:textColor="@android:color/black" />
+
+    </LinearLayout>
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/email_text_input_layout"
         android:layout_width="match_parent"
@@ -118,11 +223,12 @@
         android:layout_height="wrap_content"
         android:background="@drawable/round_edge_button"
         android:backgroundTint="#F44336"
-        android:onClick="handle_signUp"
         android:padding="10dp"
         android:text="@string/confirm"
         android:textColor="#FFFFFF"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:onClick="handle_signUp"/>
+
 
     <Button
         android:id="@+id/bttn_signup_cancel_button"

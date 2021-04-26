@@ -1,12 +1,14 @@
 package com.example.schoolqa;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.ParseException;
@@ -22,28 +24,36 @@ public class RegisterActivity extends AppCompatActivity {
     EditText et_major; //user's major/profession
     EditText et_year; //user's year of experience / year of graduation
     EditText et_intro;
+    private TextView tvNameError,  tvPasswordError, tvColor;
+    private CardView frameOne, frameTwo, frameThree, frameFour;
+    private boolean isAtLeast8 = false, hasUppercase = false, hasNumber = false, hasSymbol = false, isRegistrationClickable = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         //link layout components
-          et_username= findViewById(R.id.et_signup_username);
-          et_password= findViewById(R.id.et_signup_password);
-          et_email= findViewById(R.id.et_signup_email);
-          et_major= findViewById(R.id.et_signup_major);
-          et_year= findViewById(R.id.et_signup_yearGraduate);
-          et_intro = findViewById(R.id.et_signup_intro);
+        et_username= findViewById(R.id.et_signup_username);
+        et_password= findViewById(R.id.et_signup_password);
+        et_email= findViewById(R.id.et_signup_email);
+        et_major= findViewById(R.id.et_signup_major);
+        et_year= findViewById(R.id.et_signup_yearGraduate);
+        et_intro = findViewById(R.id.et_signup_intro);
 
     }
 
     public void handle_signUp(View view) {
         //Sign up button clicked
         Log.d(tag,"Signup button clicked");
-        String email_id = et_email.getText().toString();
+        String email_id = et_email.getText().toString(),password = et_password.getText().toString();
         if(!email_id.contains("@horizon.csueastbay.edu"))
         {
-            Toast.makeText(RegisterActivity.this, "Sign up Failed. Only csueb email is valid", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterActivity.this, "Sign up Failed.Only csueb email is valid / No duplicates allowed", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(!(password.length() >= 8) && !(password.matches("(.*[A-Z].*)")) && !(password.matches("(.*[0-9].*)")) && !(password.matches("^(?=.*[_.()]).*$"))){
+            Toast.makeText(RegisterActivity.this, "Password has to meet given criteria", Toast.LENGTH_SHORT).show();
             return;
         }
         ParseUser user = new ParseUser();
