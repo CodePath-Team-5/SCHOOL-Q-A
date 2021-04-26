@@ -29,20 +29,32 @@
             android:tint="#000000"
             app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
 
-            <TextView
-                android:id="@+id/tv_post_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/bttn_post_back_button"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginBottom="5dp"
-                android:textColor="#000000"
-                android:textSize="24sp"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="141dp"
-                tools:layout_editor_absoluteY="57dp"
-                tools:text="Question Title" />
+        <ImageButton
+            android:id="@+id/bttn_Post_refreshComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:background="#FFFFFF"
+            android:tint="#000000"
+            app:srcCompat="@drawable/ic_baseline_refresh_30"
+            android:onClick="handle_refresh_cmts"/>
+
+        <TextView
+            android:id="@+id/tv_post_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bttn_post_back_button"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:textColor="#000000"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="141dp"
+            tools:layout_editor_absoluteY="57dp"
+            tools:text="Question Title" />
 
             <TextView
                 android:id="@+id/tv_post_author_name"
@@ -106,25 +118,17 @@
                 app:drawableTint="#000000"
                 tools:text="23" />
 
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipeContainer_inPost"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/iv_post_comment_image"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="9dp"
-            >
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_post_comments"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
+                android:layout_below="@id/iv_post_comment_image"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp" />
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-            <EditText
+
+
+        <EditText
                 android:id="@+id/et_post_userComment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -132,7 +136,7 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentBottom="false"
                 android:layout_marginEnd="5dp"
-                android:layout_toLeftOf="@id/bttn_post_add_image_button"
+                android:layout_toStartOf="@id/bttn_post_add_image_button"
                 android:autofillHints=""
                 android:backgroundTint="#00BCD4"
                 android:ems="10"
@@ -159,12 +163,13 @@
                 android:layout_height="40dp"
                 android:layout_below="@id/bttn_post_upvote"
                 android:layout_marginEnd="5dp"
-                android:layout_toLeftOf="@id/bttn_post_send_button"
+                android:layout_toStartOf="@id/bttn_post_send_button"
                 android:background="@drawable/round_edge_button"
                 android:backgroundTint="#FFFFFF"
                 android:onClick="handle_add_image"
                 android:tint="#F44336"
-                app:srcCompat="@drawable/ic_add_a_photo_24" />
+                app:srcCompat="@drawable/ic_add_a_photo_24"
+                android:contentDescription="TODO" />
 
             <ImageView
                 android:id="@+id/iv_post_comment_image"
@@ -181,8 +186,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/et_post_userComment"
-                android:layout_toRightOf="@id/iv_post_comment_image"
-                android:text="Image Attached"
+                android:layout_toEndOf="@id/iv_post_comment_image"
+                android:text="@string/image_attached"
                 android:textSize="14sp"
                 android:textStyle="italic" />
 

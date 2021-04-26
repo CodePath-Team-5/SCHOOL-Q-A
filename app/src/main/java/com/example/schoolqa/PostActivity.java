@@ -62,7 +62,7 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
     Boolean comment_image_exist;
     Post post;
     List<Comment> commentList;
-    SwipeRefreshLayout refreshLayout;
+    //SwipeRefreshLayout refreshLayout;
 
     private File photoFile;
     public String photoFileName = "photo.jpg";
@@ -82,7 +82,7 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
         et_user_comment = findViewById(R.id.et_post_userComment);
         btnn_vote = findViewById(R.id.bttn_post_upvote);
         bttn_cancel_comment_image = findViewById(R.id.bttn_post_cancle_comment_image);
-        refreshLayout = findViewById(R.id.swipeContainer_inPost);
+        //refreshLayout = findViewById(R.id.swipeContainer_inPost);
         recyclerView_post_comments = findViewById(R.id.rv_post_comments);
 
         is_upvote = false;
@@ -95,14 +95,14 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
         recyclerView_post_comments.setAdapter(commentAdapter);
         recyclerView_post_comments.setLayoutManager(new LinearLayoutManager(this));
 
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                Log.i(tag, "refreshing");
-                queryComments();
-                refreshLayout.setRefreshing(false);
-            }
-        });
+//        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override
+//            public void onRefresh() {
+//                Log.i(tag, "refreshing");
+//                queryComments();
+//                refreshLayout.setRefreshing(false);
+//            }
+//        });
         setupPost(post);
     }
 
@@ -317,5 +317,9 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
         intent.putExtra("comment", Parcels.wrap(commentList.get(position)));
         startActivity(intent);
 
+    }
+
+    public void handle_refresh_cmts(View view) {
+        queryComments();
     }
 }

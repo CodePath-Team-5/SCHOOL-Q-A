@@ -109,13 +109,13 @@ public class ComposeActivity extends AppCompatActivity {
         String question_title = et_question_title.getText().toString();
         String question_content = et_question_content.getText().toString();
         if (question_title.isEmpty() || question_content.isEmpty()) {
-            Toast.makeText(ComposeActivity.this, "Cannot be empty", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ComposeActivity.this, "Post cannot be empty", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (photo_file == null || iv_compose_image.getDrawable() == null) {
-            Toast.makeText(ComposeActivity.this,"There is no image!", Toast.LENGTH_SHORT).show();
-            return;
-        }
+//        if (photo_file == null || iv_compose_image.getDrawable() == null) {
+//            Toast.makeText(ComposeActivity.this,"There is no image!", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
         ParseUser currentUser = ParseUser.getCurrentUser();
         savePost(question_title, question_content, currentUser, photo_file);
     }
@@ -125,7 +125,10 @@ public class ComposeActivity extends AppCompatActivity {
         post.setQuestion(title);
         post.setContent(content);
         post.setUser(currentUser);
-        post.setImage(new ParseFile(photoFile));
+        if(photoFile!=null)
+        {
+            post.setImage(new ParseFile(photoFile));
+        }
         post.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -137,6 +140,9 @@ public class ComposeActivity extends AppCompatActivity {
                 et_question_title.setText("");
                 et_question_content.setText("");
                 iv_compose_image.setImageResource(0);
+                //return to search screen
+                Intent returnIntent = new Intent();
+                setResult(RESULT_OK,returnIntent);
                 finish();
 
             }
