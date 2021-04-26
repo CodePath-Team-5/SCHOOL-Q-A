@@ -7,9 +7,7 @@
     android:fillViewport="true"
     android:foregroundTint="#FFFFFF"
     tools:context=".RegisterActivity">
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -96,8 +94,16 @@
             android:orientation="horizontal">
 
 
+            <ImageView
+                android:id="@+id/frameOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_baseline_check_24" />
+
 
             <TextView
+                android:id="@+id/atleasteight"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
@@ -114,9 +120,15 @@
             android:gravity="center"
             android:orientation="horizontal">
 
-
+            <ImageView
+                android:id="@+id/frameTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_baseline_check_24" />
 
             <TextView
+                android:id="@+id/uppercase"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
@@ -133,7 +145,15 @@
             android:gravity="center"
             android:orientation="horizontal">
 
+            <ImageView
+                android:id="@+id/frameThree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_baseline_check_24" />
+
             <TextView
+                android:id="@+id/onenumber"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
@@ -144,11 +164,19 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <!--<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:gravity="center"
             android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/frameFour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_baseline_check_24"
+                android:backgroundTint="#009688" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -159,7 +187,7 @@
                 android:text="Minimum one symbol"
                 android:textColor="@android:color/black" />
 
-        </LinearLayout>
+        </LinearLayout> -->
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/email_text_input_layout"
