@@ -70,4 +70,5 @@
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:onClick="handle_signUp"/>
+
 </LinearLayout>

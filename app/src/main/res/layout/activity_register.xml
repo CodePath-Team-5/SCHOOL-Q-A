@@ -1,138 +1,280 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="10dp"
+    android:fillViewport="true"
+    android:foregroundTint="#FFFFFF"
     tools:context=".RegisterActivity">
-
-
-    <ImageView
-        android:id="@+id/csueb_logo"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:contentDescription="@string/logo"
-        app:srcCompat="@drawable/csueb_logo" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/username_text_input_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="10dp">
 
 
-        <EditText
-            android:id="@+id/et_signup_username"
+        <ImageView
+            android:id="@+id/csueb_logo"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:contentDescription="@string/logo"
+            app:srcCompat="@drawable/csueb_logo" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/username_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <EditText
+                android:id="@+id/et_signup_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Username"
+                android:inputType="textPersonName" />
+
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/tvNameError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Username"
-            android:inputType="textPersonName" />
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:gravity="center|start"
+            android:text="Please enter name"
+            android:textColor="@android:color/holo_red_dark"
+            android:visibility="gone" />
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/password_text_input_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:passwordToggleEnabled="true">
-
-        <EditText
-            android:id="@+id/et_signup_password"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:ems="10"
-            android:hint="Password"
-            android:inputType="textPassword" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/email_text_input_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/et_signup_email"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_text_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Email Address"
-            android:inputType="textPersonName" />
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/Major_text_input_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            app:passwordToggleEnabled="true">
 
-        <EditText
-            android:id="@+id/et_signup_major"
+            <EditText
+                android:id="@+id/et_signup_password"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textPassword" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/tvPasswordError"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:ems="10"
-            android:hint="Major/Profession" />
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:gravity="center|start"
+            android:text="Please enter password"
+            android:textColor="@android:color/holo_red_dark"
+            android:visibility="gone" />
 
-    </com.google.android.material.textfield.TextInputLayout>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/year_text_input_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/et_signup_yearGraduate"
+        <TextView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:ems="10"
-            android:hint="Year of Experience/Graduation"
-            android:inputType="textPersonName" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Password should be"
+            android:textColor="@android:color/black" />
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/intro_text_input_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <EditText
-            android:id="@+id/et_signup_intro"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:ems="10"
-            android:hint="Say something about yourself..."
-            android:inputType="textLongMessage|textMultiLine" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
 
-    <Button
-        android:id="@+id/bttn_signup_Submit_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/round_edge_button"
-        android:backgroundTint="#F44336"
-        android:onClick="handle_signUp"
-        android:padding="10dp"
-        android:text="@string/confirm"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/frameOne"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_baseline_check_24" />
 
-    <Button
-        android:id="@+id/bttn_signup_cancel_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/round_edge_button"
-        android:backgroundTint="#000000"
-        android:padding="10dp"
-        android:text="@string/cancel"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:onClick="handle_cancel"/>
-</LinearLayout>
+
+            <TextView
+                android:id="@+id/atleasteight"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center|start"
+                android:text="At least 8 characters"
+                android:textColor="@android:color/black" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/frameTwo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_baseline_check_24" />
+
+            <TextView
+                android:id="@+id/uppercase"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center|start"
+                android:text="Minimum one uppercase"
+                android:textColor="@android:color/black" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/frameThree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_baseline_check_24" />
+
+            <TextView
+                android:id="@+id/onenumber"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center|start"
+                android:text="Minimum one number"
+                android:textColor="@android:color/black" />
+
+        </LinearLayout>
+
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/frameFour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_baseline_check_24"
+                android:backgroundTint="#009688" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                android:gravity="center|start"
+                android:text="Minimum one symbol"
+                android:textColor="@android:color/black" />
+
+        </LinearLayout> -->
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/et_signup_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Email Address"
+                android:inputType="textPersonName" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/Major_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/et_signup_major"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:hint="Major/Profession" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/year_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/et_signup_yearGraduate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:hint="Year of Experience/Graduation"
+                android:inputType="textPersonName" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/intro_text_input_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/et_signup_intro"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:ems="10"
+                android:hint="Say something about yourself..."
+                android:inputType="textLongMessage|textMultiLine" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/bttn_signup_Submit_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_edge_button"
+            android:backgroundTint="#F44336"
+            android:padding="10dp"
+            android:text="@string/confirm"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:onClick="handle_signUp"/>
+
+
+        <Button
+            android:id="@+id/bttn_signup_cancel_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_edge_button"
+            android:backgroundTint="#000000"
+            android:padding="10dp"
+            android:text="@string/cancel"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:onClick="handle_cancel"/>
+    </LinearLayout>
+</ScrollView>
