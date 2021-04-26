@@ -30,4 +30,21 @@
     <string name="logout">Logout</string>
     <string name="profile">Profile</string>
     <string name="todo">TODO</string>
+    <string name="edit_profile_button">Edit Profile Button</string>
+    <string name="major_profession">Major/profession</string>
+    <string name="edit_username">Username:</string>
+    <string name="change_profile_image">Change Profile Image</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="edit_password">Password:</string>
+    <string name="password">Password</string>
+    <string name="edit_major_profession">Major/Profession:</string>
+    <string name="graduation_year_experience">Graduation year/experience</string>
+    <string name="edit_graduation_year_experience">Graduation Year/Experience:</string>
+    <string name="introduction">Introduction:</string>
+    <string name="something_about_yourself">Something about yourself...</string>
+    <string name="save_changes">SAVE CHANGES</string>
+    <string name="image_attached">Image Attached</string>
+    <string name="email_address">Email Address</string>
+    <string name="year_of_experience_graduation">Year of Experience/Graduation</string>
+    <string name="say_something_about_yourself">Say something about yourself...</string>
 </resources>

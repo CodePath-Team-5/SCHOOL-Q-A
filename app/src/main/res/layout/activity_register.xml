@@ -26,8 +26,9 @@
             android:id="@+id/et_signup_username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints=""
             android:ems="10"
-            android:hint="Username"
+            android:hint="@string/username"
             android:inputType="textPersonName" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -44,8 +45,9 @@
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:autofillHints=""
             android:ems="10"
-            android:hint="Password"
+            android:hint="@string/password"
             android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -58,9 +60,10 @@
             android:id="@+id/et_signup_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints=""
             android:ems="10"
-            android:hint="Email Address"
-            android:inputType="textPersonName" />
+            android:hint="@string/email_address"
+            android:inputType="textEmailAddress" />
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/Major_text_input_layout"
@@ -73,8 +76,10 @@
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:autofillHints=""
             android:ems="10"
-            android:hint="Major/Profession" />
+            android:hint="@string/major_profession"
+            android:inputType="text" />
 
     </com.google.android.material.textfield.TextInputLayout>
     <com.google.android.material.textfield.TextInputLayout
@@ -89,8 +94,9 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:ems="10"
-            android:hint="Year of Experience/Graduation"
-            android:inputType="textPersonName" />
+            android:hint="@string/year_of_experience_graduation"
+            android:inputType="textPersonName"
+            android:autofillHints="" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -106,8 +112,9 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:ems="10"
-            android:hint="Say something about yourself..."
-            android:inputType="textLongMessage|textMultiLine" />
+            android:hint="@string/say_something_about_yourself"
+            android:inputType="textLongMessage|textMultiLine"
+            android:autofillHints="" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

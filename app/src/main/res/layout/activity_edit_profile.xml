@@ -10,7 +10,7 @@
 
 <RelativeLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/textView_title"
@@ -19,7 +19,7 @@
         android:layout_below="@id/bttn_edit_profile_back_button"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
-        android:text="Edit Profile"
+        android:text="@string/edit_profile"
         android:textColor="#000000"
         android:textSize="30sp"
         android:textStyle="bold" />
@@ -32,10 +32,10 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
-        android:layout_toRightOf="@id/iv__edit_profile_image"
+        android:layout_toEndOf="@id/iv__edit_profile_image"
         android:drawableEnd="@drawable/ic_add_a_photo_24"
         android:drawablePadding="2dp"
-        android:text="Change Profile Image"
+        android:text="@string/change_profile_image"
         android:textSize="14sp"
         android:onClick="handle_change_profile_image"/>
 
@@ -48,6 +48,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="10dp"
+        android:contentDescription="@string/profile_image"
         tools:srcCompat="@tools:sample/avatars" />
 
     <ImageButton
@@ -73,7 +74,7 @@
         android:layout_marginTop="11dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
-        android:text="Username:"
+        android:text="@string/edit_username"
         android:textColor="#000000"
         android:textStyle="bold" />
 
@@ -87,8 +88,9 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
+        android:autofillHints=""
         android:ems="10"
-        android:hint="Username"
+        android:hint="@string/username"
         android:inputType="textPersonName"
         android:textColor="#000000" />
 
@@ -103,7 +105,7 @@
         android:layout_marginTop="11dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
-        android:text="Password:"
+        android:text="@string/edit_password"
         android:textColor="#000000"
         android:textStyle="bold" />
 
@@ -118,9 +120,10 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
         android:ems="10"
-        android:hint="Password"
+        android:hint="@string/password"
         android:inputType="textPassword"
-        android:textColor="#000000" />
+        android:textColor="#000000"
+        android:autofillHints="" />
 
 
     <TextView
@@ -133,7 +136,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
-        android:text="Major/Profession:"
+        android:text="@string/edit_major_profession"
         android:textColor="#000000"
         android:textStyle="bold" />
 
@@ -148,9 +151,10 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
         android:ems="10"
-        android:hint="Major/profession"
+        android:hint="@string/major_profession"
         android:inputType="textPersonName"
-        android:textColor="#000000" />
+        android:textColor="#000000"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/textView_changeYearExperience"
@@ -160,7 +164,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
-        android:text="Graduation Year/Experience:"
+        android:text="@string/edit_graduation_year_experience"
         android:textColor="#000000"
         android:textStyle="bold" />
 
@@ -175,9 +179,10 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
         android:ems="10"
-        android:hint="Graduation year/experience"
+        android:hint="@string/graduation_year_experience"
         android:inputType="textPersonName"
-        android:textColor="#000000" />
+        android:textColor="#000000"
+        android:autofillHints="" />
 
     <TextView
         android:id="@+id/textview_change_intro"
@@ -189,7 +194,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
-        android:text="Introduction:"
+        android:text="@string/introduction"
         android:textColor="#000000"
         android:textStyle="bold" />
 
@@ -204,9 +209,10 @@
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="5dp"
         android:ems="10"
-        android:hint="Something about yourself..."
+        android:hint="@string/something_about_yourself"
         android:inputType="textPersonName"
-        android:textColor="#000000" />
+        android:textColor="#000000"
+        android:autofillHints="" />
 
     <Button
         android:id="@+id/button_edit_save"
@@ -221,7 +227,7 @@
         android:background="@drawable/round_edge_button"
         android:backgroundTint="#F44336"
         android:onClick="handle_save_button"
-        android:text="SAVE CHANGES"
+        android:text="@string/save_changes"
         android:textColor="#FFFFFF"
         android:textStyle="bold" />
 
@@ -237,10 +243,10 @@
         android:layout_marginBottom="10dp"
         android:background="@drawable/round_edge_button"
         android:backgroundTint="#000000"
-        android:text="CANCEL"
+        android:onClick="handle_cancel_button"
+        android:text="@string/cancel"
         android:textColor="#FFFFFF"
-        android:textStyle="bold"
-        android:onClick="handle_cancel_button"/>
+        android:textStyle="bold" />
 
 </RelativeLayout>
 </ScrollView>
