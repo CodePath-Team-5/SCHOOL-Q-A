@@ -47,7 +47,7 @@ public class RegisterActivity extends AppCompatActivity {
         //Sign up button clicked
         Log.d(tag,"Signup button clicked");
         String email_id = et_email.getText().toString(),password = et_password.getText().toString();
-        if(!email_id.contains("@horizon.csueastbay.edu"))
+        if(!email_id.contains("csueastbay.edu"))
         {
             Toast.makeText(RegisterActivity.this, "Sign up Failed.Only csueb email is valid / No duplicates allowed", Toast.LENGTH_SHORT).show();
             return;
@@ -82,6 +82,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
     }
+
 
     public void handle_cancel(View view) {
         Log.d(tag,"Cancel button clicked");
