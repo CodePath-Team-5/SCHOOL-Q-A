@@ -52,7 +52,8 @@ public class RegisterActivity extends AppCompatActivity {
             Toast.makeText(RegisterActivity.this, "Sign up Failed.Only csueb email is valid / No duplicates allowed", Toast.LENGTH_SHORT).show();
             return;
         }
-        if(!(password.length() >= 8) && !(password.matches("(.*[A-Z].*)")) && !(password.matches("(.*[0-9].*)")) && !(password.matches("^(?=.*[_.()]).*$"))){
+        //String specialChars = "(.*[@,#,$,%].*$)";
+        if(!(password.length() >= 8) || !(password.matches("(.*[A-Z].*)")) || !(password.matches("(.*[0-9].*)")) ){
             Toast.makeText(RegisterActivity.this, "Password has to meet given criteria", Toast.LENGTH_SHORT).show();
             return;
         }
