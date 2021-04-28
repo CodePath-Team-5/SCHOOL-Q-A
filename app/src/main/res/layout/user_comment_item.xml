@@ -13,6 +13,7 @@
         android:layout_height="60dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:contentDescription="@string/profile_image"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -59,7 +60,7 @@
         android:layout_marginBottom="5dp"
         android:layout_toEndOf="@id/cmt_ivImage"
         android:textColor="#000000"
-        android:textSize="20dp"
+        android:textSize="20sp"
         tools:text="What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?" />
 
     <FrameLayout

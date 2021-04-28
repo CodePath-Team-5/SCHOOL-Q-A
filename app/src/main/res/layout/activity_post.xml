@@ -38,9 +38,10 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:background="#FFFFFF"
+            android:contentDescription="@string/image"
+            android:onClick="handle_refresh_cmts"
             android:tint="#000000"
-            app:srcCompat="@drawable/ic_baseline_refresh_30"
-            android:onClick="handle_refresh_cmts"/>
+            app:srcCompat="@drawable/ic_baseline_refresh_30" />
 
         <TextView
             android:id="@+id/tv_post_title"
@@ -157,29 +158,30 @@
                 android:tint="#000000"
                 app:srcCompat="@drawable/ic_paper_plane" />
 
-            <ImageButton
-                android:id="@+id/bttn_post_add_image_button"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_below="@id/bttn_post_upvote"
-                android:layout_marginEnd="5dp"
-                android:layout_toStartOf="@id/bttn_post_send_button"
-                android:background="@drawable/round_edge_button"
-                android:backgroundTint="#FFFFFF"
-                android:onClick="handle_add_image"
-                android:tint="#F44336"
-                app:srcCompat="@drawable/ic_add_a_photo_24"
-                android:contentDescription="TODO" />
+        <ImageButton
+            android:id="@+id/bttn_post_add_image_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/bttn_post_upvote"
+            android:layout_marginEnd="5dp"
+            android:layout_toStartOf="@id/bttn_post_send_button"
+            android:background="@drawable/round_edge_button"
+            android:backgroundTint="#FFFFFF"
+            android:contentDescription="@string/add_photo"
+            android:onClick="handle_add_image"
+            android:tint="#F44336"
+            app:srcCompat="@drawable/ic_add_a_photo_24" />
 
-            <ImageView
-                android:id="@+id/iv_post_comment_image"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_below="@id/et_post_userComment"
-                android:layout_alignParentStart="true"
-                android:layout_marginEnd="10dp"
-                android:layout_marginBottom="10dp"
-                tools:srcCompat="@tools:sample/avatars" />
+        <ImageView
+            android:id="@+id/iv_post_comment_image"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/et_post_userComment"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:contentDescription="@string/image_attached"
+            tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/imageAttached"
@@ -191,17 +193,18 @@
                 android:textSize="14sp"
                 android:textStyle="italic" />
 
-            <ImageButton
-                android:id="@+id/bttn_post_cancle_comment_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/et_post_userComment"
-                android:layout_marginStart="5dp"
-                android:layout_toEndOf="@id/imageAttached"
-                android:background="@drawable/round_edge_button"
-                android:onClick="handle_cancel_comment_image"
-                android:tint="#FFFFFF"
-                app:srcCompat="@drawable/ic_cancel_24" />
+        <ImageButton
+            android:id="@+id/bttn_post_cancle_comment_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/et_post_userComment"
+            android:layout_marginStart="5dp"
+            android:layout_toEndOf="@id/imageAttached"
+            android:background="@drawable/round_edge_button"
+            android:contentDescription="@string/cancel"
+            android:onClick="handle_cancel_comment_image"
+            android:tint="#FFFFFF"
+            app:srcCompat="@drawable/ic_cancel_24" />
 
     </RelativeLayout>
 </ScrollView>

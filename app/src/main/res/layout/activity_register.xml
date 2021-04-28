@@ -9,7 +9,7 @@
     tools:context=".RegisterActivity">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dp">
 
@@ -31,8 +31,9 @@
                 android:id="@+id/et_signup_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:autofillHints=""
                 android:ems="10"
-                android:hint="Username"
+                android:hint="@string/username"
                 android:inputType="textPersonName" />
 
 
@@ -45,7 +46,7 @@
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:gravity="center|start"
-            android:text="Please enter name"
+            android:text="@string/please_enter_name"
             android:textColor="@android:color/holo_red_dark"
             android:visibility="gone" />
 
@@ -61,8 +62,9 @@
                 android:layout_height="match_parent"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
+                android:autofillHints=""
                 android:ems="10"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword" />
 
 
@@ -75,7 +77,7 @@
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:gravity="center|start"
-            android:text="Please enter password"
+            android:text="@string/please_enter_password"
             android:textColor="@android:color/holo_red_dark"
             android:visibility="gone" />
 
@@ -83,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Password should be"
+            android:text="@string/password_should_be"
             android:textColor="@android:color/black" />
 
         <LinearLayout
@@ -99,7 +101,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@drawable/ic_baseline_check_24" />
+                android:background="@drawable/ic_baseline_check_24"
+                android:contentDescription="@string/frame" />
 
 
             <TextView
@@ -109,7 +112,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:gravity="center|start"
-                android:text="At least 8 characters"
+                android:text="@string/at_least_8_characters"
                 android:textColor="@android:color/black" />
 
         </LinearLayout>
@@ -125,7 +128,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@drawable/ic_baseline_check_24" />
+                android:background="@drawable/ic_baseline_check_24"
+                android:contentDescription="@string/frame" />
 
             <TextView
                 android:id="@+id/uppercase"
@@ -134,7 +138,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:gravity="center|start"
-                android:text="Minimum one uppercase"
+                android:text="@string/minimum_one_uppercase"
                 android:textColor="@android:color/black" />
 
         </LinearLayout>
@@ -150,7 +154,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@drawable/ic_baseline_check_24" />
+                android:background="@drawable/ic_baseline_check_24"
+                android:contentDescription="@string/frame" />
 
             <TextView
                 android:id="@+id/onenumber"
@@ -159,7 +164,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
                 android:gravity="center|start"
-                android:text="Minimum one number"
+                android:text="@string/minimum_one_number"
                 android:textColor="@android:color/black" />
 
         </LinearLayout>
@@ -199,8 +204,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Email Address"
-                android:inputType="textPersonName" />
+                android:hint="@string/email_address"
+                android:inputType="textEmailAddress"
+                android:autofillHints="" />
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/Major_text_input_layout"
@@ -213,8 +219,10 @@
                 android:layout_height="match_parent"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
+                android:autofillHints=""
                 android:ems="10"
-                android:hint="Major/Profession" />
+                android:hint="@string/major_profession"
+                android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
@@ -229,8 +237,9 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:ems="10"
-                android:hint="Year of Experience/Graduation"
-                android:inputType="textPersonName" />
+                android:hint="@string/year_of_experience_graduation"
+                android:inputType="textPersonName"
+                android:autofillHints="" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -246,8 +255,9 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:ems="10"
-                android:hint="Say something about yourself..."
-                android:inputType="textLongMessage|textMultiLine" />
+                android:hint="@string/say_something_about_yourself"
+                android:inputType="textLongMessage|textMultiLine"
+                android:autofillHints="" />
 
         </com.google.android.material.textfield.TextInputLayout>
 

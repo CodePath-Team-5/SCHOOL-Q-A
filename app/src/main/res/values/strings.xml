@@ -46,5 +46,13 @@
     <string name="image_attached">Image Attached</string>
     <string name="email_address">Email Address</string>
     <string name="year_of_experience_graduation">Year of Experience/Graduation</string>
+    <string name="refresh">Refresh</string>
+    <string name="please_enter_name">Please enter name</string>
+    <string name="please_enter_password">Please enter password</string>
+    <string name="password_should_be">Password should be</string>
+    <string name="frame">Frame</string>
+    <string name="at_least_8_characters">At least 8 characters</string>
+    <string name="minimum_one_uppercase">Minimum one uppercase</string>
+    <string name="minimum_one_number">Minimum one number</string>
     <string name="say_something_about_yourself">Say something about yourself...</string>
 </resources>

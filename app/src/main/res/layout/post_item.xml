@@ -10,6 +10,7 @@
         android:id="@+id/ivImage"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:contentDescription="@string/profile_image"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -32,7 +33,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_toEndOf="@+id/ivImage"
-        android:text="Username"
+        android:text="@string/username"
         android:textSize="12sp" />
 
     <TextView
@@ -57,9 +58,9 @@
         android:layout_marginBottom="5dp"
         android:layout_toStartOf="@id/tv_Postvote"
         android:layout_toEndOf="@id/ivImage"
-        android:text="Question title"
+        android:text="@string/question_title"
         android:textColor="#000000"
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tv_Postvote"
@@ -72,12 +73,12 @@
         android:layout_marginEnd="10dp"
         android:background="@drawable/round_edge_button"
         android:backgroundTint="#D6D5D5"
-        android:drawableLeft="@drawable/ic_arrow_upward_24"
         android:drawablePadding="5dp"
         android:gravity="center"
         android:paddingEnd="5dp"
         android:textSize="14sp"
-        tools:text="4" />
+        tools:text="4"
+        app:drawableLeftCompat="@drawable/ic_arrow_upward_24" />
 
     <FrameLayout
         android:id="@+id/divisionLine"

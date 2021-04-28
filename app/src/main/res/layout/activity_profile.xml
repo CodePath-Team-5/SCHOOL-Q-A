@@ -32,9 +32,10 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="10dp"
         android:background="#FFFFFF"
+        android:contentDescription="@string/edit_profile_button"
+        android:onClick="handle_edit_button"
         android:tint="#000000"
-        app:srcCompat="@drawable/ic_edit_30"
-        android:onClick="handle_edit_button"/>
+        app:srcCompat="@drawable/ic_edit_30" />
 
     <ImageView
         android:id="@+id/iv_profile_image"
@@ -170,8 +171,9 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="10dp"
         android:background="#FFFFFF"
-        app:srcCompat="@drawable/ic_baseline_refresh_30"
-        android:onClick="handle_refresh_comments"/>
+        android:contentDescription="@string/refresh"
+        android:onClick="handle_refresh_comments"
+        app:srcCompat="@drawable/ic_baseline_refresh_30" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_user_comments"
