@@ -14,6 +14,20 @@ Original App Design Project - README Template
 6. [Sprint 4](#Sprint4)
 
 ## Overview
+ ### [👉👉👉👉 Youtube Live demo link🎥 👈👈👈👈](https://youtu.be/EM5gHqQ-Fa8)
+
+<p float="left">
+   Search Function
+   <img src= "https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/sprint4_search.gif" width=200px>
+   Post Activity                                                   
+   <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/sprint4_post.gif" width=200px>
+    Profile Activity 
+   <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/sprint4_profile.gif" width=200px>
+   Edit Profile Activity                                                   
+   <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/sprint_edit_profile.gif" width=200px>
+   Compose Activity 
+   <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/sprint4_compose.gif" width=200px>
+</p>
 
 ### Description
 The app is mainly for students at the CSUEB. It serve as a small community for students to easily access to different resources to resolve their problems.
@@ -42,7 +56,7 @@ The app is mainly for students at the CSUEB. It serve as a small community for s
 
 **Optional Nice-to-have Stories**
 * [X] Login: User must register account with their school email (csueb email)
-* [ ] Register: User must meet certain password criterias in order to regiester for an account.
+* [X] Register: User must meet certain password criterias in order to regiester for an account.
 * [X] Profile: User can view their personal info on Profile
 * [X] Profile: User can modify their profile. User can change: user image, username, password, user's info
 * [X] Profile: User can view list of their posts and comments in Profile
