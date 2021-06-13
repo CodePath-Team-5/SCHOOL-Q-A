@@ -5,6 +5,8 @@ import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.parceler.Parcel;
 
 import java.util.ArrayList;
@@ -28,6 +30,9 @@ public class Post extends ParseObject implements Cloneable {
     public static final String KEY_CREATED="createdAt";
     public static final String KEY_QUESTION="question";
     public static final String KEY_VOTE="vote";
+    public static final String KEY_HASHTAG_LIST="hashtag_list";
+
+
 
     public String getContent(){
         return getString(KEY_CONTENT);
@@ -62,5 +67,27 @@ public class Post extends ParseObject implements Cloneable {
     public void setUser(ParseUser user){
         put(KEY_USER, user);
     }
+
+    public List<String> getHashtags(){
+        JSONArray jsonArr =  getJSONArray(KEY_HASHTAG_LIST);
+        List<String> listdata = new ArrayList();
+
+        if (jsonArr != null) {
+            for (int i=0;i<jsonArr.length();i++){
+                try {
+                    listdata.add(jsonArr.getString(i));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return listdata;
+    }
+
+    public void  setHashtags(List<String> list)
+    {
+        addAllUnique(KEY_HASHTAG_LIST,list);
+    }
+
 
 }

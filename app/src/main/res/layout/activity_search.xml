@@ -44,12 +44,37 @@
         app:srcCompat="@drawable/ic_baseline_search_40" />
 
     <TextView
-        android:id="@+id/tv_searchtresult"
+        android:id="@+id/tv_popularTag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/et_search_input_text"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="Popular Tags: " />
+
+    <com.hendraanggrian.appcompat.widget.SocialTextView
+        android:id="@+id/tv_Tags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_popularTag"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="18sp"
+        app:hashtagColor="@color/DarkRed"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_searchtresult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_Tags"
+        android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:textColor="#000000"
         android:textSize="18sp"

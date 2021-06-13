@@ -46,5 +46,13 @@ dependencies {
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.3'
 
 
+    //social view
+
+    implementation "com.hendraanggrian.appcompat:socialview:0.1" // base library
+    //implementation 'com.hendraanggrian.appcompat:socialview-commons:0.1' // auto-complete hashtag and mention
+    //implementation "com.hendraanggrian.appcompat:socialview:$version" // base library
+
+    //hastag tags
+    implementation 'HashTagEditText:library:1.0.0'
 
 }

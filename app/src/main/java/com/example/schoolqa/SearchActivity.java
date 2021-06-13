@@ -1,6 +1,5 @@
 package com.example.schoolqa;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,13 +9,14 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hendraanggrian.appcompat.widget.SocialTextView;
+import com.hendraanggrian.appcompat.widget.SocialView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -26,6 +26,9 @@ import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function2;
 
 public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQuestionItemListener {
     public static String tag = "SearchActivity";
@@ -44,6 +47,8 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
 
     SwipeRefreshLayout refreshLayout;
 
+    SocialTextView tv_popular_tags;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +62,7 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
         bttn_bttn_search_button = findViewById(R.id.bttn_search_button);
         tv_search = findViewById(R.id.tv_searchtresult);
         refreshLayout = findViewById(R.id.swipeContainer);
+        tv_popular_tags = findViewById(R.id.tv_Tags);
 
 
         //Logout button clicked
@@ -106,8 +112,38 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
             }
         });
 
+        queryHashtags();
         queryPost();
 
+
+
+
+    }
+
+    private void queryHashtags() {
+        ParseQuery<Hashtag> query = ParseQuery.getQuery(Hashtag.class);
+        query.addDescendingOrder("count");
+        query.setLimit(5);
+        query.findInBackground(new FindCallback<Hashtag>() {
+            @Override
+            public void done(List<Hashtag> objects, ParseException e) {
+                if(e==null)
+                {
+                    //sucess
+                    String tags = "#MostRecent  ";
+                    for(int i=0; i<objects.size();i++)
+                    {
+                        tags+= "#"+objects.get(i).getKeyWord()+"   ";
+                    }
+                    tv_popular_tags.setText(tags);
+                }
+                else
+                {
+                    Log.e(tag, "Issue with getting hashtags", e);
+                    return;
+                }
+            }
+        });
     }
 
 

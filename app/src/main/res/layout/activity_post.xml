@@ -77,6 +77,8 @@
                 android:layout_toEndOf="@id/tv_post_author_name"
                 tools:text="10d" />
 
+
+
             <TextView
                 android:id="@+id/tv_post_questionContent"
                 android:layout_width="wrap_content"
@@ -84,17 +86,27 @@
                 android:layout_below="@id/tv_post_author_name"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginBottom="10dp"
                 android:inputType="textLongMessage|textMultiLine"
                 android:textColor="#000000"
                 android:textSize="18sp"
                 tools:text="What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?" />
 
+        <com.hendraanggrian.appcompat.widget.SocialTextView
+            android:id="@+id/tv_post_tags"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_post_questionContent"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            app:hashtagColor="@color/DarkRed"
+            />
+
             <ImageView
                 android:id="@+id/iv_post_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/tv_post_questionContent"
+                android:layout_below="@id/tv_post_tags"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="false"
                 android:layout_marginBottom="10dp"
