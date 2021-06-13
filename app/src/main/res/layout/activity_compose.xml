@@ -51,11 +51,28 @@
         tools:text="What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?"
         android:autofillHints="" />
 
+
+    <com.fenlisproject.hashtagedittext.HashTagEditText
+        android:id="@+id/et_compose_hastags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:horizontalPadding="8dp"
+        app:horizontalSpacing="2dp"
+        app:verticalPadding="4dp"
+        app:verticalSpacing="2dp"
+        app:bubbleTextColor="@color/White"
+        app:maxSize="5"
+        android:layout_below="@id/et_compost_questionContent"
+        android:hint="@string/hastag_guide"
+        app:bubbleBackground="@drawable/round_bubble_hastag"
+        />
+
+
     <Button
         android:id="@+id/bttn_compose_addPhoto_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/et_compost_questionContent"
+        android:layout_below="@id/et_compose_hastags"
         android:layout_margin="10dp"
         android:drawableEnd="@drawable/ic_baseline_add_photo_alternate_24"
         android:text="@string/add_photo"
@@ -83,7 +100,7 @@
         android:id="@+id/iv_compose_image"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_below="@id/et_compost_questionContent"
+        android:layout_below="@id/et_compose_hastags"
         android:layout_toEndOf="@id/bttn_compose_addPhoto_button"
         android:contentDescription="@string/image"
         tools:srcCompat="@tools:sample/avatars" />

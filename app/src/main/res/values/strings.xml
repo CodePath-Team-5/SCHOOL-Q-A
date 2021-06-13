@@ -57,6 +57,7 @@
     <string name="say_something_about_yourself">Say something about yourself...</string>
     <string name="comments_from_my_posts">My comments:</string>
     <string name="comment_count">Comment count:</string>
+    <string name="hastag_guide">Add tags to your post. Maximum 5 tags</string>
 
 
 </resources>

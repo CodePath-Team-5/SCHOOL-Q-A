@@ -50,5 +50,8 @@ dependencies {
     //implementation 'com.hendraanggrian.appcompat:socialview-commons:0.1' // auto-complete hashtag and mention
     //implementation "com.hendraanggrian.appcompat:socialview:$version" // base library
 
+    //hastag tags
+    implementation 'HashTagEditText:library:1.0.0'
+
 
 }

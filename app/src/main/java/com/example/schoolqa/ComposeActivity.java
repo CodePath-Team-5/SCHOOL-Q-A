@@ -18,12 +18,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.fenlisproject.hashtagedittext.HashTagEditText;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ComposeActivity extends AppCompatActivity {
     public static String TAG = "ComposeActivity";
@@ -36,6 +40,7 @@ public class ComposeActivity extends AppCompatActivity {
     Button btn_compose_cancel_button;
     File photo_file;
     String photo_file_name = "photo.jpg";
+    HashTagEditText et_hashtag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +52,10 @@ public class ComposeActivity extends AppCompatActivity {
         btn_compose_submit_button = findViewById(R.id.bttn_compose_submit_button);
         iv_compose_image = findViewById(R.id.iv_compose_image);
         btn_compose_cancel_button = findViewById(R.id.bttn_compose_cancel_button);
+        et_hashtag = findViewById(R.id.et_compose_hastags);
+
+
+
     }
 
     public void handle_add_image_button(View view) {
@@ -108,6 +117,7 @@ public class ComposeActivity extends AppCompatActivity {
         Log.d(TAG,"Submit button clicked");
         String question_title = et_question_title.getText().toString();
         String question_content = et_question_content.getText().toString();
+
         if (question_title.isEmpty() || question_content.isEmpty()) {
             Toast.makeText(ComposeActivity.this, "Post cannot be empty", Toast.LENGTH_SHORT).show();
             return;
@@ -116,8 +126,27 @@ public class ComposeActivity extends AppCompatActivity {
 //            Toast.makeText(ComposeActivity.this,"There is no image!", Toast.LENGTH_SHORT).show();
 //            return;
 //        }
-        ParseUser currentUser = ParseUser.getCurrentUser();
-        savePost(question_title, question_content, currentUser, photo_file);
+        saveHashtags();
+        // ParseUser currentUser = ParseUser.getCurrentUser();
+        //savePost(question_title, question_content, currentUser, photo_file);
+    }
+
+    private void saveHashtags() {
+
+        if (et_hashtag.getValues().isEmpty() )
+        {
+            Log.d(TAG,"No hastags added");
+            return;
+        }
+
+        List<String> hastags = new ArrayList<>();
+        hastags.addAll(et_hashtag.getValues());
+
+        //print our hashtags
+        for(int i = 0; i < hastags.size(); i++)
+        {
+            Log.d(TAG,"\nhastag: "+hastags.get(i));
+        }
     }
 
     private void savePost(String title, String content, ParseUser currentUser, File photoFile) {
