@@ -88,6 +88,7 @@
                 android:inputType="textLongMessage|textMultiLine"
                 android:textColor="#000000"
                 android:textSize="18sp"
+                android:autoLink="web|email"
                 tools:text="What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?" />
 
             <ImageView
@@ -119,6 +120,30 @@
                 app:drawableTint="#000000"
                 tools:text="23" />
 
+            <Button
+                android:id="@+id/bttn_insert_hyperlink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/et_post_userComment"
+                android:layout_below="@+id/iv_post_image"
+                android:layout_alignParentBottom="false"
+                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@+id/bttn_post_upvote"
+                android:text="Insert Hyperlink"
+                android:onClick="start_hyperlink_window"/>
+
+            <Button
+                android:id="@+id/bttn_inser_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/et_post_userComment"
+                android:layout_below="@+id/iv_post_image"
+                android:layout_alignParentBottom="false"
+                android:layout_marginBottom="5dp"
+                android:layout_toEndOf="@+id/bttn_insert_hyperlink"
+                android:text="Image/GIF"
+                android:onClick="insert_image"/>
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_post_comments"
@@ -142,7 +167,8 @@
                 android:backgroundTint="#00BCD4"
                 android:ems="10"
                 android:hint="@string/comment_here"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:autoLink="web|email"/>
 
             <ImageButton
                 android:id="@+id/bttn_post_send_button"

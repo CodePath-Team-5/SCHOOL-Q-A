@@ -49,7 +49,8 @@
         android:hint="@string/question_s_content"
         android:inputType="textLongMessage|textMultiLine"
         tools:text="What is Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry Lorem Ipsum has been the industry's standard dummy text ever since the 1500s when an unknown printer took a galley of type and scrambled it to make a type specimen book it has?"
-        android:autofillHints="" />
+        android:autofillHints=""
+        android:autoLink="web|email"/>
 
     <Button
         android:id="@+id/bttn_compose_addPhoto_button"
@@ -60,12 +61,20 @@
         android:drawableEnd="@drawable/ic_baseline_add_photo_alternate_24"
         android:text="@string/add_photo"
         android:onClick="handle_add_image_button"/>
+    <Button
+        android:id="@+id/bttn_compose_addHyperlink_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/bttn_compose_addPhoto_button"
+        android:layout_margin="10dp"
+        android:text="@string/add_hyperlink"
+        android:onClick="handle_add_hyperlink_button"/>
 
     <Button
         android:id="@+id/bttn_compose_submit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/bttn_compose_addPhoto_button"
+        android:layout_below="@id/bttn_compose_addHyperlink_button"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginStart="10dp"

@@ -51,6 +51,7 @@
         android:layout_marginBottom="5dp"
         android:text="@string/comment"
         android:textColor="#000000"
+        android:autoLink="web|email"
         tools:text="There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. " />
 
     <ImageView

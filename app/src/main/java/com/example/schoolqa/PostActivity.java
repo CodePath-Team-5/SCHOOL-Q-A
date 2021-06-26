@@ -15,12 +15,19 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +47,8 @@ import org.parceler.Parcels;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.text.Html.*;
 
 public class PostActivity extends AppCompatActivity implements CommentAdapter.OnCommentItemListener{
 
@@ -321,5 +330,50 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
 
     public void handle_refresh_cmts(View view) {
         queryComments();
+    }
+
+
+    public void start_hyperlink_window(View view) {
+
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View hyperlinkView = inflater.inflate(R.layout.window_hyperlink, null);
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(hyperlinkView, width, height, focusable);
+
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+        Log.i(tag, "Hyperlink window opened");
+
+
+        popupWindow.getContentView().findViewById(R.id.bttn_add_hyperlink).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(tag, "Add hyperlink button clicked");
+                EditText et_hyberlink = popupWindow.getContentView().findViewById(R.id.et_hyperlink);
+                String link = et_hyberlink.getText().toString();
+                String hyperlink = "<a href="+link+">"+link+"</a>";
+                et_user_comment.setMovementMethod(LinkMovementMethod.getInstance());
+                et_user_comment.append(Html.fromHtml(hyperlink));
+
+                popupWindow.dismiss();
+            }
+        });
+
+
+        // dismiss the popup window when touched
+        hyperlinkView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
+    }
+
+    public void insert_image(View view) {
     }
 }
