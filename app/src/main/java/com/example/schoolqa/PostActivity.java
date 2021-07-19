@@ -32,6 +32,7 @@ import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -45,6 +46,8 @@ import java.util.List;
 public class PostActivity extends AppCompatActivity implements CommentAdapter.OnCommentItemListener{
 
     public static String tag = "PostActivity";
+    public static final String CHANNEL_NAME = "PostChannel";
+
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 45;
     TextView tv_title;
     TextView tv_question_content;
@@ -107,6 +110,10 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
 //            }
 //        });
         setupPost(post);
+
+        //subscribe & listen to push
+        ParsePush.subscribeInBackground(CHANNEL_NAME);
+
     }
 
     private void setupPost(Post post) {

@@ -1,5 +1,6 @@
 package com.example.schoolqa;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,8 +28,6 @@ import org.parceler.Parcels;
 import java.util.ArrayList;
 import java.util.List;
 
-import kotlin.Unit;
-import kotlin.jvm.functions.Function2;
 
 public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQuestionItemListener {
     public static String tag = "SearchActivity";
@@ -115,8 +114,13 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
         queryHashtags();
         queryPost();
 
+        tv_popular_tags.setOnHashtagClickListener(new SocialView.OnClickListener() {
+            @Override
+            public void onClick(@NonNull @org.jetbrains.annotations.NotNull SocialView view,
+                                @NonNull @org.jetbrains.annotations.NotNull CharSequence text) {
 
-
+            }
+        });
 
     }
 

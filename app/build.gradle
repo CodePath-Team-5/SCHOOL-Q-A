@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -23,6 +23,11 @@ android {
 }
 
 dependencies {
+    //social view
+    implementation "com.hendraanggrian.appcompat:socialview:0.2" // base library
+    implementation "com.hendraanggrian.appcompat:socialview-commons:0.2" // auto-complete hashtag and mention
+
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
@@ -32,7 +37,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     implementation "com.google.android.material:material:${designSupportVersion}"
-    implementation 'gr.pantrif:easy-android-splash-screen:0.0.1'
+
+    //splash screen
+   // implementation 'gr.pantrif:easy-android-splash-screen:0.0.1'
+
     implementation "com.github.parse-community.Parse-SDK-Android:parse:1.18.5"
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     // Glide v4 uses this new annotation processor -- see https://bumptech.github.io/glide/doc/generatedapi.html
@@ -45,14 +53,21 @@ dependencies {
     //Recycler view swipe decorator
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.3'
 
-
-    //social view
-
-    implementation "com.hendraanggrian.appcompat:socialview:0.1" // base library
-    //implementation 'com.hendraanggrian.appcompat:socialview-commons:0.1' // auto-complete hashtag and mention
-    //implementation "com.hendraanggrian.appcompat:socialview:$version" // base library
-
     //hastag tags
     implementation 'HashTagEditText:library:1.0.0'
+
+    //firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:28.2.1')
+    //firebase SDK for Google Analytics
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-messaging'
+
+    //parse FCM SDK
+    implementation "com.github.parse-community.Parse-SDK-Android:fcm:1.26.0"
+    //Parse Bolts SDK
+    implementation 'com.parse.bolts:bolts-tasks:1.4.0'
+    implementation 'com.parse.bolts:bolts-applinks:1.4.0'
+
+
 
 }
