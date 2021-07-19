@@ -51,7 +51,7 @@ import java.util.List;
 import static android.text.Html.*;
 
 public class PostActivity extends AppCompatActivity implements CommentAdapter.OnCommentItemListener{
-
+    //test new branch
     public static String tag = "PostActivity";
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 45;
     TextView tv_title;
