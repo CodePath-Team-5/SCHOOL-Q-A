@@ -17,8 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.greenfrvr.hashtagview.HashtagView;
-import com.hendraanggrian.appcompat.widget.SocialTextView;
-import com.hendraanggrian.appcompat.widget.SocialView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -135,7 +133,6 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
                         @Override
                         public void onItemClicked(Object item) {
                             String s = (String) item;
-                            Toast.makeText(getApplicationContext(), "Item Clicked: "+s, Toast.LENGTH_SHORT).show();
                             // query posts with related hashtag
                             queryPostByHashtagKey(s);
 
@@ -188,9 +185,6 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
                     Log.e(tag, "Issue with getting post", e);
                     return;
                 }
-                for (Post post:posts){
-                    Log.i(tag, "Post: "+post.getContent()+" user: "+ post.getUser().getUsername());
-                }
                 adaptor.clear();
                 adaptor.addSearch(posts,search_key);
                 //allpost.addAll(posts);
@@ -220,9 +214,6 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
                     if (e != null) {
                         Log.e(tag, "Issue with getting post", e);
                         return;
-                    }
-                    for (Post post : posts) {
-                        Log.i(tag, "Post: " + post.getContent() + " user: " + post.getUser().getUsername());
                     }
                     adaptor.clear();
                     adaptor.addHashtagSearch(posts, hashtag);
