@@ -123,7 +123,6 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
                 {
                     //success
                     List<String> tags = new ArrayList<>();
-                    tags.add("LatestPosts");
                     for(int i=0; i<objects.size();i++)
                     {
                         tags.add(objects.get(i).getKeyWord());
@@ -174,33 +173,33 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
     private void queryPostBySearchKey(String search_key)
     {
         tv_search.setText("Search Results:");
-
-        ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
-        query.include(Post.KEY_USER);
-        query.addDescendingOrder(Post.KEY_VOTE);
-        query.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> posts, ParseException e) {
-                if(e!= null){
-                    Log.e(tag, "Issue with getting post", e);
-                    return;
+        if (search_key == "")
+        {
+            queryPost();
+        }
+        else
+        {
+            ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+            query.include(Post.KEY_USER);
+            query.addDescendingOrder(Post.KEY_VOTE);
+            query.findInBackground(new FindCallback<Post>() {
+                @Override
+                public void done(List<Post> posts, ParseException e) {
+                    if(e!= null){
+                        Log.e(tag, "Issue with getting post", e);
+                        return;
+                    }
+                    adaptor.clear();
+                    adaptor.addSearch(posts,search_key);
+                    //allpost.addAll(posts);
+                    //adaptor.notifyDataSetChanged();
+                    //swipeRefreshLayout.setRefreshing(false);
                 }
-                adaptor.clear();
-                adaptor.addSearch(posts,search_key);
-                //allpost.addAll(posts);
-                //adaptor.notifyDataSetChanged();
-                //swipeRefreshLayout.setRefreshing(false);
-            }
-        });
+            });
+        }
     }
     private void queryPostByHashtagKey(String hashtag)
     {
-        if (hashtag == "LatestPosts")
-        {
-            //LatestPosts hashtag is clicked
-            queryPost();
-        }
-        else {
             //query by hashtag
             tv_search.setText("Search Results:");
             // Search post by hashtag
@@ -222,7 +221,6 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
                     //swipeRefreshLayout.setRefreshing(false);
                 }
             });
-        }
     }
 
     public void handle_search_button(View view) {

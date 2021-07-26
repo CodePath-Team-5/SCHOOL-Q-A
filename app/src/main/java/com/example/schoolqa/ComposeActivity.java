@@ -19,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.fenlisproject.hashtagedittext.HashTagEditText;
-import com.hendraanggrian.appcompat.widget.SocialEditText;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
@@ -189,15 +188,6 @@ public class ComposeActivity extends AppCompatActivity {
         Hashtag hashtag = new Hashtag();
         hashtag.setKeyWord(s);
         hashtag.setCount(1);
-
-        //get random color
-        // create object of Random class
-        Random obj = new Random();
-        int rand_num = obj.nextInt(0xffffff + 1);
-        // format it as hexadecimal string and print
-        String colorCode = String.format("#%06x", rand_num);
-        hashtag.setColor(colorCode);
-
         hashtag.saveInBackground();
     }
 

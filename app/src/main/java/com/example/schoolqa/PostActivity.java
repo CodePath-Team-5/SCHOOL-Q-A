@@ -27,7 +27,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.greenfrvr.hashtagview.HashtagView;
-import com.hendraanggrian.appcompat.widget.SocialTextView;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
