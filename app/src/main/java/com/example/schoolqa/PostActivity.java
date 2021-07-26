@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.greenfrvr.hashtagview.HashtagView;
 import com.hendraanggrian.appcompat.widget.SocialTextView;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -59,7 +60,7 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
     ImageView iv_question_image;
     TextView btnn_vote;
     ImageButton bttn_cancel_comment_image;
-    SocialTextView tv_tags;
+    HashtagView tv_tags;
     RecyclerView recyclerView_post_comments;
     CommentAdapter commentAdapter;
     int vote;
@@ -131,15 +132,11 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
         //setup hashtags
 
         if (post.getHashtags().isEmpty()==false) {
+            Log.d(tag,"Tags: "+post.getHashtags().size());
             List<String> tags = new ArrayList<>();
             tags.addAll(post.getHashtags());
 
-            String mytag = " ";
-            for (int i = 0; i < tags.size(); i++) {
-                mytag += "#" + tags.get(i)+ "   ";
-            }
-            Log.d(tag, "Tags: " + mytag);
-            tv_tags.setText(mytag);
+            tv_tags.setData(tags);
         }
         // setup vote
         int vote = post.getVote();

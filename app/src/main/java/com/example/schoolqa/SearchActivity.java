@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.greenfrvr.hashtagview.HashtagView;
 import com.hendraanggrian.appcompat.widget.SocialTextView;
 import com.hendraanggrian.appcompat.widget.SocialView;
 import com.parse.FindCallback;
@@ -34,6 +35,7 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
     public static final int COMPOSE_CODE = 29;
     EditText et_user_input;
     TextView tv_search;
+    TextView tv_popular_tag_txt;
     ImageButton bttn_user_profile;
     ImageButton bttn_logout;
     ImageButton bttn_compose;
@@ -46,7 +48,7 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
 
     SwipeRefreshLayout refreshLayout;
 
-    SocialTextView tv_popular_tags;
+    HashtagView tv_popular_tags;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,7 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
         tv_search = findViewById(R.id.tv_searchtresult);
         refreshLayout = findViewById(R.id.swipeContainer);
         tv_popular_tags = findViewById(R.id.tv_Tags);
+        tv_popular_tag_txt = findViewById(R.id.tv_popularTag);
 
 
         //Logout button clicked
@@ -86,7 +89,7 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
             }
         });
 
-        tv_search.setText("Recently Added Posts:");
+
         allpost = new ArrayList<>();
         adaptor = new PostAdaptor(this, allpost,  this);
 
@@ -103,24 +106,11 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
         recyclerView_postResults.setLayoutManager(new LinearLayoutManager(this));
 
         bttn_bttn_search_button = findViewById(R.id.bttn_search_button);
-        bttn_bttn_search_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                search_key = et_user_input.getText().toString();
-                handle_search_button(v,search_key);
-            }
-        });
+
 
         queryHashtags();
         queryPost();
 
-        tv_popular_tags.setOnHashtagClickListener(new SocialView.OnClickListener() {
-            @Override
-            public void onClick(@NonNull @org.jetbrains.annotations.NotNull SocialView view,
-                                @NonNull @org.jetbrains.annotations.NotNull CharSequence text) {
-
-            }
-        });
 
     }
 
@@ -133,13 +123,24 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
             public void done(List<Hashtag> objects, ParseException e) {
                 if(e==null)
                 {
-                    //sucess
-                    String tags = "#MostRecent  ";
+                    //success
+                    List<String> tags = new ArrayList<>();
+                    tags.add("LatestPosts");
                     for(int i=0; i<objects.size();i++)
                     {
-                        tags+= "#"+objects.get(i).getKeyWord()+"   ";
+                        tags.add(objects.get(i).getKeyWord());
                     }
-                    tv_popular_tags.setText(tags);
+                    tv_popular_tags.setData(tags);
+                    tv_popular_tags.addOnTagClickListener(new HashtagView.TagsClickListener() {
+                        @Override
+                        public void onItemClicked(Object item) {
+                            String s = (String) item;
+                            Toast.makeText(getApplicationContext(), "Item Clicked: "+s, Toast.LENGTH_SHORT).show();
+                            // query posts with related hashtag
+                            queryPostByHashtagKey(s);
+
+                        }
+                    });
                 }
                 else
                 {
@@ -152,9 +153,11 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
 
 
     private void queryPost() {
+        //query 15 latest post
+        tv_search.setText("Recently Added Posts:");
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
-        query.setLimit(20);
+        query.setLimit(15);
         query.addDescendingOrder(Post.KEY_CREATED);
         query.findInBackground(new FindCallback<Post>() {
             @Override
@@ -162,9 +165,6 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
                 if(e!= null){
                     Log.e(tag, "Issue with getting post", e);
                     return;
-                }
-                for (Post post:posts){
-                    Log.i(tag, "Post: "+post.getContent()+" user: "+ post.getUser().getUsername());
                 }
                 adaptor.clear();
                 adaptor.addAll(posts);
@@ -174,11 +174,10 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
             }
         });
     }
-
-    public void handle_search_button(View view,final String search_key) {
-        //Search button clicked
+    private void queryPostBySearchKey(String search_key)
+    {
         tv_search.setText("Search Results:");
-        Log.d(tag,"Search button clicked");
+
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
         query.addDescendingOrder(Post.KEY_VOTE);
@@ -199,6 +198,48 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
                 //swipeRefreshLayout.setRefreshing(false);
             }
         });
+    }
+    private void queryPostByHashtagKey(String hashtag)
+    {
+        if (hashtag == "LatestPosts")
+        {
+            //LatestPosts hashtag is clicked
+            queryPost();
+        }
+        else {
+            //query by hashtag
+            tv_search.setText("Search Results:");
+            // Search post by hashtag
+            ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
+            query.include(Post.KEY_USER);
+            query.addDescendingOrder(Post.KEY_VOTE);
+            query.whereContains(Post.KEY_HASHTAG_LIST, hashtag);
+            query.findInBackground(new FindCallback<Post>() {
+                @Override
+                public void done(List<Post> posts, ParseException e) {
+                    if (e != null) {
+                        Log.e(tag, "Issue with getting post", e);
+                        return;
+                    }
+                    for (Post post : posts) {
+                        Log.i(tag, "Post: " + post.getContent() + " user: " + post.getUser().getUsername());
+                    }
+                    adaptor.clear();
+                    adaptor.addHashtagSearch(posts, hashtag);
+                    //allpost.addAll(posts);
+                    //adaptor.notifyDataSetChanged();
+                    //swipeRefreshLayout.setRefreshing(false);
+                }
+            });
+        }
+    }
+
+    public void handle_search_button(View view) {
+        //get input key
+        String key = et_user_input.getText().toString();
+        Log.d(tag,"Search button clicked - key input: "+key);
+        queryPostBySearchKey(key);
+
     }
     private void handle_profile_button() {
         Log.d(tag,"Profile button clicked");
