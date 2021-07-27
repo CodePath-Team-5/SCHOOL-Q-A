@@ -185,7 +185,7 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
             }
         });
     }
-    private void queryPostBySearchKey(String search_key)
+    private void queryPostBySearchKey(final String search_key)
     {
         tv_search.setText("Search Results:");
         if (search_key == "")
@@ -213,7 +213,7 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
             });
         }
     }
-    private void queryPostByHashtagKey(String hashtag)
+    private void queryPostByHashtagKey(final String hashtag)
     {
             //query by hashtag
             tv_search.setText("Search Results:");

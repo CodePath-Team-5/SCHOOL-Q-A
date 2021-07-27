@@ -37,21 +37,11 @@
 
         <ImageView
             android:id="@+id/csueb_icon"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="350dp"
+            android:layout_height="350dp"
             android:layout_gravity="center"
             android:contentDescription="@string/icon"
-            app:srcCompat="@drawable/csueb_icon" />
-
-        <TextView
-            android:id="@+id/tv_school_q_a"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/school_q_a"
-            android:textColor="#000000"
-            android:textSize="24sp"
-            android:textStyle="bold" />
+            android:src="@drawable/logo" />
 
     </LinearLayout>
 
