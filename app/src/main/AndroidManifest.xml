@@ -22,6 +22,16 @@
         android:theme="@style/AppTheme"
         android:name = ".ParseApplication">
 
+
+        <meta-data
+            android:name="com.parse.SERVER_URL"
+            android:value="https://parseapi.back4app.com" />
+        <meta-data
+            android:name="com.parse.APPLICATION_ID"
+            android:value="BjxUjW3jGo300iPCHbUSXVEjXwY5T7a49d7hDmT6" />
+        <meta-data
+            android:name="com.parse.CLIENT_KEY"
+            android:value="u45uIQMJtNtSYcrAsf9EejaNuZKjT8JeFmp0rLnk" />
         <meta-data android:name="com.parse.push.gcm_sender_id"
             android:value="45077241050" />
 

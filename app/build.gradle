@@ -60,6 +60,8 @@ dependencies {
 
     //parse FCM SDK
     implementation "com.github.parse-community.Parse-SDK-Android:fcm:1.26.0"
+    implementation 'com.github.parse-community.Parse-SDK-Android:bolts-tasks:1.26.0'
+
     //Parse Bolts SDK
     implementation 'com.parse.bolts:bolts-tasks:1.4.0'
     implementation 'com.parse.bolts:bolts-applinks:1.4.0'

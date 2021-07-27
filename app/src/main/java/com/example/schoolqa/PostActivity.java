@@ -46,7 +46,7 @@ import java.util.List;
 public class PostActivity extends AppCompatActivity implements CommentAdapter.OnCommentItemListener{
 
     public static String tag = "PostActivity";
-    public static final String CHANNEL_NAME = "PostChannel";
+    public  String CHANNEL_NAME;
 
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 45;
     TextView tv_title;
@@ -96,6 +96,8 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
 
         post = (Post) Parcels.unwrap(getIntent().getParcelableExtra("post"));
 
+        CHANNEL_NAME = "POST_"+post.getObjectId();
+
         commentList = new ArrayList<>();
         commentAdapter = new CommentAdapter(this,commentList, this);
         recyclerView_post_comments.setAdapter(commentAdapter);
@@ -110,9 +112,6 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
 //            }
 //        });
         setupPost(post);
-
-        //subscribe & listen to push
-        ParsePush.subscribeInBackground(CHANNEL_NAME);
 
     }
 
@@ -202,6 +201,13 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
                 {
                     //save success
                     Toast.makeText(getApplicationContext(),"Sent!", Toast.LENGTH_SHORT).show();
+                    //send push notification
+                    ParsePush push = new ParsePush();
+                    push.setChannel(CHANNEL_NAME);
+                    String message = ParseUser.getCurrentUser().getUsername() + " has just commented to your post: "+post.getQuestion();
+                    push.setMessage(message);
+                    push.sendInBackground();
+                    //query comments
                     queryComments();
                 }
                 else

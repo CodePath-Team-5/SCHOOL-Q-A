@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.greenfrvr.hashtagview.HashtagView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
@@ -31,6 +32,8 @@ import java.util.List;
 public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQuestionItemListener {
     public static String tag = "SearchActivity";
     public static final int COMPOSE_CODE = 29;
+    public static final int PROFILE_CODE = 95;
+
     EditText et_user_input;
     TextView tv_search;
     TextView tv_popular_tag_txt;
@@ -40,9 +43,9 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
     RecyclerView recyclerView_postResults;
     PostAdaptor adaptor;
     List<Post> allpost;
-
     ImageButton bttn_bttn_search_button;
-    String search_key;
+
+    boolean isJustCreatedNewPost; //ONLY TRUE if user just created new post
 
     SwipeRefreshLayout refreshLayout;
 
@@ -64,7 +67,8 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
         tv_popular_tags = findViewById(R.id.tv_Tags);
         tv_popular_tag_txt = findViewById(R.id.tv_popularTag);
 
-
+        //initialize var
+        isJustCreatedNewPost= false;
         //Logout button clicked
         bttn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,6 +171,17 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
                 //allPost.addAll(posts);
                 //adaptor.notifyDataSetChanged();
                 //swipeRefreshLayout.setRefreshing(false);
+
+                //user just created a post
+                if (isJustCreatedNewPost == true)
+                {
+                    //reset bool
+                    isJustCreatedNewPost = false;
+                    //subscribe user to their new post channel
+                    String postChannel = "POST_"+posts.get(0).getObjectId();
+                    ParsePush.subscribeInBackground(postChannel);
+
+                }
             }
         });
     }
@@ -235,7 +250,7 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
         //go to Profile activity
         Intent intent = new Intent(this, ProfileActivity.class);
         intent.putExtra("is_guest", false);
-        startActivity(intent);
+        startActivityForResult(intent, PROFILE_CODE);
     }
     private void handle_compose_button() {
         Log.d(tag,"Compose button clicked");
@@ -259,6 +274,16 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
         if(requestCode==COMPOSE_CODE) {
             if (resultCode == RESULT_OK) {
                 Toast.makeText(this, "Post Created!", Toast.LENGTH_SHORT).show();
+                isJustCreatedNewPost = true;
+                queryPost();
+
+            }
+        }
+        if (requestCode==PROFILE_CODE)
+        {
+            if (requestCode == RESULT_OK)
+            {
+                // user delete their post while in Profile activity => refresh post
                 queryPost();
             }
         }
