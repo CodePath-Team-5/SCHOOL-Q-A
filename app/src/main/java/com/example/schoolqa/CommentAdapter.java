@@ -44,13 +44,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         return commentList.size();
     }
 
-    // Clean all elements of the recycler
     public void clear() {
         commentList.clear();
         notifyDataSetChanged();
     }
 
-    // Add a list of items -- change to type used
     public void addAll(List<Comment> list) {
         commentList.addAll(list);
         notifyDataSetChanged();
@@ -90,9 +88,8 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             } else {
                 Glide.with(context).load(context.getResources().getDrawable(R.drawable.ic_user)).into(ivUserImage);
             }
-            //add comment image
+
             if (cmt_image != null) {
-                // Glide.with(context).load(post.getImage().getUrl()).into(ivImage);
                 Glide.with(context).load(cmt_image.getUrl()).into(ivImage);
             }
         }

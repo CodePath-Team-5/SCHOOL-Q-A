@@ -68,14 +68,13 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
     Post deletedPost = null;
     Comment deletedComment = null;
     Comment user_cmt;
-    Boolean isPostDelete; //ONLY true if user delete their post
+    Boolean isPostDelete;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        //link layout components
         tv_username = findViewById(R.id.tv_profile_username);
         tv_major = findViewById(R.id.tv_profile_major);
         tv_year = findViewById(R.id.tv_profile_year);
@@ -87,20 +86,17 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
         recyclerView_User_comments = findViewById(R.id.rv_user_comments);
         bttn_editProfile = findViewById(R.id.imageButton_profile_edit);
 
-        //initialize var
         isPostDelete = false;
 
-        //get intent
         Bundle extras = getIntent().getExtras();
         boolean guest =  extras.getBoolean("is_guest");
 
         userposts = new ArrayList<>();
         adapter= new PostAdaptor(this, userposts, this);
-        //rv for user_posts
+
         recyclerView_User_postResults.setAdapter(adapter);
         recyclerView_User_postResults.setLayoutManager(new LinearLayoutManager(this));
 
-        //rv for user_comments
         user_comments = new ArrayList<>();
         commentAdapter = new UserCommentAdapter(this,user_comments,this);
         recyclerView_User_comments.setAdapter(commentAdapter);
@@ -118,26 +114,22 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
 
         if (guest == true)
         {
-            // Guest profile => invisible Edit button
             bttn_editProfile.setVisibility(View.INVISIBLE);
             user_cmt = (Comment) Parcels.unwrap(getIntent().getParcelableExtra("comment"));
             user  = user_cmt.getUser();
         }
         else {
-            // User profile
-            // visible Edit button
+
             user = ParseUser.getCurrentUser();
             bttn_editProfile.setVisibility(View.VISIBLE);
 
-            //set up swipe to delete feature for Post list
             ItemTouchHelper itemTouchHelper = new ItemTouchHelper(Post_simpleCallback);
             itemTouchHelper.attachToRecyclerView(recyclerView_User_postResults);
 
-            //set up swipe to delete feature for Comment list
             ItemTouchHelper itemTouchHelper2 = new ItemTouchHelper(Comment_simpleCallback);
             itemTouchHelper2.attachToRecyclerView(recyclerView_User_comments);
         }
-        bind(); //set up layout view
+        bind();
 
     }
 
@@ -151,7 +143,6 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
         ParseFile image = user.getParseFile("user_image");
 
         if (image != null) {
-            // Glide.with(context).load(post.getImage().getUrl()).into(ivImage);
             Glide.with(this).load(image.getUrl()).into(iv_user_image);
         } else {
             Glide.with(this).load(context.getResources().getDrawable(R.drawable.ic_user)).into(iv_user_image);
@@ -171,17 +162,10 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
             @Override
             public void done(List<Post> posts, ParseException e) {
                 if(e!= null){
-                    Log.e(tag, "Issue with getting post", e);
                     return;
-                }
-                for (Post post:posts){
-                    Log.i(tag, "Post: "+post.getContent()+" user: "+ post.getUser().getUsername());
                 }
                 adapter.clear();
                 adapter.addAll(posts);
-                //allPost.addAll(posts);
-                //adaptor.notifyDataSetChanged();
-                //swipeRefreshLayout.setRefreshing(false);
                 tv_post_count.setText(""+posts.size());
             }
         });
@@ -200,13 +184,10 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
                 public void done(List<Comment> comments, ParseException e) {
                     if  (e!=null)
                     {
-                        //fail
-                        Log.e(tag, "Issue with getting comment", e);
                         return;
                     }
                     //sucess
                     for (Comment cmt:comments){
-                        Log.i(tag, "Commment: "+cmt.getContent()+" -user: "+ cmt.getUser().getUsername());
                         user_comments.add(cmt);
                         commentAdapter.notifyItemInserted(user_comments.size()-1);
                     }

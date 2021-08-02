@@ -49,7 +49,6 @@ public class UserCommentAdapter extends RecyclerView.Adapter<UserCommentAdapter.
         return commentList.size();
     }
 
-    // Clean all elements of the recycler
     public void clear() {
         commentList.clear();
         notifyDataSetChanged();
@@ -83,15 +82,10 @@ public class UserCommentAdapter extends RecyclerView.Adapter<UserCommentAdapter.
         }
 
         public void bind(Comment comment) {
-            //set username
             tvUsername.setText("Commented By: "+comment.getUser().getUsername());
-
-            //set post title
-
             final String id = comment.getPostId();
-            Log.i("UserCommentAdapter","Post ID: "+id);
             ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
-            // Define our query conditions
+
             query.whereEqualTo("objectId", id);
             query.findInBackground(new FindCallback<Post>() {
                 @Override
@@ -109,11 +103,9 @@ public class UserCommentAdapter extends RecyclerView.Adapter<UserCommentAdapter.
                 }
             });
 
-            //set timestamp
             String time = TimeFormatter.getTimeDifference(comment.getCreatedAt().toString());
             tvTimestamp.setText(time);
 
-            //set comment
             String cmt = comment.getContent();
             cmt = cmt.substring(0, Math.min(cmt.length(), 50)); //trim down comment content to only 100 character
             if (cmt.length()>20)
@@ -126,7 +118,6 @@ public class UserCommentAdapter extends RecyclerView.Adapter<UserCommentAdapter.
 
             ParseFile user_image = comment.getUser().getParseFile("user_image");
             ParseFile cmt_image = comment.getImage();
-            //add user image
             if (user_image != null) {
                 Glide.with(context).load(user_image.getUrl()).into(ivUserImage);
             } else {

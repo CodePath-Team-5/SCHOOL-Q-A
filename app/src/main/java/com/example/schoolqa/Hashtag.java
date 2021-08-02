@@ -15,7 +15,6 @@ public class Hashtag extends ParseObject implements Cloneable {
     public static final String KEY_OBJECT_ID = "objectId";
     public static final String KEY_CREATED="createdAt";
 
-    //empty constructor needed by the Parceler library
     public Hashtag() {
     }
 

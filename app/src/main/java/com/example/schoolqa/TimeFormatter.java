@@ -6,12 +6,6 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-/**
- * Given a date String of the format given by the Twitter API, returns a display-formatted
- * String representing the relative time difference, e.g. "2m", "6d", "23 May", "1 Jan 14"
- * depending on how great the time difference between now and the given date is.
- * This, as of 2016-06-29, matches the behavior of the official Twitter app.
- */
 public class TimeFormatter {
     public static String getTimeDifference(String rawJsonDate) {
         String time = "";
@@ -49,11 +43,6 @@ public class TimeFormatter {
         return time;
     }
 
-    /**
-     * Given a date String of the format given by the Twitter API, returns a display-formatted
-     * String of the absolute date of the form "30 Jun 16".
-     * This, as of 2016-06-30, matches the behavior of the official Twitter app.
-     */
     public static String getTimeStamp(String rawJsonDate) {
         String time = "";
         String twitterFormat = "EEE MMM dd HH:mm:ss ZZZZZ yyyy";

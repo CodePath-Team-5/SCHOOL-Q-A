@@ -48,13 +48,11 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHholder>{
         return posts.size();
     }
 
-    // Clean all elements of the recycler
     public void clear() {
         posts.clear();
         notifyDataSetChanged();
     }
 
-    // Add a list of items -- change to type used
     public void addAll(List<Post> list) {
         posts.addAll(list);
         notifyDataSetChanged();
@@ -110,14 +108,13 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHholder>{
             String time = TimeFormatter.getTimeDifference(post.getCreatedAt().toString());
             tvTimestamp.setText(time);
             tvVote.setText(""+post.getVote());
-            //hashtag list
+
             if (post.getHashtags().isEmpty() == false) {
                 tvHashtags.setData(post.getHashtags());
             }
-            //ParseFile image = post.getImage();
+
             ParseFile image = post.getUser().getParseFile("user_image");
             if (image != null) {
-                // Glide.with(context).load(post.getImage().getUrl()).into(ivImage);
                 Glide.with(context).load(image.getUrl()).into(ivImage);
             } else {
                 Glide.with(context).load(context.getResources().getDrawable(R.drawable.ic_user)).into(ivImage);

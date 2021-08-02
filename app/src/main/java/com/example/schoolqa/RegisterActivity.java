@@ -25,8 +25,8 @@ public class RegisterActivity extends AppCompatActivity {
     EditText et_username;
     EditText et_password;
     EditText et_email;
-    EditText et_major; //user's major/profession
-    EditText et_year; //user's year of experience / year of graduation
+    EditText et_major;
+    EditText et_year;
     EditText et_intro;
     TextView et_has8;
     TextView et_uppercase;
@@ -38,7 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        //link layout components
+
           et_username= findViewById(R.id.et_signup_username);
           et_password= findViewById(R.id.et_signup_password);
           et_email= findViewById(R.id.et_signup_email);
@@ -49,8 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void handle_signUp(View view) {
-        //Sign up button clicked
-        Log.d(tag,"Signup button clicked");
+
         String email_id = et_email.getText().toString();
         String password = et_password.getText().toString();
         String name = et_username.getText().toString();
@@ -86,7 +85,6 @@ public class RegisterActivity extends AppCompatActivity {
                     finish();
                 } else {
                     Toast.makeText(RegisterActivity.this, "Sign up Failed.Enter correct credentials/Duplicates not allowed", Toast.LENGTH_SHORT).show();
-                    Log.e(tag, "Issue with Sign up", e);
                     return;
                 }
 
@@ -103,7 +101,6 @@ public class RegisterActivity extends AppCompatActivity {
        frameOne = findViewById(R.id.frameOne);
        frameTwo = findViewById(R.id.frameTwo);
        frameThree = findViewById(R.id.frameThree);
-      // frameFour = findViewById(R.id.frameFour);
      if(!(password.length() >= 8)){
          frameOne.setBackgroundTintList(getResources().getColorStateList(R.color.colorPrimary));
        }
@@ -146,7 +143,6 @@ public class RegisterActivity extends AppCompatActivity {
         return true;
    }
     public void handle_cancel(View view) {
-        Log.d(tag,"Cancel button clicked");
         finish();
     }
 }

@@ -20,7 +20,6 @@ public class ParseApplication extends Application {
                 .build()
         );
 
-        // Save the current Installation to Parse.
         ParseInstallation.getCurrentInstallation().saveInBackground();
 
         ParseInstallation parseInstallation = ParseInstallation.getCurrentInstallation();

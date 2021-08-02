@@ -45,7 +45,7 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
     List<Post> allpost;
     ImageButton bttn_bttn_search_button;
 
-    boolean isJustCreatedNewPost; //ONLY TRUE if user just created new post
+    boolean isJustCreatedNewPost;
 
     SwipeRefreshLayout refreshLayout;
 
@@ -67,23 +67,19 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
         tv_popular_tags = findViewById(R.id.tv_Tags);
         tv_popular_tag_txt = findViewById(R.id.tv_popularTag);
 
-        //initialize var
         isJustCreatedNewPost= false;
-        //Logout button clicked
         bttn_logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 handle_logout_button();
             }
         });
-        //Profile button clicked
         bttn_user_profile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 handle_profile_button();
             }
         });
-        //Compose button clicked
         bttn_compose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,7 +94,6 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Log.i(tag, "refreshing");
                 queryPost();
                 refreshLayout.setRefreshing(false);
             }
@@ -144,7 +139,6 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
                 }
                 else
                 {
-                    Log.e(tag, "Issue with getting hashtags", e);
                     return;
                 }
             }
@@ -153,7 +147,6 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
 
 
     private void queryPost() {
-        //query 15 latest post
         tv_search.setText("Recently Added Posts:");
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         query.include(Post.KEY_USER);
@@ -163,21 +156,14 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
             @Override
             public void done(List<Post> posts, ParseException e) {
                 if(e!= null){
-                    Log.e(tag, "Issue with getting post", e);
                     return;
                 }
                 adaptor.clear();
                 adaptor.addAll(posts);
-                //allPost.addAll(posts);
-                //adaptor.notifyDataSetChanged();
-                //swipeRefreshLayout.setRefreshing(false);
 
-                //user just created a post
                 if (isJustCreatedNewPost == true)
                 {
-                    //reset bool
                     isJustCreatedNewPost = false;
-                    //subscribe user to their new post channel
                     String postChannel = "POST_"+posts.get(0).getObjectId();
                     ParsePush.subscribeInBackground(postChannel);
 
@@ -201,23 +187,17 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
                 @Override
                 public void done(List<Post> posts, ParseException e) {
                     if(e!= null){
-                        Log.e(tag, "Issue with getting post", e);
                         return;
                     }
                     adaptor.clear();
                     adaptor.addSearch(posts,search_key);
-                    //allpost.addAll(posts);
-                    //adaptor.notifyDataSetChanged();
-                    //swipeRefreshLayout.setRefreshing(false);
                 }
             });
         }
     }
     private void queryPostByHashtagKey(final String hashtag)
     {
-            //query by hashtag
             tv_search.setText("Search Results:");
-            // Search post by hashtag
             ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
             query.include(Post.KEY_USER);
             query.addDescendingOrder(Post.KEY_VOTE);
@@ -226,41 +206,29 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
                 @Override
                 public void done(List<Post> posts, ParseException e) {
                     if (e != null) {
-                        Log.e(tag, "Issue with getting post", e);
                         return;
                     }
                     adaptor.clear();
                     adaptor.addHashtagSearch(posts, hashtag);
-                    //allpost.addAll(posts);
-                    //adaptor.notifyDataSetChanged();
-                    //swipeRefreshLayout.setRefreshing(false);
                 }
             });
     }
 
     public void handle_search_button(View view) {
-        //get input key
         String key = et_user_input.getText().toString();
-        Log.d(tag,"Search button clicked - key input: "+key);
         queryPostBySearchKey(key);
 
     }
     private void handle_profile_button() {
-        Log.d(tag,"Profile button clicked");
-        //go to Profile activity
         Intent intent = new Intent(this, ProfileActivity.class);
         intent.putExtra("is_guest", false);
         startActivityForResult(intent, PROFILE_CODE);
     }
     private void handle_compose_button() {
-        Log.d(tag,"Compose button clicked");
-        //go to Profile activity
         Intent intent = new Intent(this, ComposeActivity.class);
         startActivityForResult(intent, COMPOSE_CODE);
     }
     private void handle_logout_button() {
-        Log.d(tag,"Logout button clicked");
-        //logout account
         ParseUser.logOut();
         ParseUser currentUser = ParseUser.getCurrentUser(); // this will now be null
 
@@ -283,7 +251,6 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
         {
             if (requestCode == RESULT_OK)
             {
-                // user delete their post while in Profile activity => refresh post
                 queryPost();
             }
         }

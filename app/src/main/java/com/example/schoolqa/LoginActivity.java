@@ -37,11 +37,8 @@ public class LoginActivity extends AppCompatActivity {
         bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i(tag, "onClick login button");
                 String username = et_username.getText().toString();
                 String password = et_password.getText().toString();
-
-               Log.i(tag,"username: "+username + " - password: "+password);
 
                 ParseUser.logInInBackground(username, password, new LogInCallback() {
                     @Override
@@ -49,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
                         if(e != null) {
 
                             Toast.makeText(LoginActivity.this, "Login Failed. Enter correct credentials", Toast.LENGTH_SHORT).show();
-                            Log.e(tag, "Issue with login", e);
                             return;
                         }
                         goToSearchActivity();
@@ -67,9 +63,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void handle_signUp(View view) {
-        //when Sign Up button clicked
-        Log.d(tag,"Signup button clicked");
-
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }

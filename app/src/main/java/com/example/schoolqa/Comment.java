@@ -26,8 +26,6 @@ public class Comment extends ParseObject implements Cloneable{
     public static final String KEY_IMAGE="image";
     public static final String KEY_CREATED="createdAt";
 
-
-    //empty constructor needed by the Parceler library
     public Comment() {
     }
 
