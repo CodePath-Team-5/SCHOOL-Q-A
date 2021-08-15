@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:fillViewport="true"
     android:foregroundTint="#FFFFFF"
     tools:context=".ProfileActivity">
@@ -179,7 +179,6 @@
         android:id="@+id/rv_user_comments"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_below="@id/tv_profile_comment_count"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp" />

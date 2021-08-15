@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchActivity">
+    tools:context=".SearchActivity"
+    >
+
 
     <include layout="@layout/toolbar"
         android:id="@+id/toolbar"/>
@@ -44,12 +48,43 @@
         app:srcCompat="@drawable/ic_baseline_search_40" />
 
     <TextView
-        android:id="@+id/tv_searchtresult"
+        android:id="@+id/tv_popularTag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/et_search_input_text"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="Popular Tags: " />
+
+
+    <com.greenfrvr.hashtagview.HashtagView
+        android:id="@+id/tv_Tags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_popularTag"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp"
+        app:tagTextSize="18sp"
+        app:tagMargin="5dp"
+        app:tagPaddingLeft="5dp"
+        app:tagPaddingRight="5dp"
+        app:tagPaddingTop="2dp"
+        app:tagPaddingBottom="2dp"
+        app:tagTextColor="@color/White"
+        app:tagBackground="@drawable/round_bubble_hashtag"
+        />
+
+    <TextView
+        android:id="@+id/tv_searchtresult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_Tags"
+        android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:textColor="#000000"
         android:textSize="18sp"
@@ -59,7 +94,7 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeContainer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tv_searchtresult"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
@@ -69,7 +104,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_search_results"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="10dp"
@@ -79,4 +114,5 @@
 
         </androidx.recyclerview.widget.RecyclerView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
 </RelativeLayout>
