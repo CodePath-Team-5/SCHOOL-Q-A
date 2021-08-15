@@ -52,11 +52,28 @@
         android:autofillHints=""
         android:autoLink="web|email"/>
 
+
+    <com.fenlisproject.hashtagedittext.HashTagEditText
+        android:id="@+id/et_compose_hastags"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:horizontalPadding="8dp"
+        app:horizontalSpacing="2dp"
+        app:verticalPadding="4dp"
+        app:verticalSpacing="2dp"
+        app:bubbleTextColor="@color/White"
+        app:maxSize="3"
+        android:layout_below="@id/et_compost_questionContent"
+        android:hint="@string/hashtag_hint"
+        app:bubbleBackground="@drawable/round_bubble_hashtag"
+        />
+
+
     <Button
         android:id="@+id/bttn_compose_addPhoto_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/et_compost_questionContent"
+        android:layout_below="@id/et_compose_hastags"
         android:layout_margin="10dp"
         android:drawableEnd="@drawable/ic_baseline_add_photo_alternate_24"
         android:text="@string/add_photo"
@@ -92,7 +109,7 @@
         android:id="@+id/iv_compose_image"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:layout_below="@id/et_compost_questionContent"
+        android:layout_below="@id/et_compose_hastags"
         android:layout_toEndOf="@id/bttn_compose_addPhoto_button"
         android:contentDescription="@string/image"
         tools:srcCompat="@tools:sample/avatars" />

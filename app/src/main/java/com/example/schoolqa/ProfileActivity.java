@@ -31,6 +31,7 @@ import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -67,6 +68,7 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
     Post deletedPost = null;
     Comment deletedComment = null;
     Comment user_cmt;
+    Boolean isPostDelete; //ONLY true if user delete their post
 
 
     @Override
@@ -84,6 +86,9 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
         recyclerView_User_postResults = findViewById(R.id.rv_profile_UserPosts);
         recyclerView_User_comments = findViewById(R.id.rv_user_comments);
         bttn_editProfile = findViewById(R.id.imageButton_profile_edit);
+
+        //initialize var
+        isPostDelete = false;
 
         //get intent
         Bundle extras = getIntent().getExtras();
@@ -245,6 +250,13 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
     public void handle_back_button(View view) {
         //Back button clicked
         Log.d(tag,"Back button clicked");
+
+        //return to search screen
+        if (isPostDelete == true)
+        {
+            Intent returnIntent = new Intent();
+            setResult(RESULT_OK,returnIntent);
+        }
         finish(); //go back to previous screen - Search screen
     }
 
@@ -403,7 +415,13 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
 
                                     //delete comments that relate with post
                                     query_and_deleteComments(deletedPost.getObjectId());
+
+                                    //unsubscribe post channel before delete post
+                                    String postChannel = "POST_"+deletedPost.getObjectId();
+                                    ParsePush.unsubscribeInBackground(postChannel);
+
                                     // Delete post officially if user does not intent to undo their action
+
                                     deletedPost.deleteInBackground(new DeleteCallback() {
                                         @Override
                                         public void done(ParseException e) {
@@ -411,6 +429,9 @@ public class ProfileActivity extends AppCompatActivity implements PostAdaptor.On
                                             {
                                                 //sucessfully delete on back4app
                                                 Log.i(tag, "Sucessfully delete post on Back4App. Post: " + deletedPost.getQuestion());
+
+                                                //set isPostDelte to true -> trigger flag to refresh post list when go back to Search Activity
+                                                isPostDelete = true;
                                             }
                                             else
                                             {

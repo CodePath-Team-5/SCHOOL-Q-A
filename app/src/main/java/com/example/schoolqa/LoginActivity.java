@@ -41,8 +41,7 @@ public class LoginActivity extends AppCompatActivity {
                 String username = et_username.getText().toString();
                 String password = et_password.getText().toString();
 
-                System.out.println(password);
-                System.out.println(username);
+               Log.i(tag,"username: "+username + " - password: "+password);
 
                 ParseUser.logInInBackground(username, password, new LogInCallback() {
                     @Override

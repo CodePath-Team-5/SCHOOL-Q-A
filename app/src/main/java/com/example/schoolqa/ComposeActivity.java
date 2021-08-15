@@ -25,12 +25,19 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import com.fenlisproject.hashtagedittext.HashTagEditText;
+import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
+import com.parse.ParsePush;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class ComposeActivity extends AppCompatActivity {
     public static String TAG = "ComposeActivity";
@@ -43,6 +50,9 @@ public class ComposeActivity extends AppCompatActivity {
     Button btn_compose_cancel_button;
     File photo_file;
     String photo_file_name = "photo.jpg";
+    HashTagEditText et_hashtag;
+    List<String> hastags;
+    Boolean containHashtag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +64,13 @@ public class ComposeActivity extends AppCompatActivity {
         btn_compose_submit_button = findViewById(R.id.bttn_compose_submit_button);
         iv_compose_image = findViewById(R.id.iv_compose_image);
         btn_compose_cancel_button = findViewById(R.id.bttn_compose_cancel_button);
+        et_hashtag = findViewById(R.id.et_compose_hastags);
+
+        hastags = new ArrayList<>();
+        containHashtag = false;
+
+
+
     }
 
     public void handle_add_image_button(View view) {
@@ -123,9 +140,65 @@ public class ComposeActivity extends AppCompatActivity {
 //            Toast.makeText(ComposeActivity.this,"There is no image!", Toast.LENGTH_SHORT).show();
 //            return;
 //        }
+        checkHashtags();
         ParseUser currentUser = ParseUser.getCurrentUser();
         savePost(question_title, question_content, currentUser, photo_file);
     }
+    private void checkHashtags() {
+
+        if (et_hashtag.getValues().isEmpty() )
+        {
+            Log.d(TAG,"No hastags added");
+            containHashtag = false;
+            return;
+        }
+        containHashtag = true;
+
+        hastags.addAll(et_hashtag.getValues());
+
+        //See if hashtags exists on database or not
+        for (int i = 0; i< hastags.size(); i++)
+        {
+            final String my_tag = hastags.get(i);
+            Log.d(TAG,"Tag: "+ my_tag);
+            ParseQuery<Hashtag> query = ParseQuery.getQuery(Hashtag.class);
+            query.whereEqualTo(Hashtag.KEY_WORD, my_tag);
+            query.findInBackground(new FindCallback<Hashtag>() {
+                @Override
+                public void done(List<Hashtag> objects, ParseException e) {
+                    if (e== null)
+                    {
+                        //sucess -> tag exist on database ->  update tag_count
+                        if (objects.isEmpty())
+                        {
+                            saveHashtag(my_tag);
+                        }
+                        else {
+                            Log.d(TAG, "-> Update tag_count: " + objects.get(0));
+                            int count = objects.get(0).getCount() + 1;
+                            objects.get(0).setCount(count);
+                            objects.get(0).saveInBackground();
+                        }
+                    }
+                    else
+                    {
+                        //fail -> tag does not exist on database -> save to database
+                        saveHashtag(my_tag);
+                    }
+                }
+            });
+        }
+    }
+
+    private void saveHashtag(String s) {
+        Log.d(TAG,"-> Save tag: "+ s + " to database");
+
+        Hashtag hashtag = new Hashtag();
+        hashtag.setKeyWord(s);
+        hashtag.setCount(1);
+        hashtag.saveInBackground();
+    }
+
 
     private void savePost(String title, String content, ParseUser currentUser, File photoFile) {
         Post post = new Post();
@@ -136,12 +209,17 @@ public class ComposeActivity extends AppCompatActivity {
         {
             post.setImage(new ParseFile(photoFile));
         }
+        if (containHashtag==true)
+        {
+            post.setHashtags(hastags);
+        }
         post.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 if (e != null) {
                     Log.e(TAG, "Error while saving", e);
                     Toast.makeText(ComposeActivity.this,"Error while saving", Toast.LENGTH_SHORT).show();
+                    return;
                 }
                 Log.i(TAG, "Post save was successful");
                 et_question_title.setText("");

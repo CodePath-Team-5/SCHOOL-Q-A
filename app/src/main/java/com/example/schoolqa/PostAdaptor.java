@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.greenfrvr.hashtagview.HashtagView;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 
@@ -67,6 +68,15 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHholder>{
         }
         notifyDataSetChanged();
     }
+    public void addHashtagSearch(List<Post> list, String key){
+        for(int i =0; i<list.size();i++){
+            for (int tag=0; tag<3; tag++ )
+            if(list.get(i).getHashtags().get(tag).toLowerCase().contains(key.toLowerCase())){
+                posts.add(list.get(i));
+            }
+        }
+        notifyDataSetChanged();
+    }
 
 
     class ViewHholder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -77,6 +87,7 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHholder>{
         private TextView tvTimestamp;
         private ImageView ivImage;
         private TextView tvQuestion;
+        private HashtagView tvHashtags;
         OnQuestionItemListener onQuestionItemListener;
         public ViewHholder(@NonNull View itemView, OnQuestionItemListener onQuestionItemListener) {
             super(itemView);
@@ -86,6 +97,7 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHholder>{
             tvQuestion = itemView.findViewById(R.id.tvQuestion);
             tvPostId = itemView.findViewById(R.id.tvPostid);
             tvVote = itemView.findViewById(R.id.tv_Postvote);
+            tvHashtags = itemView.findViewById(R.id.tvHashtagList);
 
             this.onQuestionItemListener = onQuestionItemListener;
             itemView.setOnClickListener(this);
@@ -98,6 +110,10 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHholder>{
             String time = TimeFormatter.getTimeDifference(post.getCreatedAt().toString());
             tvTimestamp.setText(time);
             tvVote.setText(""+post.getVote());
+            //hashtag list
+            if (post.getHashtags().isEmpty() == false) {
+                tvHashtags.setData(post.getHashtags());
+            }
             //ParseFile image = post.getImage();
             ParseFile image = post.getUser().getParseFile("user_image");
             if (image != null) {

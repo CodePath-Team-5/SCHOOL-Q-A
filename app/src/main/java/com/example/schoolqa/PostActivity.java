@@ -39,15 +39,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.greenfrvr.hashtagview.HashtagView;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.parceler.Parcels;
 
 import java.io.File;
@@ -63,6 +67,8 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
 
     private static final int PICK_IMAGE = 1;
     public static String tag = "PostActivity";
+    public  String CHANNEL_NAME;
+
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 45;
     TextView tv_title;
     TextView tv_question_content;
@@ -74,6 +80,7 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
     ImageView iv_question_image;
     TextView btnn_vote;
     ImageButton bttn_cancel_comment_image;
+    HashtagView tv_tags;
     RecyclerView recyclerView_post_comments;
     CommentAdapter commentAdapter;
     int vote;
@@ -99,6 +106,7 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
         tv_author_name = findViewById(R.id.tv_post_author_name);
         tv_post_timestamp = findViewById(R.id.tv_post_timestamp);
         tv_imageAttached = findViewById(R.id.imageAttached);
+        tv_tags = findViewById(R.id.tv_post_tags);
         iv_question_image = findViewById(R.id.iv_post_image);
         iv_comment_image = findViewById(R.id.iv_post_comment_image);
         et_user_comment = findViewById(R.id.et_post_userComment);
@@ -112,6 +120,8 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
         comment_image_exist2 = false;
 
         post = (Post) Parcels.unwrap(getIntent().getParcelableExtra("post"));
+
+        CHANNEL_NAME = "POST_"+post.getObjectId();
 
         commentList = new ArrayList<>();
         commentAdapter = new CommentAdapter(this,commentList, this);
@@ -127,6 +137,7 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
 //            }
 //        });
         setupPost(post);
+
     }
 
     private void setupPost(Post post) {
@@ -134,15 +145,24 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
         iv_comment_image.setVisibility(View.INVISIBLE);
         tv_imageAttached.setVisibility(View.INVISIBLE);
         bttn_cancel_comment_image.setVisibility(View.INVISIBLE);
-        //set text & image view
+        //set post content
         tv_title.setText(post.getQuestion());
         tv_question_content.setText(post.getContent());
         tv_author_name.setText(post.getUser().getUsername());
         String createdAt = TimeFormatter.getTimeDifference(post.getCreatedAt().toString());
         tv_post_timestamp.setText(" - "+ createdAt);
-        Log.d(tag,"Time create post: "+ createdAt);
 
-        vote = post.getVote();
+        //setup hashtags
+
+        if (post.getHashtags().isEmpty()==false) {
+            Log.d(tag,"Tags: "+post.getHashtags().size());
+            List<String> tags = new ArrayList<>();
+            tags.addAll(post.getHashtags());
+
+            tv_tags.setData(tags);
+        }
+        // setup vote
+        int vote = post.getVote();
         btnn_vote.setText(String.valueOf(vote));
 
         ParseFile image = post.getImage();
@@ -198,6 +218,7 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
         if (comment_image_exist ==true) {
             Log.d(tag, photoFile.getAbsolutePath());
             comment.setImage(new ParseFile(photoFile));
+           // photoFile.delete(); //delete file
             comment_image_exist = false; //reset
         }else if(comment_image_exist2){
             Log.d(tag, photoFile2.getAbsolutePath());
@@ -211,6 +232,24 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
                 {
                     //save success
                     Toast.makeText(getApplicationContext(),"Sent!", Toast.LENGTH_SHORT).show();
+                    //send push notification
+                    JSONObject data = new JSONObject();
+                    String message = ParseUser.getCurrentUser().getUsername() + " has just commented to your post: "+post.getQuestion();
+                    try{
+                        data.put("alert","New comment!");
+                        data.put("title", message);
+                    }
+                    catch (JSONException e2)
+                    {
+                        throw new IllegalArgumentException("Unexpected parsing error", e2);
+                    }
+
+                    ParsePush push = new ParsePush();
+                    push.setChannel(CHANNEL_NAME);
+
+                    push.setData(data);
+                    push.sendInBackground();
+                    //query comments
                     queryComments();
                 }
                 else
@@ -235,6 +274,7 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
         String filePath;
         String[] filePathColumn = {MediaStore.MediaColumns.DATA};
 
+        //Yi 
         Cursor cursor = contentResolver.query(contentUri, filePathColumn, null, null, null);
 
         cursor.moveToFirst();
@@ -243,6 +283,7 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
         filePath = cursor.getString(columnIndex);
         cursor.close();
         return filePath;
+
     }
 
     public void handle_vote_button(View view) {
