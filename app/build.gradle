@@ -49,6 +49,9 @@ dependencies {
     //Recycler view swipe decorator
     implementation 'it.xabaras.android:recyclerview-swipedecorator:1.2.3'
 
+    //yi stuff
+    implementation 'org.sufficientlysecure:html-textview:4.0'
+
     //hastag tags
     implementation 'HashTagEditText:library:1.0.0'
 
@@ -68,8 +71,6 @@ dependencies {
 
     //hashtag view
     implementation 'com.github.greenfrvr:hashtag-view:1.3.1'
-
-
 
 
 }

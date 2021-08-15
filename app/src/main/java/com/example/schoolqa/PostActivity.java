@@ -7,20 +7,33 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.ImageDecoder;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.FileUtils;
 import android.provider.MediaStore;
+import android.provider.OpenableColumns;
+import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,11 +55,17 @@ import org.json.JSONObject;
 import org.parceler.Parcels;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.text.Html.*;
+
 public class PostActivity extends AppCompatActivity implements CommentAdapter.OnCommentItemListener{
 
+    private static final int PICK_IMAGE = 1;
     public static String tag = "PostActivity";
     public  String CHANNEL_NAME;
 
@@ -67,12 +86,15 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
     int vote;
     Boolean is_upvote;
     Boolean comment_image_exist;
+    Boolean comment_image_exist2;
     Post post;
     List<Comment> commentList;
     //SwipeRefreshLayout refreshLayout;
 
     private File photoFile;
+    private File photoFile2;
     public String photoFileName = "photo.jpg";
+    Uri imageURI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +117,7 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
 
         is_upvote = false;
         comment_image_exist = false;
+        comment_image_exist2 = false;
 
         post = (Post) Parcels.unwrap(getIntent().getParcelableExtra("post"));
 
@@ -193,9 +216,14 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
         comment.setUser(ParseUser.getCurrentUser());
         comment.setPostId(post.getObjectId());
         if (comment_image_exist ==true) {
+            Log.d(tag, photoFile.getAbsolutePath());
             comment.setImage(new ParseFile(photoFile));
            // photoFile.delete(); //delete file
             comment_image_exist = false; //reset
+        }else if(comment_image_exist2){
+            Log.d(tag, photoFile2.getAbsolutePath());
+            comment.setImage(new ParseFile(photoFile2));
+            comment_image_exist2 = false; //reset
         }
         comment.saveInBackground(new SaveCallback() {
             @Override
@@ -232,16 +260,32 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
             }
         });// Immediately save the data asynchronously
 
-
         Log.d(tag,"Update comment list ");
         //when sent...reset text box & image view
         iv_comment_image.setVisibility(View.INVISIBLE);
         tv_imageAttached.setVisibility(View.INVISIBLE);
         bttn_cancel_comment_image.setVisibility(View.INVISIBLE);
         et_user_comment.setText("");
+    }
 
+
+    public static String getFilePathFromContentUri(Uri contentUri,
+                                                   ContentResolver contentResolver) {
+        String filePath;
+        String[] filePathColumn = {MediaStore.MediaColumns.DATA};
+
+        //Yi 
+        Cursor cursor = contentResolver.query(contentUri, filePathColumn, null, null, null);
+
+        cursor.moveToFirst();
+
+        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+        filePath = cursor.getString(columnIndex);
+        cursor.close();
+        return filePath;
 
     }
+
     public void handle_vote_button(View view) {
         //Vote button clicked
         Log.d(tag,"Vote button clicked");
@@ -322,19 +366,53 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
                 Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
                 comment_image_exist = false;
             }
+        }else if(requestCode == PICK_IMAGE){
+            /*
+            imageURI=data.getData();
+            try{
+                ImageDecoder.Source source = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+                    source = ImageDecoder.createSource(getApplicationContext().getContentResolver(), imageURI);
+                    Bitmap bitmap = ImageDecoder.decodeBitmap(source);
+                    iv_comment_image.setImageBitmap(bitmap);
+                }
+                photoFile = new File (imageURI.getPath());
+                iv_comment_image.setVisibility(View.VISIBLE);
+                tv_imageAttached.setVisibility(View.VISIBLE);
+                bttn_cancel_comment_image.setVisibility(View.VISIBLE);
+                comment_image_exist = true;
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+             */
+
+
+            if (resultCode == RESULT_OK) {
+                imageURI=data.getData();
+                photoFile2 = new File( getFilePathFromContentUri(imageURI, this.getContentResolver()));
+                iv_comment_image.setImageURI(imageURI);
+                iv_comment_image.setVisibility(View.VISIBLE);
+                tv_imageAttached.setVisibility(View.VISIBLE);
+                bttn_cancel_comment_image.setVisibility(View.VISIBLE);
+                comment_image_exist2 = true;
+            } else { // Result was a failure
+                Toast.makeText(this, "Picture wasn't loaded!", Toast.LENGTH_SHORT).show();
+                comment_image_exist2 = false;
+            }
+
         }
     }
 
+
     public void handle_add_image(View view) {
         launchCamera();
-
-
     }
     public void handle_cancel_comment_image(View view) {
         iv_comment_image.setVisibility(View.INVISIBLE);
         tv_imageAttached.setVisibility(View.INVISIBLE);
         bttn_cancel_comment_image.setVisibility(View.INVISIBLE);
         comment_image_exist = false;
+        comment_image_exist2 = false;
     }
     public void handle_back_button(View view) {
         //Back button clicked
@@ -358,5 +436,81 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
 
     public void handle_refresh_cmts(View view) {
         queryComments();
+    }
+
+
+    public void start_hyperlink_window(View view) {
+
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View hyperlinkView = inflater.inflate(R.layout.window_hyperlink, null);
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(hyperlinkView, width, height, focusable);
+
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+        Log.i(tag, "Hyperlink window opened");
+
+
+        popupWindow.getContentView().findViewById(R.id.bttn_add_hyperlink).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.i(tag, "Add hyperlink button clicked");
+                EditText et_hyberlink = popupWindow.getContentView().findViewById(R.id.et_hyperlink);
+                String link = et_hyberlink.getText().toString();
+                String hyperlink = "<a href="+link+">"+link+"</a>";
+                et_user_comment.setMovementMethod(LinkMovementMethod.getInstance());
+                et_user_comment.append(Html.fromHtml(hyperlink));
+
+                popupWindow.dismiss();
+            }
+        });
+
+
+        // dismiss the popup window when touched
+        hyperlinkView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
+    }
+/*
+    public void insert_image(View view) {
+        Intent gallery = new Intent();
+        gallery.setType("image/*");
+        gallery.setAction(Intent.ACTION_GET_CONTENT);
+
+        photoFile2 = getPhotoFileUri(photoFileName);
+        // wrap File object into a content provider
+        // required for API >= 24
+        // See https://guides.codepath.com/android/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher
+        Uri fileProvider = FileProvider.getUriForFile(PostActivity.this, "com.codepath.fileprovider", photoFile2);
+        gallery.putExtra(MediaStore.EXTRA_OUTPUT, fileProvider);
+
+        // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
+        // So as long as the result is not null, it's safe to use the intent.
+        if (gallery.resolveActivity(getPackageManager()) != null) {
+            // Start the image capture intent to take photo
+            startActivityForResult(Intent.createChooser(gallery, "Select Picture"), PICK_IMAGE);
+        }
+
+    }
+
+ */
+    public void insert_image(View view) {
+    // Create intent for picking a photo from the gallery
+        Intent intent = new Intent(Intent.ACTION_PICK,
+                MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        // If you call startActivityForResult() using an intent that no app can handle, your app will crash.
+        // So as long as the result is not null, it's safe to use the intent.
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            // Bring up gallery to select a photo
+            startActivityForResult(intent, PICK_IMAGE);
+        }
     }
 }
