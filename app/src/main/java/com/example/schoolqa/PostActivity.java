@@ -37,6 +37,8 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.parceler.Parcels;
 
 import java.io.File;
@@ -192,6 +194,7 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
         comment.setPostId(post.getObjectId());
         if (comment_image_exist ==true) {
             comment.setImage(new ParseFile(photoFile));
+           // photoFile.delete(); //delete file
             comment_image_exist = false; //reset
         }
         comment.saveInBackground(new SaveCallback() {
@@ -202,10 +205,21 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
                     //save success
                     Toast.makeText(getApplicationContext(),"Sent!", Toast.LENGTH_SHORT).show();
                     //send push notification
+                    JSONObject data = new JSONObject();
+                    String message = ParseUser.getCurrentUser().getUsername() + " has just commented to your post: "+post.getQuestion();
+                    try{
+                        data.put("alert","New comment!");
+                        data.put("title", message);
+                    }
+                    catch (JSONException e2)
+                    {
+                        throw new IllegalArgumentException("Unexpected parsing error", e2);
+                    }
+
                     ParsePush push = new ParsePush();
                     push.setChannel(CHANNEL_NAME);
-                    String message = ParseUser.getCurrentUser().getUsername() + " has just commented to your post: "+post.getQuestion();
-                    push.setMessage(message);
+
+                    push.setData(data);
                     push.sendInBackground();
                     //query comments
                     queryComments();
@@ -225,8 +239,6 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
         tv_imageAttached.setVisibility(View.INVISIBLE);
         bttn_cancel_comment_image.setVisibility(View.INVISIBLE);
         et_user_comment.setText("");
-
-
 
 
     }
