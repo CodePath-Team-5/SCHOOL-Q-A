@@ -98,6 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_post_author_name"
             android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
             android:layout_marginBottom="10dp"
             app:tagTextSize="14sp"
             app:tagTextColor="@color/White"
@@ -124,27 +125,39 @@
                 android:layout_alignParentStart="true"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/round_edge_button"
-                android:backgroundTint="#FFEB3B"
+                android:backgroundTint="@color/Black"
                 android:drawablePadding="10dp"
                 android:gravity="center"
                 android:onClick="handle_vote_button"
-                android:textColor="#000000"
+                android:textColor="@color/White"
                 android:textStyle="bold"
                 app:drawableLeftCompat="@drawable/ic_arrow_upward_24"
-                app:drawableTint="#000000"
-                tools:text="23" />
+                app:drawableTint="@color/White"
+                tools:text="23"
+                android:padding="5dp"/>
 
-            <Button
-                android:id="@+id/bttn_insert_hyperlink"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <TextView
+                android:id="@+id/bttn_set_favorite"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
                 android:layout_above="@+id/et_post_userComment"
                 android:layout_below="@+id/iv_post_image"
                 android:layout_alignParentBottom="false"
-                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
                 android:layout_toEndOf="@+id/bttn_post_upvote"
-                android:text="Insert Hyperlink"
-                android:onClick="start_hyperlink_window"/>
+                android:text="@string/add_to_favourite"
+                android:background="@drawable/round_edge_button"
+                android:backgroundTint="@color/Black"
+                android:drawablePadding="10dp"
+                android:padding="5dp"
+                android:gravity="center"
+                android:textColor="@color/White"
+                app:drawableLeftCompat="@drawable/ic_favorite_24"
+                app:drawableTint="@color/White"
+                tools:text="23"
+                android:onClick="handle_favourite_button"
+                />
 
             <Button
                 android:id="@+id/bttn_inser_image"
@@ -154,9 +167,10 @@
                 android:layout_below="@+id/iv_post_image"
                 android:layout_alignParentBottom="false"
                 android:layout_marginBottom="5dp"
-                android:layout_toEndOf="@+id/bttn_insert_hyperlink"
+                android:layout_toEndOf="@+id/bttn_set_favorite"
                 android:text="Image/GIF"
-                android:onClick="insert_image"/>
+                android:onClick="insert_image"
+                android:visibility="invisible"/>
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -176,9 +190,9 @@
                 android:layout_alignParentStart="true"
                 android:layout_alignParentBottom="false"
                 android:layout_marginEnd="5dp"
-                android:layout_toStartOf="@id/bttn_post_add_image_button"
+                android:layout_toStartOf="@id/bttn_post_add_hyberlink_button"
                 android:autofillHints=""
-                android:backgroundTint="#00BCD4"
+                android:backgroundTint="@color/colorAccent"
                 android:ems="10"
                 android:hint="@string/comment_here"
                 android:inputType="textPersonName"
@@ -192,10 +206,10 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="5dp"
                 android:background="@drawable/round_edge_button"
-                android:backgroundTint="#F44336"
+                android:backgroundTint="@color/colorAccent"
                 android:contentDescription="@string/send"
                 android:onClick="handle_send_button"
-                android:tint="#000000"
+                android:tint="@color/black"
                 app:srcCompat="@drawable/ic_paper_plane" />
 
         <ImageButton
@@ -206,12 +220,23 @@
             android:layout_marginEnd="5dp"
             android:layout_toStartOf="@id/bttn_post_send_button"
             android:background="@drawable/round_edge_button"
-            android:backgroundTint="#FFFFFF"
+            android:backgroundTint="@color/White"
             android:contentDescription="@string/add_photo"
             android:onClick="handle_add_image"
-            android:tint="#F44336"
+            android:tint="@color/colorAccent"
             app:srcCompat="@drawable/ic_add_a_photo_24" />
-
+        <ImageButton
+            android:id="@+id/bttn_post_add_hyberlink_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_below="@id/bttn_post_upvote"
+            android:layout_marginEnd="5dp"
+            android:layout_toStartOf="@id/bttn_post_add_image_button"
+            android:background="@drawable/round_edge_button"
+            android:backgroundTint="#FFFFFF"
+            android:tint="@color/colorAccent"
+            app:srcCompat="@drawable/ic_insert_link_24"
+            android:onClick="start_hyperlink_window"/>
         <ImageView
             android:id="@+id/iv_post_comment_image"
             android:layout_width="30dp"
@@ -243,7 +268,7 @@
             android:background="@drawable/round_edge_button"
             android:contentDescription="@string/cancel"
             android:onClick="handle_cancel_comment_image"
-            android:tint="#FFFFFF"
+            android:tint="@color/White"
             app:srcCompat="@drawable/ic_cancel_24" />
 
     </RelativeLayout>

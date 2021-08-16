@@ -59,7 +59,11 @@
     <string name="comment_count">Comment count:</string>
     <string name="add_hyperlink">Add Hyperlink</string>
     <string name="hashtag_hint">(Optional) Enter tags. Maximum 3 tags</string>
-
+    <string name="insert_your_hyperlink_below">Insert your hyperlink below:</string>
+    <string name="add_to_favourite">Add to My Favourite</string>
+    <string name="my_favorite_post">My Favorite Posts:</string>
+    <string name="favourite_post_count">Favorite post count:</string>
+    <string name="view_more">View More</string>
 
 
 </resources>

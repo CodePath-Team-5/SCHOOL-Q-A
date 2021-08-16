@@ -6,182 +6,262 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fillViewport="true"
-    android:foregroundTint="#FFFFFF"
-    tools:context=".ProfileActivity">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:foregroundTint="@color/White"
+    tools:context=".ProfileActivity"
+    android:id="@+id/profile_scrollview"
     android:layout_margin="10dp">
 
-    <ImageButton
-        android:id="@+id/bttn_profile_back_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:background="#FFFFFF"
-        android:contentDescription="@string/profile_back"
-        android:onClick="handle_back_button"
-        android:tint="#000000"
-        app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
+    <RelativeLayout
 
-    <ImageButton
-        android:id="@+id/imageButton_profile_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="10dp"
-        android:background="#FFFFFF"
-        android:contentDescription="@string/edit_profile_button"
-        android:onClick="handle_edit_button"
-        android:tint="#000000"
-        app:srcCompat="@drawable/ic_edit_30" />
-
-    <ImageView
-        android:id="@+id/iv_profile_image"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_below="@id/bttn_profile_back_button"
-        android:layout_alignParentStart="true"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="10dp"
-        android:contentDescription="@string/profile_image"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <TextView
-        android:id="@+id/tv_profile_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/bttn_profile_back_button"
-        android:layout_marginBottom="10dp"
-        android:layout_toEndOf="@id/iv_profile_image"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        tools:text="Username" />
-
-    <TextView
-        android:id="@+id/tv_profile_major"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_profile_username"
-        android:layout_marginBottom="10dp"
-        android:layout_toEndOf="@id/iv_profile_image"
-        android:textColor="#000000"
-        tools:text="Major/Profession" />
-
-    <TextView
-        android:id="@+id/tv_profile_year"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_profile_major"
-        android:layout_marginBottom="10dp"
-        android:layout_toEndOf="@id/iv_profile_image"
-        android:textColor="#000000"
-        tools:text="Year of Experience/ Graduation" />
-
-    <TextView
-        android:id="@+id/tv_profile_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/iv_profile_image"
-        android:layout_marginBottom="10dp"
-        android:textColor="#000000"
-        tools:text="Intro: Something about me..." />
-
-    <TextView
-        android:id="@+id/tv_my_posts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_profile_description"
-        android:layout_marginBottom="5dp"
-        android:text="@string/my_posts"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:textStyle="bold" />
-
-    <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_my_posts"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="10dp"
-        android:text="@string/post_count"
-        android:textColor="#000000" />
-
-    <TextView
-        android:id="@+id/tv_profile_post_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_my_posts"
-        android:layout_marginStart="10dp"
-        android:layout_toEndOf="@id/textView9"
-        android:textColor="#000000"
-        tools:text="0" />
-
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_profile_UserPosts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/textView9"
-        android:layout_marginBottom="10dp">
+        android:layout_margin="10dp"
+        android:padding="10dp">
 
-    </androidx.recyclerview.widget.RecyclerView>
+        <ImageButton
+            android:id="@+id/bttn_profile_back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:background="#FFFFFF"
+            android:contentDescription="@string/profile_back"
+            android:onClick="handle_back_button"
+            android:tint="#000000"
+            app:srcCompat="@drawable/ic_baseline_arrow_back_ios_24" />
 
-    <TextView
-        android:id="@+id/tv_comments"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rv_profile_UserPosts"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="5dp"
-        android:text="@string/comments_from_my_posts"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        <ImageButton
+            android:id="@+id/imageButton_profile_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:background="#FFFFFF"
+            android:contentDescription="@string/edit_profile_button"
+            android:onClick="handle_edit_button"
+            android:tint="#000000"
+            app:srcCompat="@drawable/ic_edit_30" />
 
-    <TextView
-        android:id="@+id/tv_cmtCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_comments"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="10dp"
-        android:text="@string/comment_count"
-        android:textColor="#000000" />
+        <ImageView
+            android:id="@+id/iv_profile_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@id/bttn_profile_back_button"
+            android:layout_alignParentStart="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:contentDescription="@string/profile_image"
+            tools:srcCompat="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/tv_profile_comment_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_comments"
-        android:layout_marginStart="10dp"
-        android:layout_toEndOf="@id/tv_cmtCount"
-        android:textColor="#000000"
-        tools:text="0" />
+        <TextView
+            android:id="@+id/tv_profile_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/bttn_profile_back_button"
+            android:layout_marginBottom="10dp"
+            android:layout_toEndOf="@id/iv_profile_image"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="Username" />
+
+        <TextView
+            android:id="@+id/tv_profile_major"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_profile_username"
+            android:layout_marginBottom="10dp"
+            android:layout_toEndOf="@id/iv_profile_image"
+            android:textColor="#000000"
+            tools:text="Major/Profession" />
+
+        <TextView
+            android:id="@+id/tv_profile_year"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_profile_major"
+            android:layout_marginBottom="10dp"
+            android:layout_toEndOf="@id/iv_profile_image"
+            android:textColor="#000000"
+            tools:text="Year of Experience/ Graduation" />
+
+        <TextView
+            android:id="@+id/tv_profile_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_profile_image"
+            android:layout_marginBottom="10dp"
+            android:textColor="#000000"
+            tools:text="Intro: Something about me..." />
+
+        <TextView
+            android:id="@+id/tv_my_favorite_posts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_profile_description"
+            android:layout_marginBottom="5dp"
+            android:text="@string/my_favorite_post"
+            android:textColor="@color/Black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/favorite_post_count_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_my_favorite_posts"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="10dp"
+            android:text="@string/favourite_post_count"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/tv_profile_favorite_post_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_my_favorite_posts"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/favorite_post_count_txt"
+            android:textColor="#000000"
+            tools:text="0" />
 
 
-    <ImageButton
-        android:id="@+id/bttn_refresh_cmts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/rv_profile_UserPosts"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="10dp"
-        android:background="#FFFFFF"
-        android:contentDescription="@string/refresh"
-        android:onClick="handle_refresh_comments"
-        app:srcCompat="@drawable/ic_baseline_refresh_30" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_profile_UserFavoritePosts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/favorite_post_count_txt"
+            android:layout_marginBottom="10dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_user_comments"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tv_profile_comment_count"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp" />
+        </androidx.recyclerview.widget.RecyclerView>
+        <TextView
+            android:id="@+id/tv_view_more_favorite_posts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rv_profile_UserFavoritePosts"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/round_border_button"
+            android:gravity="center"
+            android:text="@string/view_more"
+            android:textColor="@color/Coral"
+            android:onClick="handle_view_more_favorite_posts"/>
 
-</RelativeLayout>
+        <TextView
+            android:id="@+id/tv_my_posts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_view_more_favorite_posts"
+            android:layout_marginBottom="5dp"
+            android:text="@string/my_posts"
+            android:textColor="@color/Black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_my_posts"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="10dp"
+            android:text="@string/post_count"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/tv_profile_post_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_my_posts"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/textView9"
+            android:textColor="#000000"
+            tools:text="0" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_profile_UserPosts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView9"
+            android:layout_marginBottom="10dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/tv_view_more_posts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rv_profile_UserPosts"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/round_border_button"
+            android:gravity="center"
+            android:text="@string/view_more"
+            android:textColor="@color/Coral"
+            android:onClick="handle_view_more_posts"/>
+
+        <TextView
+            android:id="@+id/tv_comments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_view_more_posts"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="5dp"
+            android:text="@string/comments_from_my_posts"
+            android:textColor="@color/Black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_cmtCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_comments"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="10dp"
+            android:text="@string/comment_count"
+            android:textColor="@color/Black" />
+
+        <TextView
+            android:id="@+id/tv_profile_comment_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_comments"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/tv_cmtCount"
+            android:textColor="@color/Black"
+            tools:text="0" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_user_comments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_profile_comment_count"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:id="@+id/tv_view_more_comments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rv_user_comments"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/round_border_button"
+            android:gravity="center"
+            android:text="@string/view_more"
+            android:textColor="@color/Coral"
+            android:onClick="handle_view_more_comments"/>
+
+    </RelativeLayout>
 </ScrollView>

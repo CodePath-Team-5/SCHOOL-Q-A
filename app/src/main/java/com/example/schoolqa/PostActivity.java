@@ -2,6 +2,7 @@ package com.example.schoolqa;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +16,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.ImageDecoder;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -40,6 +44,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.greenfrvr.hashtagview.HashtagView;
+import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
@@ -79,17 +84,20 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
     ImageView iv_comment_image;
     ImageView iv_question_image;
     TextView btnn_vote;
+    TextView bttn_favorite;
     ImageButton bttn_cancel_comment_image;
     HashtagView tv_tags;
     RecyclerView recyclerView_post_comments;
     CommentAdapter commentAdapter;
     int vote;
-    Boolean is_upvote;
+    Boolean is_upvote; // vote button flag
+    Boolean is_favoritePost; //favourite button flag
     Boolean comment_image_exist;
     Boolean comment_image_exist2;
     Post post;
     List<Comment> commentList;
     //SwipeRefreshLayout refreshLayout;
+    FavoritePost favoritePost;
 
     private File photoFile;
     private File photoFile2;
@@ -111,15 +119,18 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
         iv_comment_image = findViewById(R.id.iv_post_comment_image);
         et_user_comment = findViewById(R.id.et_post_userComment);
         btnn_vote = findViewById(R.id.bttn_post_upvote);
+        bttn_favorite = findViewById(R.id.bttn_set_favorite);
         bttn_cancel_comment_image = findViewById(R.id.bttn_post_cancle_comment_image);
         //refreshLayout = findViewById(R.id.swipeContainer_inPost);
         recyclerView_post_comments = findViewById(R.id.rv_post_comments);
 
         is_upvote = false;
+        is_favoritePost = false;
         comment_image_exist = false;
         comment_image_exist2 = false;
 
         post = (Post) Parcels.unwrap(getIntent().getParcelableExtra("post"));
+
 
         CHANNEL_NAME = "POST_"+post.getObjectId();
 
@@ -295,7 +306,10 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
             is_upvote = true;
             vote++;
             post.setVote(vote);
-            btnn_vote.setTextColor(Color.parseColor("#F44336"));
+            //change button color
+            Drawable drawable = btnn_vote.getCompoundDrawables()[0];
+            drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(btnn_vote.getContext(), R.color.colorAccent), PorterDuff.Mode.SRC_IN));
+            btnn_vote.setTextColor(Color.parseColor("#F44336")); //red
             Toast.makeText(this,"Upvote!", Toast.LENGTH_SHORT).show();
         }
         else
@@ -303,12 +317,71 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
             is_upvote = false;
             vote--;
             post.setVote(vote);
-            btnn_vote.setTextColor(Color.parseColor("#000000"));
+            //change button color
+            Drawable drawable = btnn_vote.getCompoundDrawables()[0];
+            drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(btnn_vote.getContext(), R.color.colorAccent), PorterDuff.Mode.SRC_IN));
+            btnn_vote.setTextColor(Color.parseColor("#FFFFFF")); //white
+
             Toast.makeText(this,"Downvote!", Toast.LENGTH_SHORT).show();
         }
         btnn_vote.setText(String.valueOf(vote));
         post.saveInBackground();// Immediately save the data asynchronously
 
+    }
+    public void handle_favourite_button(View view) {
+        //Vote button clicked
+        Log.d(tag,"Favorite button clicked");
+
+        if (is_favoritePost==false)
+        {
+            //set favorite
+            is_favoritePost = true;
+            favoritePost = new FavoritePost();
+            favoritePost.setUser(ParseUser.getCurrentUser());
+            favoritePost.setPost(post);
+            favoritePost.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if (e==null)
+                    {
+                        //save sucess => change button color & pop Toast to update user
+                        Drawable drawable = bttn_favorite.getCompoundDrawables()[0];
+                        drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(bttn_favorite.getContext(), R.color.colorAccent), PorterDuff.Mode.SRC_IN));
+                        bttn_favorite.setTextColor(Color.parseColor("#F44336")); //red
+                        Toast.makeText(getApplicationContext(),"Add to My Favorite", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(),"Error.Please try again later!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+        }
+        else
+        {
+            //set NOT favorite
+            is_favoritePost = false;
+            favoritePost.deleteInBackground(new DeleteCallback() {
+                @Override
+                public void done(ParseException e) {
+                    //delete success
+                    if (e==null)
+                    {
+                        Drawable drawable = bttn_favorite.getCompoundDrawables()[0];
+                        drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(bttn_favorite.getContext(), R.color.White), PorterDuff.Mode.SRC_IN));
+                        bttn_favorite.setTextColor(Color.parseColor("#FFFFFF")); //white
+                        Toast.makeText(getApplicationContext(),"Remove from My Favourite", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(),"Error.Please try again later!", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+            });
+
+        }
     }
 
 
@@ -461,11 +534,43 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
                 Log.i(tag, "Add hyperlink button clicked");
                 EditText et_hyberlink = popupWindow.getContentView().findViewById(R.id.et_hyperlink);
                 String link = et_hyberlink.getText().toString();
-                String hyperlink = "<a href="+link+">"+link+"</a>";
-                et_user_comment.setMovementMethod(LinkMovementMethod.getInstance());
-                et_user_comment.append(Html.fromHtml(hyperlink));
+                if (!link.isEmpty())
+                {
+                    //String hyperlink = "<a href="+link+">"+link+"</a>";
 
-                popupWindow.dismiss();
+                    // user entered a link
+                    Comment comment = new Comment();
+                    comment.setContent(link);
+                    Log.d(tag,"Send button clicked - comment: "+link);
+                    comment.setUser(ParseUser.getCurrentUser());
+                    comment.setPostId(post.getObjectId());
+                    comment.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e==null)
+                            {
+                                //save success
+                                queryComments(); //refresh - query comments
+
+                            }
+                            else
+                            {
+                                Toast.makeText(getApplicationContext(),"Fail to attach hyperlink. Please try again later!",Toast.LENGTH_LONG).show();
+                            }
+                            popupWindow.dismiss();
+                        }
+                    });
+
+//                    et_user_comment.setMovementMethod(LinkMovementMethod.getInstance());
+//                    et_user_comment.append(Html.fromHtml(hyperlink));
+
+                }
+                else
+                {
+                    //user not entered anything
+                    popupWindow.dismiss();
+                }
+
             }
         });
 
@@ -513,4 +618,6 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
             startActivityForResult(intent, PICK_IMAGE);
         }
     }
+
+
 }

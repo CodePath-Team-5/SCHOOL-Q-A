@@ -16,6 +16,7 @@ import com.greenfrvr.hashtagview.HashtagView;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHholder>{
@@ -57,6 +58,17 @@ public class PostAdaptor extends RecyclerView.Adapter<PostAdaptor.ViewHholder>{
     // Add a list of items -- change to type used
     public void addAll(List<Post> list) {
         posts.addAll(list);
+        notifyDataSetChanged();
+    }
+
+    // Add a list of items -- change to type used
+    public void addAllFavoritePost(List<FavoritePost> list) {
+        List<Post> p = new ArrayList<>();
+        for(int i=0; i<list.size(); i++)
+        {
+            p.add(list.get(i).getPost());
+        }
+        posts.addAll(p);
         notifyDataSetChanged();
     }
 

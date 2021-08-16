@@ -6,24 +6,24 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
 
-
     <application
+        android:name=".ParseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name = ".ParseApplication">
-
+        android:theme="@style/AppTheme">
+        <activity android:name=".ShowUserFavoritePostListActivity"></activity>
+        <activity android:name=".ShowUserCommentListActivity" />
+        <activity android:name=".ShowUserPostListActivity" />
 
         <meta-data
             android:name="com.parse.SERVER_URL"
@@ -34,9 +34,9 @@
         <meta-data
             android:name="com.parse.CLIENT_KEY"
             android:value="u45uIQMJtNtSYcrAsf9EejaNuZKjT8JeFmp0rLnk" />
-        <meta-data android:name="com.parse.push.gcm_sender_id"
+        <meta-data
+            android:name="com.parse.push.gcm_sender_id"
             android:value="45077241050" />
-
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -48,8 +48,8 @@
                 android:resource="@xml/fileprovider" />
         </provider>
 
-        <activity android:name=".PostActivity"/>
-        <activity android:name=".EditProfileActivity"/>
+        <activity android:name=".PostActivity" />
+        <activity android:name=".EditProfileActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".ComposeActivity" />
         <activity android:name=".SearchActivity" />
@@ -63,14 +63,15 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name="com.parse.fcm.ParseFirebaseMessagingService">
+        <service android:name="com.parse.fcm.ParseFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
-        <receiver android:name="com.parse.ParsePushBroadcastReceiver" android:exported="false">
+        <receiver
+            android:name="com.parse.ParsePushBroadcastReceiver"
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.parse.push.intent.RECEIVE" />
                 <action android:name="com.parse.push.intent.OPEN" />

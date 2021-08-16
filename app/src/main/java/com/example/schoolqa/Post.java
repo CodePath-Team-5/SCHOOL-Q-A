@@ -1,6 +1,7 @@
 package com.example.schoolqa;
 
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
@@ -62,7 +63,16 @@ public class Post extends ParseObject implements Cloneable {
     }
 
     public ParseUser getUser(){
-        return getParseUser(KEY_USER);
+
+//        \return getParseUser(KEY_USER);
+        ParseUser user = new ParseUser();
+        try {
+            user  = this.getParseObject(KEY_USER).fetchIfNeeded();
+        } catch (ParseException | NullPointerException e) {
+            e.printStackTrace();
+        }
+
+        return user;
     }
     public void setUser(ParseUser user){
         put(KEY_USER, user);

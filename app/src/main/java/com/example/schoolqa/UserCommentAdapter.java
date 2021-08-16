@@ -89,7 +89,7 @@ public class UserCommentAdapter extends RecyclerView.Adapter<UserCommentAdapter.
             //set post title
 
             final String id = comment.getPostId();
-            Log.i("UserCommentAdapter","Post ID: "+id);
+
             ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
             // Define our query conditions
             query.whereEqualTo("objectId", id);
