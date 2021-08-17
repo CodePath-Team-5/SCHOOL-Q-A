@@ -93,14 +93,14 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
     Boolean is_upvote; // vote button flag
     Boolean is_favoritePost; //favourite button flag
     Boolean comment_image_exist;
-    Boolean comment_image_exist2;
+
     Post post;
     List<Comment> commentList;
     //SwipeRefreshLayout refreshLayout;
     FavoritePost favoritePost;
 
     private File photoFile;
-    private File photoFile2;
+
     public String photoFileName = "photo.jpg";
     Uri imageURI;
 
@@ -127,7 +127,7 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
         is_upvote = false;
         is_favoritePost = false;
         comment_image_exist = false;
-        comment_image_exist2 = false;
+
 
         post = (Post) Parcels.unwrap(getIntent().getParcelableExtra("post"));
 
@@ -273,10 +273,6 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
             comment.setImage(new ParseFile(photoFile));
            // photoFile.delete(); //delete file
             comment_image_exist = false; //reset
-        }else if(comment_image_exist2){
-            Log.d(tag, photoFile2.getAbsolutePath());
-            comment.setImage(new ParseFile(photoFile2));
-            comment_image_exist2 = false; //reset
         }
         comment.saveInBackground(new SaveCallback() {
             @Override
@@ -478,40 +474,6 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
                 Toast.makeText(this, "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
                 comment_image_exist = false;
             }
-        }else if(requestCode == PICK_IMAGE){
-            /*
-            imageURI=data.getData();
-            try{
-                ImageDecoder.Source source = null;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
-                    source = ImageDecoder.createSource(getApplicationContext().getContentResolver(), imageURI);
-                    Bitmap bitmap = ImageDecoder.decodeBitmap(source);
-                    iv_comment_image.setImageBitmap(bitmap);
-                }
-                photoFile = new File (imageURI.getPath());
-                iv_comment_image.setVisibility(View.VISIBLE);
-                tv_imageAttached.setVisibility(View.VISIBLE);
-                bttn_cancel_comment_image.setVisibility(View.VISIBLE);
-                comment_image_exist = true;
-            }catch (IOException e){
-                e.printStackTrace();
-            }
-             */
-
-
-            if (resultCode == RESULT_OK) {
-                imageURI=data.getData();
-                photoFile2 = new File( getFilePathFromContentUri(imageURI, this.getContentResolver()));
-                iv_comment_image.setImageURI(imageURI);
-                iv_comment_image.setVisibility(View.VISIBLE);
-                tv_imageAttached.setVisibility(View.VISIBLE);
-                bttn_cancel_comment_image.setVisibility(View.VISIBLE);
-                comment_image_exist2 = true;
-            } else { // Result was a failure
-                Toast.makeText(this, "Picture wasn't loaded!", Toast.LENGTH_SHORT).show();
-                comment_image_exist2 = false;
-            }
-
         }
     }
 
@@ -524,7 +486,7 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
         tv_imageAttached.setVisibility(View.INVISIBLE);
         bttn_cancel_comment_image.setVisibility(View.INVISIBLE);
         comment_image_exist = false;
-        comment_image_exist2 = false;
+
     }
     public void handle_back_button(View view) {
         //Back button clicked
