@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="10dp"
-    tools:context=".ComposeActivity">
+    tools:context=".ComposeActivity"
+    android:background="@color/White">
 
     <TextView
         android:id="@+id/textView_header"

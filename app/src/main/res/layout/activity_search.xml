@@ -6,7 +6,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".SearchActivity">
+    tools:context=".SearchActivity"
+    android:background="@color/White">
 
 
     <include layout="@layout/toolbar"
@@ -70,12 +71,13 @@
         android:layout_marginBottom="5dp"
         app:tagTextSize="18sp"
         app:tagMargin="5dp"
-        app:tagPaddingLeft="5dp"
-        app:tagPaddingRight="5dp"
         app:tagPaddingTop="2dp"
         app:tagPaddingBottom="2dp"
         app:tagTextColor="@color/White"
         app:tagBackground="@drawable/round_bubble_hashtag"
+        app:tagPaddingLeft="10dp"
+        app:tagPaddingRight="10dp"
+        app:tagTextGravity="center"
         />
 
     <TextView

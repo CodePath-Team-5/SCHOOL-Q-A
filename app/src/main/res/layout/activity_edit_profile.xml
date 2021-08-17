@@ -6,7 +6,8 @@
     android:fillViewport="true"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".EditProfileActivity">
+    tools:context=".EditProfileActivity"
+    android:background="@color/White">
 
 <RelativeLayout
     android:layout_width="match_parent"

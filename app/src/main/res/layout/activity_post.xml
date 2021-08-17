@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:fillViewport="true"
-    tools:context=".PostActivity">
+    tools:context=".PostActivity"
+    android:background="@color/White">
 
     <RelativeLayout
 
@@ -104,6 +105,9 @@
             app:tagTextColor="@color/White"
             app:tagBackground="@drawable/round_bubble_hashtag"
             app:rowGravity="left"
+            app:tagPaddingLeft="10dp"
+            app:tagPaddingRight="10dp"
+            app:tagTextGravity="center"
             />
 
             <ImageView
