@@ -163,18 +163,6 @@
                 android:onClick="handle_favourite_button"
                 />
 
-            <Button
-                android:id="@+id/bttn_inser_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/et_post_userComment"
-                android:layout_below="@+id/iv_post_image"
-                android:layout_alignParentBottom="false"
-                android:layout_marginBottom="5dp"
-                android:layout_toEndOf="@+id/bttn_set_favorite"
-                android:text="Image/GIF"
-                android:onClick="insert_image"
-                android:visibility="invisible"/>
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -183,7 +171,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/iv_post_comment_image"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp" />
+                android:layout_marginBottom="10dp" 
+                android:background="@color/White"/>
 
 
         <EditText
