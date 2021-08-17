@@ -112,7 +112,7 @@
             android:layout_below="@id/tv_my_favorite_posts"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="10dp"
-            android:text="@string/favourite_post_count"
+            android:text="@string/favorite_post_count"
             android:textColor="#000000" />
 
         <TextView

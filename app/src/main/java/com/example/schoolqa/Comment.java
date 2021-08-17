@@ -25,6 +25,7 @@ public class Comment extends ParseObject implements Cloneable{
     public static final String KEY_USER="author";
     public static final String KEY_IMAGE="image";
     public static final String KEY_CREATED="createdAt";
+    public static final String KEY_URL="isURL";
 
 
     //empty constructor needed by the Parceler library
@@ -40,6 +41,13 @@ public class Comment extends ParseObject implements Cloneable{
     }
     public void setContent(String content){
         put(KEY_CONTENT, content);
+    }
+
+    public boolean isURL(){
+        return getBoolean(KEY_URL);
+    }
+    public void set_isURL(boolean isUrl){
+        put(KEY_URL, isUrl);
     }
 
     public ParseFile getImage(){

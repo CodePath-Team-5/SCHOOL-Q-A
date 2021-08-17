@@ -185,9 +185,54 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
         {
             Log.d(tag,"No image attached to the post");
         }
-
-
+        // check & change color of Favorite Button if current post is user's favorite post
+        isUser_FavoritePost();
+        //query post's comment
         queryComments();
+    }
+
+    private void isUser_FavoritePost() {
+        //check if current post is User's favorite post
+        ParseQuery<FavoritePost> query =ParseQuery.getQuery(FavoritePost.class);
+        query.include(FavoritePost.KEY_USER);
+        query.whereEqualTo(FavoritePost.KEY_USER, ParseUser.getCurrentUser());
+        query.whereEqualTo(FavoritePost.KEY_POST,post);
+        query.findInBackground(new FindCallback<FavoritePost>() {
+            @Override
+            public void done(List<FavoritePost> objects, ParseException e) {
+                if(e==null)
+                {
+                    //find success
+                    if(!objects.isEmpty())
+                    {
+                       //array not empty -> current post is user's favorite post
+
+                        favoritePost= objects.get(0);
+                        is_favoritePost = true;
+                        setColor_FavoritePost_Bttn();//change color Favorite button
+                    }
+
+                }
+
+            }
+        });
+
+    }
+
+    private void setColor_FavoritePost_Bttn() {
+
+        if (is_favoritePost==true)
+        {
+            Drawable drawable = bttn_favorite.getCompoundDrawables()[0];
+            drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(bttn_favorite.getContext(), R.color.colorAccent), PorterDuff.Mode.SRC_IN));
+            bttn_favorite.setTextColor(Color.parseColor("#F44336")); //red
+        }
+        else
+        {
+            Drawable drawable = bttn_favorite.getCompoundDrawables()[0];
+            drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(bttn_favorite.getContext(), R.color.White), PorterDuff.Mode.SRC_IN));
+            bttn_favorite.setTextColor(Color.parseColor("#FFFFFF")); //white
+        }
     }
 
     private void queryComments() {
@@ -205,9 +250,6 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
 
                 }
                 // Access the array of results here
-                for (Comment comment:itemList) {
-                    Log.i(tag, "Comment: " + comment.getContent());
-                }
                 commentAdapter.clear();
                 commentAdapter.addAll(itemList);
             }
@@ -345,9 +387,7 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
                     if (e==null)
                     {
                         //save sucess => change button color & pop Toast to update user
-                        Drawable drawable = bttn_favorite.getCompoundDrawables()[0];
-                        drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(bttn_favorite.getContext(), R.color.colorAccent), PorterDuff.Mode.SRC_IN));
-                        bttn_favorite.setTextColor(Color.parseColor("#F44336")); //red
+                        setColor_FavoritePost_Bttn();
                         Toast.makeText(getApplicationContext(),"Add to My Favorite", Toast.LENGTH_SHORT).show();
                     }
                     else
@@ -368,9 +408,7 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
                     //delete success
                     if (e==null)
                     {
-                        Drawable drawable = bttn_favorite.getCompoundDrawables()[0];
-                        drawable.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(bttn_favorite.getContext(), R.color.White), PorterDuff.Mode.SRC_IN));
-                        bttn_favorite.setTextColor(Color.parseColor("#FFFFFF")); //white
+                        setColor_FavoritePost_Bttn();
                         Toast.makeText(getApplicationContext(),"Remove from My Favourite", Toast.LENGTH_SHORT).show();
                     }
                     else
@@ -544,6 +582,7 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
                     Log.d(tag,"Send button clicked - comment: "+link);
                     comment.setUser(ParseUser.getCurrentUser());
                     comment.setPostId(post.getObjectId());
+                    comment.set_isURL(true);
                     comment.saveInBackground(new SaveCallback() {
                         @Override
                         public void done(ParseException e) {

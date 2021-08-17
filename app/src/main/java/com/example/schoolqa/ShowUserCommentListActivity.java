@@ -16,6 +16,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.parse.DeleteCallback;
@@ -40,10 +41,9 @@ public class ShowUserCommentListActivity extends AppCompatActivity implements Us
     RecyclerView recyclerView;
     List<Comment> list;
     ParseUser user;
-    Post deletedPost = null;
     Comment deletedComment = null;
     Comment user_cmt;
-    Boolean isPostDelete;
+    Boolean isCommentDelete;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +54,7 @@ public class ShowUserCommentListActivity extends AppCompatActivity implements Us
 
         //init
         list = new ArrayList<>();
-        isPostDelete = false;
+        isCommentDelete = false;
 
         //get intent
         Bundle extras = getIntent().getExtras();
@@ -106,10 +106,6 @@ public class ShowUserCommentListActivity extends AppCompatActivity implements Us
 
     }
 
-    public void handle_back_button(View view) {
-        finish();
-    }
-
     ItemTouchHelper.SimpleCallback Comment_simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -146,6 +142,8 @@ public class ShowUserCommentListActivity extends AppCompatActivity implements Us
                                 adapter.notifyItemInserted(position);
                                 //reset comment count:
                                 tv_count.setText("" + list.size());
+                                //reset flag
+                                isCommentDelete = false;
 
                             }
                         })
@@ -161,10 +159,12 @@ public class ShowUserCommentListActivity extends AppCompatActivity implements Us
                                         public void done(ParseException e) {
                                             if (e == null) {
                                                 //sucessfully delete on back4app
+                                                isCommentDelete = true; //reset flag
                                                 Log.i(tag, "Sucessfully delete comment on Back4App. Comment: " + deletedComment.getContent());
+
                                             } else {
                                                 //fail to delete post
-                                                Log.i(tag, "Fail to delete comment: " + e.getMessage());
+                                                Toast.makeText(getApplicationContext(),"Fail to delete comment. Try again later!", Toast.LENGTH_LONG).show();
                                             }
                                         }
                                     });
@@ -195,6 +195,21 @@ public class ShowUserCommentListActivity extends AppCompatActivity implements Us
     @Override
     public void onCommentClick(View v, int position) {
     // do nothing
+
+    }
+
+
+    public void handle_back_button(View view) {
+        Log.d(tag,"Back button clicked");
+
+        if (isCommentDelete==  true)
+        {
+            //if user delete post -> need update/query list again when go back Profile Screen
+            Intent returnIntent= new Intent();
+            setResult(RESULT_OK,returnIntent);
+        }
+
+        finish(); //go back to previous screen - Profile screen
 
     }
 

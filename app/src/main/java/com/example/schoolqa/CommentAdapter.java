@@ -7,16 +7,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.overflowarchives.linkpreview.TelegramPreview;
+import com.overflowarchives.linkpreview.ViewListener;
+import com.overflowarchives.linkpreview.WhatsappPreview;
 import com.parse.ParseFile;
 
 import java.util.List;
 
+
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHolder> {
+    private static final String tag ="CommentAdapter";
     private Context context;
     private List<Comment> commentList;
     private OnCommentItemListener itemListener;
@@ -62,6 +68,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         private TextView tvComment;
         private TextView tvTimestamp;
         private ImageView ivUserImage;
+        private TelegramPreview urlPreview;
         OnCommentItemListener commentItemListener;
 
         public ViewHolder(@NonNull View itemView, OnCommentItemListener listener) {
@@ -71,6 +78,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             ivImage = itemView.findViewById(R.id.commentItem_image);
             tvComment = itemView.findViewById(R.id.commentItem_comment);
             ivUserImage = itemView.findViewById(R.id.commentItem_userImage);
+            urlPreview = itemView.findViewById(R.id.link_preview_comment);
 
             this.commentItemListener = listener;
             itemView.setOnClickListener(this);
@@ -80,7 +88,32 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             tvUsername.setText(comment.getUser().getUsername());
             String time = TimeFormatter.getTimeDifference(comment.getCreatedAt().toString());
             tvTimestamp.setText(time);
-            tvComment.setText(comment.getContent());
+            String content = comment.getContent();
+            tvComment.setText(content);
+
+            if (comment.isURL())
+            {
+                String url = "";
+                if (content.contains("https://"))
+                {
+                    url = content;
+                }
+                else
+                {
+                    url = "https://" + content;
+                }
+                urlPreview.loadUrl(url, new ViewListener() {
+                    @Override
+                    public void onPreviewSuccess(boolean b) {
+
+                    }
+
+                    @Override
+                    public void onFailedToLoad(Exception e) {
+
+                    }
+                });
+            }
 
             ParseFile user_image = comment.getUser().getParseFile("user_image");
             ParseFile cmt_image = comment.getImage();
@@ -95,6 +128,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                 // Glide.with(context).load(post.getImage().getUrl()).into(ivImage);
                 Glide.with(context).load(cmt_image.getUrl()).into(ivImage);
             }
+
         }
         @Override
         public void onClick(View v) {

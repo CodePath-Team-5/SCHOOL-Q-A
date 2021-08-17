@@ -145,6 +145,8 @@ public class ShowUserFavoritePostListActivity extends AppCompatActivity implemen
                                 adapter.notifyItemInserted(position);
                                 //reset post count:
                                 tv_count.setText("" + list.size());
+                                //reset flag
+                                isPostDelete = false;
 
                             }
                         })
@@ -154,6 +156,7 @@ public class ShowUserFavoritePostListActivity extends AppCompatActivity implemen
                                 if (event == Snackbar.Callback.DISMISS_EVENT_TIMEOUT) {
                                     // Snackbar closed on its own
                                     remove_FavPost(deletedPost);
+                                    isPostDelete =true;
                                 }
                             }
                         })
@@ -191,11 +194,6 @@ public class ShowUserFavoritePostListActivity extends AppCompatActivity implemen
     }
 
 
-    public void handle_back_button(View view) {
-        finish();
-    }
-
-
     @Override
     public void onItemClick(View v, int position) {
         Post post = list.get(position).getPost();
@@ -220,5 +218,20 @@ public class ShowUserFavoritePostListActivity extends AppCompatActivity implemen
         Intent intent = new Intent(this, PostActivity.class);
         intent.putExtra("post", Parcels.wrap(post));
         startActivityForResult(intent,POST_CODE); //go to post activity
+    }
+
+
+    public void handle_back_button(View view) {
+        Log.d(tag,"Back button clicked");
+
+        if (isPostDelete==  true)
+        {
+            //if user delete post -> need update/query list again when go back Profile Screen
+            Intent returnIntent= new Intent();
+            setResult(RESULT_OK,returnIntent);
+        }
+
+        finish(); //go back to previous screen - Profile screen
+
     }
 }

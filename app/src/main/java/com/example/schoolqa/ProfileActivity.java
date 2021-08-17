@@ -50,6 +50,9 @@ public class ProfileActivity extends AppCompatActivity implements FavoritePostAd
     public static String tag = "ProfileActivity";
     public static final int EDIT_CODE = 5;
     public static final int POST_CODE = 24;
+    public static final int VIEW_MORE_CMT_CODE = 71;
+    public static final int VIEW_MORE_POST_CODE = 72;
+    public static final int VIEW_MORE_FAV_POST_CODE = 73;
     TextView tv_username;
     TextView tv_major;
     TextView tv_year;
@@ -314,32 +317,6 @@ public class ProfileActivity extends AppCompatActivity implements FavoritePostAd
     }
 
 
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==EDIT_CODE)
-        {
-            if (resultCode==RESULT_OK)
-            {
-                Toast.makeText(this,"Update profile sucessfully",Toast.LENGTH_SHORT).show();
-                bind();
-            }
-            else if (resultCode==RESULT_CANCELED)
-            {
-                Toast.makeText(this,"Fail to update your profile. Please try again later!",Toast.LENGTH_SHORT).show();
-            }
-        }
-        if (requestCode == POST_CODE)
-        {
-            if (resultCode==RESULT_OK)
-            {
-                queryComments();
-            }
-        }
-    }
-
-
     @Override
     public void onItemClick(View v, int position) {
         Post post = userposts.get(position);
@@ -361,23 +338,60 @@ public class ProfileActivity extends AppCompatActivity implements FavoritePostAd
         startActivityForResult(intent,POST_CODE);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==EDIT_CODE)
+        {
+            if (resultCode==RESULT_OK)
+            {
+                Toast.makeText(this,"Update profile sucessfully",Toast.LENGTH_SHORT).show();
+                bind();
+            }
+            else if (resultCode==RESULT_CANCELED)
+            {
+                Toast.makeText(this,"Fail to update your profile. Please try again later!",Toast.LENGTH_SHORT).show();
+            }
+        }
+        else if (requestCode == POST_CODE)
+        {
+            if (resultCode==RESULT_OK)
+            {
+                queryComments();
+            }
+        }
+        else if (requestCode == VIEW_MORE_CMT_CODE && resultCode == RESULT_OK)
+        {
+            queryComments();
+        }
+        else if (requestCode == VIEW_MORE_POST_CODE && resultCode == RESULT_OK)
+        {
+            queryPost();
+        }
+        else if (requestCode == VIEW_MORE_FAV_POST_CODE && resultCode == RESULT_OK)
+        {
+            queryFavoritePosts();
+        }
+    }
+
 
     public void handle_view_more_favorite_posts(View view) {
         Intent intent = new Intent(this, ShowUserFavoritePostListActivity.class);
         intent.putExtra("favPostCount", favPostCount);
-        startActivity(intent);
+        startActivityForResult(intent,VIEW_MORE_FAV_POST_CODE);
     }
     public void handle_view_more_posts(View view) {
         Intent intent = new Intent(this, ShowUserPostListActivity.class);
         intent.putExtra("postCount", postCount);
-        startActivity(intent);
+        startActivityForResult(intent,VIEW_MORE_POST_CODE);
     }
     public void handle_view_more_comments(View view) {
 
         Intent intent = new Intent(this, ShowUserCommentListActivity.class);
         intent.putExtra("commentCount", commentCount);
-        startActivity(intent);
+        startActivityForResult(intent,VIEW_MORE_CMT_CODE);
     }
+
 
 
     @Override

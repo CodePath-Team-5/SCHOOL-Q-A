@@ -106,9 +106,6 @@ public class ShowUserPostListActivity extends AppCompatActivity implements PostA
 
     }
 
-    public void handle_back_button(View view) {
-        finish();
-    }
 
     ItemTouchHelper.SimpleCallback Post_simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
         @Override
@@ -147,6 +144,8 @@ public class ShowUserPostListActivity extends AppCompatActivity implements PostA
                                 adapter.notifyItemInserted(position);
                                 //reset post count:
                                 tv_count.setText("" + list.size());
+                                //reset flag
+                                isPostDelete = false;
 
                             }
                         })
@@ -242,5 +241,19 @@ public class ShowUserPostListActivity extends AppCompatActivity implements PostA
         Intent intent = new Intent(this, PostActivity.class);
         intent.putExtra("post", Parcels.wrap(post));
         startActivityForResult(intent,POST_CODE);
+    }
+
+    public void handle_back_button(View view) {
+        Log.d(tag,"Back button clicked");
+
+        if (isPostDelete==  true)
+        {
+            //if user delete post -> need update/query list again when go back Profile Screen
+            Intent returnIntent= new Intent();
+            setResult(RESULT_OK,returnIntent);
+        }
+
+        finish(); //go back to previous screen - Profile screen
+
     }
 }
