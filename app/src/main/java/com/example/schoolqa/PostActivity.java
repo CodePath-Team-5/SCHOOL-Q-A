@@ -72,7 +72,7 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
 
     private static final int PICK_IMAGE = 1;
     public static String tag = "PostActivity";
-    public  String CHANNEL_NAME;
+//    public  String CHANNEL_NAME;
 
     public static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 45;
     TextView tv_title;
@@ -132,7 +132,7 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
         post = (Post) Parcels.unwrap(getIntent().getParcelableExtra("post"));
 
 
-        CHANNEL_NAME = "POST_"+post.getObjectId();
+//        CHANNEL_NAME = "POST_"+post.getObjectId();
 
         commentList = new ArrayList<>();
         commentAdapter = new CommentAdapter(this,commentList, this);
@@ -297,11 +297,12 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
                         throw new IllegalArgumentException("Unexpected parsing error", e2);
                     }
 
-                    ParsePush push = new ParsePush();
-                    push.setChannel(CHANNEL_NAME);
-
-                    push.setData(data);
-                    push.sendInBackground();
+                    //send notification
+//                    ParsePush push = new ParsePush();
+//                    push.setChannel(CHANNEL_NAME);
+//
+//                    push.setData(data);
+//                    push.sendInBackground();
                     //query comments
                     queryComments();
                 }

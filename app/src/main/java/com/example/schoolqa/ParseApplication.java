@@ -3,11 +3,9 @@ package com.example.schoolqa;
 import android.app.Application;
 
 import com.parse.Parse;
-import com.parse.ParseConfig;
-import com.parse.ParseInstallation;
+//import com.parse.ParseInstallation;
 import com.parse.ParseObject;
-import com.parse.ParsePush;
-import com.parse.fcm.ParseFirebaseMessagingService;
+//import com.parse.fcm.ParseFirebaseMessagingService;
 
 public class ParseApplication extends Application {
     @Override
@@ -24,11 +22,11 @@ public class ParseApplication extends Application {
                 .build()
         );
 
-        // Save the current Installation to Parse.
-        ParseInstallation.getCurrentInstallation().saveInBackground();
-
-        ParseInstallation parseInstallation = ParseInstallation.getCurrentInstallation();
-        parseInstallation.put("GCMSenderId", "45077241050"); //sender id on firebase
-        parseInstallation.saveInBackground();
+//        // Save the current Installation to Parse.
+//        ParseInstallation.getCurrentInstallation().saveInBackground();
+//
+//        ParseInstallation parseInstallation = ParseInstallation.getCurrentInstallation();
+//        parseInstallation.put("GCMSenderId", "45077241050"); //sender id on firebase
+//        parseInstallation.saveInBackground();
     }
 }

@@ -177,9 +177,9 @@ public class SearchActivity extends AppCompatActivity implements PostAdaptor.OnQ
                 {
                     //reset bool
                     isJustCreatedNewPost = false;
-                    //subscribe user to their new post channel
-                    String postChannel = "POST_"+posts.get(0).getObjectId();
-                    ParsePush.subscribeInBackground(postChannel);
+//                    //subscribe user to their new post channel
+//                    String postChannel = "POST_"+posts.get(0).getObjectId();
+//                    ParsePush.subscribeInBackground(postChannel);
 
                 }
             }

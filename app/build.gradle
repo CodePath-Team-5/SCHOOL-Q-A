@@ -55,19 +55,19 @@ dependencies {
     //hastag tags
     implementation 'HashTagEditText:library:1.0.0'
 
-    //firebase BoM
-    implementation platform('com.google.firebase:firebase-bom:28.2.1')
-    //firebase SDK for Google Analytics
-    implementation 'com.google.firebase:firebase-analytics'
-    implementation 'com.google.firebase:firebase-messaging'
-
-    //parse FCM SDK
-    implementation "com.github.parse-community.Parse-SDK-Android:fcm:1.26.0"
-    implementation 'com.github.parse-community.Parse-SDK-Android:bolts-tasks:1.26.0'
-
-    //Parse Bolts SDK
-    implementation 'com.parse.bolts:bolts-tasks:1.4.0'
-    implementation 'com.parse.bolts:bolts-applinks:1.4.0'
+//    //firebase BoM
+//    implementation platform('com.google.firebase:firebase-bom:28.2.1')
+//    //firebase SDK for Google Analytics
+//    implementation 'com.google.firebase:firebase-analytics'
+//    implementation 'com.google.firebase:firebase-messaging'
+//
+//    //parse FCM SDK
+//    implementation "com.github.parse-community.Parse-SDK-Android:fcm:1.26.0"
+//    implementation 'com.github.parse-community.Parse-SDK-Android:bolts-tasks:1.26.0'
+//
+//    //Parse Bolts SDK
+//    implementation 'com.parse.bolts:bolts-tasks:1.4.0'
+//    implementation 'com.parse.bolts:bolts-applinks:1.4.0'
 
     //hashtag view
     implementation 'com.github.greenfrvr:hashtag-view:1.3.1'

@@ -84,6 +84,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/bttn_compose_addPhoto_button"
         android:layout_margin="10dp"
+        android:drawableEnd="@drawable/ic_insert_link_24"
         android:text="@string/add_hyperlink"
         android:onClick="handle_add_hyperlink_button"/>
 

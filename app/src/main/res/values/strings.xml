@@ -1,10 +1,16 @@
 <resources>
     <string name="app_name">SchoolQA</string>
+
+    <string name="intro">Designed and Developed by Over9000 Team</string>
+    <string name="hao">Hao Tu Lam</string>
+    <string name="yi">Yi-Nong Wei</string>
+    <string name="nischitha">Nischitha Chottanahalli Nagaraju</string>
+    <string name="hu">Margaret Hu</string>
+
     <string name="i_m_searching_for">I\'m searching for...</string>
     <string name="comment_here">Comment here...</string>
     <string name="design_by"><![CDATA[Develop & Design By]]></string>
     <string name="school_q_a"><![CDATA[SCHOOL Q&A]]></string>
-    <string name="developers">Hao Tu Lam * Yi-Nong Wei * Nischitha Chottanahalli Nagaraju * Margaret Hu</string>
     <string name="confirm">Sign Up!</string>
     <string name="cancel">CANCEL</string>
     <string name="icon">Icon</string>
