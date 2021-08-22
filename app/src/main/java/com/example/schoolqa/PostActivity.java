@@ -340,6 +340,8 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
         //Vote button clicked
         Log.d(tag,"Vote button clicked");
 
+        vote = post.getVote();
+
         if (is_upvote==false)
         {
             is_upvote = true;
