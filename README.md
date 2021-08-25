@@ -4,17 +4,17 @@ Original App Design Project - README Template
 # SCHOOL Q&A
 
 ## Table of Contents
-1. [Overview](##Overview)
-1. [Product Spec](##Product-Spec)
-1. [Wireframes](##Wireframes)
-2. [Schema](##Schema)
-3. [Sprint 1](##Sprint1)
-4. [Sprint 2](##Sprint2)
-5. [Sprint 3](##Sprint3)
-6. [Sprint 4](##Sprint4)
+1. [Overview](#overview)
+1. [Product Spec](#product-spec)
+1. [Wireframes](#wireframes)
+2. [Schema](#schema)
+3. [Sprint 1](#sprint1)
+4. [Sprint 2](#sprint2)
+5. [Sprint 3](#sprint3)
+6. [Sprint 4](#sprint4)
 
 ## Overview
- ### [👉👉👉👉 Youtube Live demo link🎥 👈👈👈👈](https://youtu.be/EM5gHqQ-Fa8)
+ ### [ Youtube Live demo link 🎥 ](https://www.youtube.com/channel/UCaRbt9rsjsysCJI8TP2YtEg/videos)
 
 <p float="left">
    Search Function
