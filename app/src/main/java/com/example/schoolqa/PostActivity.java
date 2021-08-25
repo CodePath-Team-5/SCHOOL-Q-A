@@ -561,6 +561,7 @@ public class PostActivity extends AppCompatActivity implements CommentAdapter.On
                             {
                                 Toast.makeText(getApplicationContext(),"Fail to attach hyperlink. Please try again later!",Toast.LENGTH_LONG).show();
                             }
+                            et_hyberlink.setText(""); //reset
                             popupWindow.dismiss();
                         }
                     });
