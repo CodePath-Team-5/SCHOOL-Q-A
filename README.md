@@ -25,10 +25,10 @@
  ### [ Youtube Live demo link 🎥 ](https://www.youtube.com/channel/UCaRbt9rsjsysCJI8TP2YtEg/videos)
 
 <p float="left">
+   SignUp Activity
+   <img src= "https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/GIF%20demo/signup%20and%20edit%20profile.gif" width=200px>
    Search Function
    <img src= "https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/GIF%20demo/search%20by%20phrase.gif" width=200px>
-   Post Activity                                                   
-   <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/GIF%20demo/comment%20and%20search%20by%20hashtag.gif" width=200px>
  </p><br/>
 <p float="left">
    Profile Activity 
@@ -39,6 +39,8 @@
 <p float = "left">
    Compose Activity 
    <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/GIF%20demo/create%20post.gif" width=200px>
+   Post Activity                                                   
+   <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/GIF%20demo/comment%20and%20search%20by%20hashtag.gif" width=200px>
 </p><br/>
 
 ### Description
