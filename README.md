@@ -1,5 +1,9 @@
 
-# PIONEERS ASK (aka SCHOOL Q&A) Android App - Developed By Over9000 Team
+# PIONEERS ASK (aka SCHOOL Q&A)  
+
+ ### An Android App Developed By Over9000 Team
+
+ <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/app/src/main/res/drawable-v24/logo.png" width=200px>
 
 ## Table of Contents
 1. [Overview](#overview)
