@@ -1,7 +1,5 @@
-Original App Design Project - README Template
-===
 
-# SCHOOL Q&A
+# PIONEERS ASK (aka SCHOOL Q&A) Android App - Developed By Over9000 Team
 
 ## Table of Contents
 1. [Overview](#overview)
@@ -14,23 +12,34 @@ Original App Design Project - README Template
 6. [Sprint 4](#sprint4)
 
 ## Overview
+ We, Over9000 Team are CS students from CSUEB: Hao Tu Lam, Yi-Nong Wei, Nischitha Chottanahalli Nagaraju and Margaret Hu. We started developing this app when we participated in CodePath-CSUEB Android Development Course. When the course ended, Hao Tu Lam and Yi-Nong Wei continue building more features for this app, and  Nischitha Chottanahalli Nagaraju becomes our team's representative. We're all young and passionate developers, and our team is excited and eager to promote our app and launch it in App Store. 
+
+ PioneerAsk is an app that helps connect CSUEB students with CSUEB Pioneers Community. This app can also be a useful pocket guide for new students where you can get quick advice from the CSUEB community who are currently studying and working at CSUEB.
+
+ Any futher interests about our app, please contact us through this email: over9thousand.team@gmail.com
+
  ### [ Youtube Live demo link 🎥 ](https://www.youtube.com/channel/UCaRbt9rsjsysCJI8TP2YtEg/videos)
 
 <p float="left">
    Search Function
-   <img src= "https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/sprint4_search.gif" width=200px>
+   <img src= "https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/GIF%20demo/search%20by%20phrase.gif" width=200px>
    Post Activity                                                   
-   <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/sprint4_post.gif" width=200px>
-    Profile Activity 
-   <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/sprint4_profile.gif" width=200px>
+   <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/GIF%20demo/comment%20and%20search%20by%20hashtag.gif" width=200px>
+ </p><br/>
+<p float="left">
+   Profile Activity 
+   <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/GIF%20demo/profile%20managing.gif" width=200px>
    Edit Profile Activity                                                   
-   <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/sprint_edit_profile.gif" width=200px>
+   <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/GIF%20demo/change%20profile%20image.gif" width=200px>
+</p><br/>
+<p float = "left">
    Compose Activity 
-   <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/sprint4_compose.gif" width=200px>
-</p>
+   <img src="https://github.com/CodePath-Team-5/SCHOOL-Q-A/blob/main/GIF%20demo/create%20post.gif" width=200px>
+</p><br/>
 
 ### Description
-The app is mainly for students at the CSUEB. It serve as a small community for students to easily access to different resources to resolve their problems.
+The app is an open discussion forum where students, staff, and faculty can interact, connect, and support each other. Our goal is to bring a healthy and active community into the university's life -  Every question will be answered, every concern will be valued.
+Join PioneersAsk and be a part of our community. Go Pioneers!  
 
 ### App Evaluation
 [Evaluation of your app across the following attributes]
@@ -66,6 +75,8 @@ The app is mainly for students at the CSUEB. It serve as a small community for s
 * [X] Post: User can upvote a post
 * [X] Post: Capture Photo feature. User can send comment with attached image
 * [X] Compose: Capture Photo feature. User can upload a post question with attached image.
+* [X] Compose: User can add maximum 3 hastags to their post.
+* [X] Search: User can search related posts by popular Hashtag.
 
 ### 2. Screen Archetypes
 
